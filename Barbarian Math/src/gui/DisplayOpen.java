@@ -36,26 +36,26 @@ public class DisplayOpen extends JPanel {
 	public void setup(int x, int y, ActionListener l)
 	{
 		setSize(y,x);
-		//setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
+		
 		setLayout(new GridBagLayout());
-		GridBagConstraints g = new GridBagConstraints();
+		GridBagConstraints g = new GridBagConstraints();//used to tell where the item goes
+		//establish text
 		JLabel text = new JLabel("Barbarian Math");
-		
-		
-		JButton startButton = new JButton(Constants.START_BUTTON);
-		
-		startButton.setActionCommand(Constants.START_BUTTON);
-		
+		//establish button
+		JButton startButton = new JButton(Constants.GOTO_MAIN_BUTTON);
+		//action commands are used for identifying what to do. 
+		startButton.setActionCommand(Constants.GOTO_MAIN_BUTTON);
+		//universal listener
 		startButton.addActionListener(l);
-		
-		g.gridx = 1;
-		g.gridy = 1;
-		g.ipady = 40;
+		//determine where the text will go in the grid
+		g.gridx = 1;//middle
+		g.gridy = 1;//middle
+		g.ipady = 40;//padding
 		g.fill = GridBagConstraints.BOTH;
 		add(text, g);
 		g.ipady = 0;
-		g.gridx = 0;
-		g.gridy = 2;
+		g.gridx = 0;//left
+		g.gridy = 2;//bottom
 		g.fill = GridBagConstraints.HORIZONTAL;
 		add(startButton, g);
 
