@@ -10,5 +10,6 @@ public class Constants {
 	public static final String START_BUTTON = "BUTTON_START";
 	// freeSpell --> spells such as for bard class that can gain any type of spell for its level
 	// asi --> Ability score improvement
+	// cantropAddWisdom --> goes for cleric adds wisdom modifier to cantrop damage
 
 }
