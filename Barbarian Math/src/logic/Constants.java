@@ -8,6 +8,7 @@ public class Constants {
 	public static final String MODE_MAIN = "MODE_MAIN";
 	public static final String MODE_MODIFIER = "MODE_MODIFIER";
 	public static final String START_BUTTON = "BUTTON_START";
-	
+	// freeSpell --> spells such as for bard class that can gain any type of spell for its level
+	// asi --> Ability score improvement
 
 }
