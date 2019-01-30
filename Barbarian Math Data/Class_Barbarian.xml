@@ -1,6 +1,6 @@
 <?xml version = "1.0"?>
 <class>
-	<adv>
+	<adventurer>
 		<bundle>
 			<name>Barbarian</name><!--Name as shown in app-->
 			<tag>class</tag><!--For character classes, class should be enough-->
@@ -37,5 +37,5 @@
 				<value>16:4</value>
 			</scalar>
 		</modifier>
-	</adv>
+	</adventurer>
 </class>
