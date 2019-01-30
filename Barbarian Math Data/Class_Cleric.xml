@@ -1,0 +1,17 @@
+<?xml version = "1.0"?>
+<class>
+			<adventurer>
+							<bundle>	
+										<name> Cleric </name>
+										<tag> class </tag>
+										<value>1:subclass</value>
+										<value>4:asi</value>
+										<value>8:asi</value>
+										<value>12:asi</value>
+										<value>16:asi</value>
+										<value>19:asi</value>
+							</bundle>
+										<subclass>
+													<name> Knowledge </name>
+													<parent> Cleric </parent>
+													<value>8: cantropAddWisdom</value>
