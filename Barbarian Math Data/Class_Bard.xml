@@ -23,4 +23,5 @@
 								<parent>Bard</parent>
 								<value>6:extraAttack1</value>
 						</subclass>
-						
+		</adventurer>
+</class>
