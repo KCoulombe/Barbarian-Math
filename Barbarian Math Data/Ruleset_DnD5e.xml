@@ -3,6 +3,5 @@
 	<ruleset>
 		<name>Dungeons and Dragons 5e</name><!--Given name for user-->
 		<components>Class_Barbarian.xml Modifiers_Weapons.xml</components><!--the filenames of the basic system should be added here.-->
-		<values></values>
 	</ruleset>
 </class>
