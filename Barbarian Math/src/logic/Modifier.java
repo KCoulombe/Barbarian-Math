@@ -4,11 +4,11 @@ import java.util.List;
 
 public class Modifier 
 {
-    String name;
-    List<String> values;
-    List<String> tags;
-    List<String> limits;
-    List<String> cost;
+	public String name;
+	public List<String> values;
+	public List<String> tags;
+	public List<String> limits;
+	public List<String> cost;
 
     public Modifier(String name, List<String> values, List<String> tags, List<String> limits, List<String> cost)
     {
