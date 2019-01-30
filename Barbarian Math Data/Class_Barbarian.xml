@@ -12,6 +12,7 @@
 			<value>8:asi</value>
 			<value>9:brutalCritical</value>
 			<value>12:asi</value>
+			<value>16:asi</value>
 			<value>19:asi</value>
 			<value>20:primalChampion</value>
 		</bundle>
@@ -20,6 +21,10 @@
 			<parent>Barbarian</parent><!--Used to verify the subclass to its parent class-->
 			<value>3:frenzy</value>
 			<value>14:retaliate</value>
+		</subclass>
+		<subclass><!--One subclass for one character-->
+			<name>Totem Warrior</name>
+			<parent>Barbarian</parent><!--Used to verify the subclass to its parent class-->
 		</subclass>
 		<modifier>
 			<name>Rage</name>
