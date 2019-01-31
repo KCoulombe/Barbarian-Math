@@ -45,8 +45,6 @@ public class DisplayMain {
 		////build windows
 		prepareFrames();
 		mainFrame.add(screens);
-		//setup(Command.MODE_MAIN);
-		//mainFrame.setVisible(true);
 	}
 	/**
 	 * Launch the window from other class.
@@ -73,14 +71,27 @@ public class DisplayMain {
 		case Constants.MODE_MAIN: 
 			c = (CardLayout) screens.getLayout();
 			c.show(screens, Constants.MODE_MAIN);
-			break;/*
-		case Constants.MODE_IMPORT:
-			c = (CardLayout) screens.getLayout();
-			c.show(screens, Constants.MODE_IMPORT);
 			break;
-		case Constants.MODE_LIST:
+		case Constants.MODE_BUILD:
 			c = (CardLayout) screens.getLayout();
-			c.show(screens, Command.MODE_LIST);*/
+			c.show(screens, Constants.MODE_BUILD);
+			break;
+		case Constants.MODE_MODIFIER:
+			c = (CardLayout) screens.getLayout();
+			c.show(screens, Constants.MODE_MODIFIER);
+			break;
+		case Constants.MODE_CALCULATE:
+			c = (CardLayout) screens.getLayout();
+			c.show(screens, Constants.MODE_CALCULATE);
+			break;
+		case Constants.MODE_SAVE:
+			c = (CardLayout) screens.getLayout();
+			c.show(screens, Constants.MODE_SAVE);
+			break;
+		case Constants.MODE_LOAD:
+			c = (CardLayout) screens.getLayout();
+			c.show(screens, Constants.MODE_LOAD);
+			break;
 		}
 	}
 	/**
@@ -90,22 +101,32 @@ public class DisplayMain {
 	{
 		//start
 		DisplayOpen view1 = new DisplayOpen();
-		view1.setup(Constants.WINDOW_X,Constants.WINDOW_Y, new ButtonClickListener());
+		view1.setup(Constants.WINDOW_X,Constants.WINDOW_Y, new ButtonClickListener(), core);
 		screens.add(view1, Constants.MODE_START);
 		//main menu
 		DisplayCenterMenu view2 = new DisplayCenterMenu();
-		view2.setup(Constants.WINDOW_X,Constants.WINDOW_Y, new ButtonClickListener());
+		view2.setup(Constants.WINDOW_X,Constants.WINDOW_Y, new ButtonClickListener(), core);
 		screens.add(view2, Constants.MODE_MAIN);
-		//list
-		//view3 = new DisplayList(brie);
-		//view3.setup(Command.WINDOW_X, Command.WINDOW_Y, new ButtonClickListener());
-		//screens.add(view3, Command.MODE_LIST);
-		
-		//item
-		
-		//attribute
-		
-		//export
+		//calculator
+		DisplayCalculate view3 = new DisplayCalculate();
+		view3.setup(Constants.WINDOW_X,Constants.WINDOW_Y, new ButtonClickListener(), core);
+		screens.add(view3, Constants.MODE_CALCULATE);
+		//build
+		DisplayBuild view4 = new DisplayBuild();
+		view4.setup(Constants.WINDOW_X,Constants.WINDOW_Y, new ButtonClickListener(), core);
+		screens.add(view4, Constants.MODE_BUILD);
+		//modifier
+		DisplayModifier view5 = new DisplayModifier();
+		view5.setup(Constants.WINDOW_X,Constants.WINDOW_Y, new ButtonClickListener(), core);
+		screens.add(view5, Constants.MODE_MODIFIER);
+		//save
+		DisplaySave view6 = new DisplaySave();
+		view6.setup(Constants.WINDOW_X,Constants.WINDOW_Y, new ButtonClickListener(), core);
+		screens.add(view6, Constants.MODE_SAVE);
+		//load
+		DisplayLoad view7 = new DisplayLoad();
+		view7.setup(Constants.WINDOW_X,Constants.WINDOW_Y, new ButtonClickListener(), core);
+		screens.add(view7, Constants.MODE_LOAD);
 	}
 	/**
 	 * Button control lives here. This listener should be used universally.
@@ -122,9 +143,21 @@ public class DisplayMain {
 	    		case Constants.GOTO_MAIN_BUTTON:
 	    			setup(Constants.MODE_MAIN);
 	    			break;
-	    		
-	    		
-	    		
+	    		case Constants.GOTO_BUILD_BUTTON:
+	    			setup(Constants.MODE_BUILD);
+	    			break;
+	    		case Constants.GOTO_MODIFIER_BUTTON:
+	    			setup(Constants.MODE_MODIFIER);
+	    			break;
+	    		case Constants.GOTO_CALCULATOR_BUTTON:
+	    			setup(Constants.MODE_CALCULATE);
+	    			break;
+	    		case Constants.GOTO_LOAD_BUTTON:
+	    			setup(Constants.MODE_LOAD);
+	    			break;
+	    		case Constants.GOTO_SAVE_BUTTON:
+	    			setup(Constants.MODE_SAVE);
+	    			break;
 	    	}
 	    }
 	}  

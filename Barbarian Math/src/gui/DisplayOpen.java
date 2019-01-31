@@ -10,10 +10,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import logic.Constants;
+import logic.Core;
 
 
 
-public class DisplayOpen extends JPanel {
+public class DisplayOpen extends DisplayPanel {
 	
 	public DisplayOpen() {
 	}
@@ -33,7 +34,7 @@ public class DisplayOpen extends JPanel {
 
 	}
 	
-	public void setup(int x, int y, ActionListener l)
+	public void setup(int x, int y, ActionListener l, Core c)
 	{
 		setSize(y,x);
 		
@@ -42,7 +43,7 @@ public class DisplayOpen extends JPanel {
 		//establish text
 		JLabel text = new JLabel("Barbarian Math");
 		//establish button
-		JButton startButton = new JButton(Constants.GOTO_MAIN_BUTTON);
+		JButton startButton = new JButton(Constants.GOTO_MAIN_BUTTON_LABEL);
 		//action commands are used for identifying what to do. 
 		startButton.setActionCommand(Constants.GOTO_MAIN_BUTTON);
 		//universal listener
@@ -51,9 +52,11 @@ public class DisplayOpen extends JPanel {
 		g.gridx = 1;//middle
 		g.gridy = 1;//middle
 		g.ipady = 40;//padding
+		g.ipadx = 40;
 		g.fill = GridBagConstraints.BOTH;
 		add(text, g);
 		g.ipady = 0;
+		g.ipadx = 0;
 		g.gridx = 0;//left
 		g.gridy = 2;//bottom
 		g.fill = GridBagConstraints.HORIZONTAL;

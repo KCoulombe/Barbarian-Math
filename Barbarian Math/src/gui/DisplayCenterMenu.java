@@ -10,8 +10,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import logic.Constants;
+import logic.Core;
 
-public class DisplayCenterMenu extends JPanel {
+public class DisplayCenterMenu extends DisplayPanel {
 	
 	
 	public DisplayCenterMenu() {
@@ -32,7 +33,7 @@ public class DisplayCenterMenu extends JPanel {
 
 	}
 	
-	public void setup(int x, int y, ActionListener l)
+	public void setup(int x, int y, ActionListener l, Core c)
 	{
 		setSize(y,x);
 		//setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
@@ -41,11 +42,11 @@ public class DisplayCenterMenu extends JPanel {
 		JLabel text = new JLabel("Barbarian Math");
 		
 		
-		JButton calculatorButton = new JButton(Constants.GOTO_CALCULATOR_BUTTON);
-		JButton buildButton = new JButton(Constants.GOTO_BUILD_BUTTON);
-		JButton modifierButton = new JButton(Constants.GOTO_MODIFIER_BUTTON);
-		JButton saveButton = new JButton(Constants.GOTO_SAVE_BUTTON);
-		JButton loadButton = new JButton(Constants.GOTO_LOAD_BUTTON);
+		JButton calculatorButton = new JButton(Constants.GOTO_CALCULATOR_BUTTON_LABEL);
+		JButton buildButton = new JButton(Constants.GOTO_BUILD_BUTTON_LABEL);
+		JButton modifierButton = new JButton(Constants.GOTO_MODIFIER_BUTTON_LABEL);
+		JButton saveButton = new JButton(Constants.GOTO_SAVE_BUTTON_LABEL);
+		JButton loadButton = new JButton(Constants.GOTO_LOAD_BUTTON_LABEL);
 		
 		calculatorButton.setActionCommand(Constants.GOTO_CALCULATOR_BUTTON);
 		buildButton.setActionCommand(Constants.GOTO_BUILD_BUTTON);
