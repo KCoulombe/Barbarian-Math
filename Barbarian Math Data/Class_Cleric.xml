@@ -15,3 +15,58 @@
 													<name> Knowledge </name>
 													<parent> Cleric </parent>
 													<value>8: cantropAddWisdom</value>
+										</subclass>
+										<subclass>
+													<name> Tempest </name>
+													<parent> Cleric </parent>
+													<value>1: wrathOftheStorm</value>
+													<value>8: divineStrikeStorm</value>
+										</subclass>
+										<subclass>
+													<name> Trickery </name>
+													<parent> Cleric</parent>
+													<value>8: divineStrikeAcid</value>
+										</subclass>
+										<subclass>
+													<name> War </name>
+													<parent> Cleric </name>
+													<value>1: bonusActionAttack</value>
+													<value>8:divineStrikeWeapon</value>
+													
+										</subclass>
+							<modifier>
+										<name> wrathOftheStorm </name>
+										<tags> reaction magic<tags>
+										<value>2d8</value>
+										<limit>whenHit</limit>
+										<cost>wisMod</cost>
+							</modifier>
+							<modifier>
+									<scalar>
+										<name> divineStrikeStorm </name>
+										<tags> spell scaling </tags>
+										<value>8: 1d8 lightning </value>
+										<value>14: 2d8 lightning </value>
+										<limit> oncePerTurn </limit>
+									</scalar>
+							</modifier>
+							<modifier>
+									<scalar>
+										<name> divineStrikeAcid </name>
+										<tags> spell scaling </tags>
+										<value>8: 1d8 acid </value>
+										<value>14: 2d8 acid </value>
+										<limit> oncePerTurn </limit>
+									</scalar>
+							</modifier>
+							<modifier>
+									<scalar>
+										<name> divineStrikeWeapon </name>
+										<tags> spell scaling </tags>
+										<value>8: 1d8</value>
+										<value>14: 2d8</value>
+										<limit> oncePerTurn </limit>
+									</scalar>
+							</modifier>
+				</adventurer>
+	</class>
