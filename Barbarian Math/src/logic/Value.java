@@ -1,13 +1,12 @@
 package logic;
 
-public class Value 
+public class Value extends Component
 {
-	public String name;
 	public int number;
 	
 	public Value(String name, int number)
 	{
-		this.name = name;
+		super.name = name;
 		this.number = number;
 	}
 	

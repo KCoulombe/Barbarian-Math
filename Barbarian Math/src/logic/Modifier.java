@@ -2,9 +2,8 @@ package logic;
 
 import java.util.List;
 
-public class Modifier 
+public class Modifier extends Component
 {
-	public String name;
 	public List<String> values;
 	public List<String> tags;
 	public List<String> limits;
@@ -12,7 +11,7 @@ public class Modifier
 
     public Modifier(String name, List<String> values, List<String> tags, List<String> limits, List<String> cost)
     {
-        this.name = name;
+        super.name = name;
         this.values = values;
         this.tags = tags;
         this.limits = limits;
