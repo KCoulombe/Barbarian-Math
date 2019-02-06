@@ -1,15 +1,11 @@
 package logic;
 
-/**
- * The superclass for all of the various parts of a tabletop game.  Does nothing on it's own
- * @author Kyle Coulombe
- * @see Adventurer
- * @see CharacterBuild
- * @see Bundle
- * @see Modifier
- * @see Value
- */
+import java.util.ArrayList;
+import java.util.List;
+
 public class Component 
 {
+	public List<String> tags;
 	public String name;
+	public CharacterBuild owner;
 }
