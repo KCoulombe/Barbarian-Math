@@ -1,0 +1,173 @@
+<?xml version = "1.0"?>
+
+	<bundle>
+		<scalar>
+			<name> Cantrips </name>
+			<tags> spellslot fullCaster </tags>
+			<value>1:2 </value>
+			<value>2:2 </value>
+			<value>3:2 </value>
+			<value>4:3 </value>
+			<value>5:3 </value>
+			<value>6:3 </value>
+			<value>7:3 </value>
+			<value>8:3 </value>
+			<value>9:3 </value>
+			<value>10:4 </value>
+			<value>11:4 </value>
+			<value>12:4 </value>
+			<value>13:4 </value>
+			<value>14:4 </value>
+			<value>15:4 </value>
+			<value>16:4 </value>
+			<value>17:4 </value>
+			<value>18:4 </value>
+			<value>19:4 </value>
+			<value>20:4 </value>
+		</scalar>
+		<scalar>
+			<name> firstLevelSpell </name>
+			<tags> spellslot fullCaster </tags>
+			<value>1:2 </value>
+			<value>2:3 </value>
+			<value>3:4 </value>
+			<value>4:4 </value>
+			<value>5:4 </value>
+			<value>6:4 </value>
+			<value>7:4 </value>
+			<value>8:4 </value>
+			<value>9:4 </value>
+			<value>10:4 </value>
+			<value>11:4 </value>
+			<value>12:4 </value>
+			<value>13:4 </value>
+			<value>14:4 </value>
+			<value>15:4 </value>
+			<value>16:4 </value>
+			<value>17:4 </value>
+			<value>18:4 </value>
+			<value>19:4 </value>
+			<value>20:4 </value>
+		</scalar>
+		<scalar>
+			<name> secondLevelSpell </name>
+			<tags> spellslot fullCaster </tags>
+			<value>3:2 </value>
+			<value>4:3 </value>
+			<value>5:3 </value>
+			<value>6:3 </value>
+			<value>7:3 </value>
+			<value>8:3 </value>
+			<value>9:3 </value>
+			<value>10:3 </value>
+			<value>11:3 </value>
+			<value>12:3 </value>
+			<value>13:3 </value>
+			<value>14:3 </value>
+			<value>15:3 </value>
+			<value>16:3 </value>
+			<value>17:3 </value>
+			<value>18:3 </value>
+			<value>19:3 </value>
+			<value>20:3 </value>
+		</scalar>
+		<scalar>
+			<name> thirdLevelSpells </name>
+			<tags> spellslot fullCaster </tags>
+			<value>5:2 </value>
+			<value>6:3 </value>
+			<value>7:3 </value>
+			<value>8:3 </value>
+			<value>9:3 </value>
+			<value>10:3 </value>
+			<value>11:3 </value>
+			<value>12:3 </value>
+			<value>13:3 </value>
+			<value>14:3 </value>
+			<value>15:3 </value>
+			<value>16:3 </value>
+			<value>17:3 </value>
+			<value>18:3 </value>
+			<value>19:3 </value>
+			<value>20:3 </value>
+		</scalar>
+		<scalar>
+			<name>fourthLevelSpells</name>
+			<tags> spellslot fullCaster</tags>
+			<value>7:1 </value>
+			<value>8:2 </value>
+			<value>9:3 </value>
+			<value>10:3 </value>
+			<value>11:3 </value>
+			<value>12:3 </value>
+			<value>13:3 </value>
+			<value>14:3 </value>
+			<value>15:3 </value>
+			<value>16:3 </value>
+			<value>17:3 </value>
+			<value>18:3 </value>
+			<value>19:3 </value>
+			<value>20:3 </value>
+		</scalar>
+		<scalar>
+			<name> fifthLevelSpells </name>
+			<tags> spellslot fullCaster</tags>
+			<value>9:1 </value>
+			<value>10:2 </value>
+			<value>11:2 </value>
+			<value>12:2 </value>
+			<value>13:2 </value>
+			<value>14:2 </value>
+			<value>15:2 </value>
+			<value>16:2 </value>
+			<value>17:2 </value>
+			<value>18:3 </value>
+			<value>19:3 </value>
+			<value>20:3 </value>
+		</scalar>
+		<scalar>
+			<name> sixthLevelSpells</name>
+			<tags> spellslot fullCaster</tags>
+			<value>11:1 </value>
+			<value>12:1 </value>
+			<value>13:1 </value>
+			<value>14:1 </value>
+			<value>15:1 </value>
+			<value>16:1 </value>
+			<value>17:1 </value>
+			<value>18:1 </value>
+			<value>19:2 </value>
+			<value>20:2 </value>
+		</scalar>
+		<scalar>
+			<name> seventhLevelSpell</name>
+			<tags> spellslot fullCaster</tags>
+			<value>13:1 </value>
+			<value>14:1 </value>
+			<value>15:1 </value>
+			<value>16:1 </value>
+			<value>17:1 </value>
+			<value>18:1 </value>
+			<value>19:1 </value>
+			<value>20:2 </value>
+		</scalar>
+		<scalar>
+			<name> eighthLevelSpell</name>
+			<tags> spellslot fullCaster</tags>
+			<value>16:1 </value>
+			<value>17:1 </value>
+			<value>18:1 </value>
+			<value>19:1 </value>
+			<value>20:2 </value>
+		</scalar>
+		<scalar>
+			<name> ninthLevelSpell</name>
+			<tags> spellslot fullCaster</tags>
+			<value>17:1 </value>
+			<value>18:1 </value>
+			<value>19:1 </value>
+			<value>20:2 </value>
+		</scalar>
+			
+			
+			
