@@ -1,0 +1,49 @@
+<?xml version = "1.0"?>
+<class>
+		<adventurer>
+					<bundle>
+							<name> Fighter </name>
+							<tag> class </tag>
+							<value>1:fightingStyle</value>
+							<value>2:actionSurge</value>
+							<value>3:subclass</value>
+							<value>4:asi</value>
+							<value>5:extraAttack</value>
+							<value>6:asi</value>
+							<value>8:asi</value>
+							<value>12:asi</value>
+							
+					</bundle>
+					<subclass>
+								<name> Champion</name>
+								<parent>Fighter</parent>
+								<value>3:improvedCritical</value>
+								<value>10:fightingStyle</value>
+								<value>15:superiorCritical</value>
+					</subclass>
+					<subclass>
+								<name> Battle Master </name>
+								<parent> Fighter</name>
+								<value>3:maneuvers</value>
+								<value>7:aditionalManeuvers</value>
+								<value>10:aditionalManeuvers</value>
+								<value>15:aditionalManeuvers</value>
+					</subclass>
+					<subclass>
+								<name> Eldritch Knight</name>
+								<parent> Fighter</parent>
+								<value>3: spellCasting</value>
+								<value>7: warMagic</value>
+								<value>18:improvedWarMagic</value>
+					</subclass>
+					<modifier>
+						<scalar>
+							<name> actionSurge</name>
+							<tags> Fighter addAction</tags>
+							<value>2: 1 addAction</value>
+							<value>17:2 addAction</value>
+							<limit>rest</limit>
+						</scalar>
+					</modifier>
+					
+							

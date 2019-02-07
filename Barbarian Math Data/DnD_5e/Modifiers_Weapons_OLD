@@ -1,0 +1,333 @@
+<?xml version = "1.0"?>
+<class>
+<!--Holds weapon data-->
+	<modifier>
+		<name>Dagger</name><!--Name as shown in app-->
+		<tags>weapon finesse light thrown</tags><!--Tags to identify and give properties-->
+		<value>1d4</value> strMod</value> dexMod</value><!--Values that influence the damage.
+		This may include things like: 1d8 strMod magicBonus:2 fire:1d8-->
+		<limits>attack</limits><!--Represents limitations on how it may be applied.
+		weapon should be sufficient for weapons-->
+		<cost></cost>
+	</modifier>
+	<modifier>
+		<name>Shortsword</name>
+		<tags>weapon finesse light</tags>
+		
+		<value>1d6</value> 
+		<value>strMod</value> 
+		<value>dexMod</value>
+		<limits>attack</limits>
+		<cost></cost>
+	</modifier>
+	<modifier>
+		<name>Longsword</name>
+		<tags>weapon versatile</tags>
+		
+		<value>1d8</value> 
+		<value>strMod</value>
+		<limits>attack</limits>
+		<cost></cost>
+	</modifier>
+	<modifier>
+		<name>Greatsword</name>
+		<tags>weapon twoHand</tags>
+		
+		<value>1d4</value> 
+		<value>strMod</value>
+		<limits>attack</limits>
+		<cost></cost>
+	</modifier>
+	<modifier>
+		<name>Club</name>
+		<tags>weapon light</tags>
+		
+		<value>1d4</value> 
+		<value>strMod</value>
+		<limits>attack</limits>
+		<cost></cost>
+	</modifier>
+	<modifier>
+		<name>Greatclub</name>
+		<tags>weapon twoHand</tags>
+		
+		<value>1d8</value> 
+		<value>strMod</value>
+		<limits>attack</limits>
+		<cost></cost>
+	</modifier>
+	<modifier>
+		<name>Handaxe</name>
+		<tags>weapon light thrown</tags>
+		
+		<value>1d6</value> 
+		<value>strMod</value>
+		<limits>attack</limits>
+		<cost></cost>
+	</modifier>
+	<modifier>
+		<name>Javeline</name>
+		<tags>weapon thrown</tags>
+		
+		<value>1d6</value> 
+		<value>strMod</value>
+		<limits>attack</limits>
+		<cost></cost>
+	</modifier>
+	<modifier>
+		<name>Light Hammer</name>
+		<tags>weapon light thrown</tags>
+		
+		<value>1d4</value> 
+		<value>strMod</value>
+		<limits>attack</limits>
+		<cost></cost>
+	</modifier>
+	<modifier>
+		<name>Mace</name>
+		<tags>weapon</tags>
+		
+		<value>1d6</value> 
+		<value>strMod</value>
+		<limits>attack</limits>
+		<cost></cost>
+	</modifier>
+	<modifier>
+		<name>Quarterstaff</name>
+		<tags>weapon versatile</tags>
+		
+		<value>1d6</value> 
+		<value>strMod</value>
+		<limits>attack</limits>
+		<cost></cost>
+	</modifier>
+	<modifier>
+		<name>Sickle</name>
+		<tags>weapon light</tags>
+		
+		<value>1d4</value> 
+		<value>strMod</value>
+		<limits>attack</limits>
+		<cost></cost>
+	</modifier>
+	<modifier>
+		<name>Spear</name>
+		<tags>weapon thrown versatile</tags>
+		
+		<value>1d6</value> 
+		<value>strMod</value>
+		<limits>attack</limits>
+		<cost></cost>
+	</modifier>
+	<modifier>
+		<name>Crossbow Light</name>
+		<tags>ammunition loading twoHand</tags>
+		
+		<value>1d8</value> 
+		<value>dexMod</value>
+		<limits>attack</limits>
+		<cost></cost>
+	</modifier>
+	<modifier>
+		<name>Dart</name>
+		<tags>weapon finesse thrown</tags>
+		
+		<value>1d4</value> 
+		<value>strMod</value> 
+		<value>dexMod</value>
+		<limits>attack</limits>
+		<cost></cost>
+	</modifier>
+	<modifier>
+		<name>ShortBow</name>
+		<tags>weapon ammunition twoHand</tags>
+		
+		<value>1d6</value> 
+		<value>dexMod</value>
+		<limits>attack</limits>
+		<cost></cost>
+	</modifier>
+	<modifier>
+		<name>Sling</name>
+		<tags>weapon Ammunition</tags>
+		
+		<value>1d4</value> 
+		<value>dexMod</value>
+		<limits>attack</limits>
+		<cost></cost>
+	</modifier>
+	<modifier>
+		<name>Battleaxe</name>
+		<tags>weapon versatile</tags>
+		
+		<value> 1d8</value> 
+		<value>strMod</value>
+		<limits>attack</limits>
+		<cost></cost>
+	</modifier>
+	<modifier>
+		<name>Flail</name>
+		<tags>weapon</tags>
+		
+		<value>1d8</value> 
+		<value>strMod</value>
+		<limits>attack</limits>
+		<cost></cost>
+	</modifier>
+	<modifier>
+		<name>Glaive</name>
+		<tags>weapon heavy twoHand</tags>
+		
+		<value>1d10</value> 
+		<value>strMod</value>
+		<limits>attack</limits>
+		<cost></cost>
+	</modifier>
+	<modifier>
+		<name>Greataxe</name>
+		<tags>weapon heavy twoHand</tags>
+		
+		<value>1d12</value> 
+		<value>strMod</value>
+		<limits>attack</limits>
+		<cost></cost>
+	</modifier>
+	<modifier>
+		<name>Halberd</name>
+		<tags>weapon heavy twoHand</tags>
+		
+		<value>1d10</value> 
+		<value>strMod</value>
+		<limits>attack</limits>
+		<cost></cost>
+	</modifier>
+	<modifier>
+		<name>Lance</name>
+		<tags>weapon</tags>
+		
+		<value>1d12</value> 
+		<value>strMod</value>
+		<limits>attack</limits>
+		<cost></cost>
+	</modifier>
+	<modifier>
+		<name>Maul</name>
+		<tags>weapon heavy twoHand</tags>
+		
+		<value>2d6</value> 
+		<value>strMod</value>
+		<limits>attack</limits>
+		<cost></cost>
+	</modifier>
+	<modifier>
+		<name>Morningstar</name>
+		<tags>weapon</tags>
+		
+		<value>1d8</value> 
+		<value>strMod</value>
+		<limits>attack</limits>
+		<cost></cost>
+	</modifier>
+	<modifier>
+		<name>Pike</name>
+		<tags>weapon heavy twoHand</tags>
+		
+		<value>1d10</value> 
+		<value>strMod</value>
+		<limits>attack</limits>
+		<cost></cost>
+	</modifier>
+	<modifier>
+		<name>Rapier</name>
+		<tags>weapon finesse</tags>
+		
+		<value>1d8</value> 
+		<value>strMod</value> 
+		<value>dexMod</value>
+		<limits>attack</limits>
+		<cost></cost>
+	</modifier>
+	<modifier>
+		<name>Scimitar</name>
+		<tags>weapon finesse light</tags>
+		
+		<value>1d8</value> 
+		<value>strMod</value> 
+		<value>dexMod</value>
+		<limits>attack</limits>
+		<cost></cost>
+	</modifier>
+	<modifier>
+		<name>Trident</name>
+		<tags>weapon thrown versatile</tags>
+		
+		<value>1d6</value> 
+		<value>strMod</value>
+		<limits>attack</limits>
+		<cost></cost>
+	</modifier>
+	<modifier>
+		<name>War Pick</name>
+		<tags>weapon</tags>
+		
+		<value>1d8</value> 
+		<value>strMod</value>
+		<limits>attack</limits>
+		<cost></cost>
+	</modifier>
+	<modifier>
+		<name>Warhammer</name>
+		<tags>weapon versatile</tags>
+		
+		<value>1d8</value> 
+		<value>strMod</value>
+		<limits>attack</limits>
+		<cost></cost>
+	</modifier>
+	<modifier>
+		<name>Whip</name>
+		<tags>weapon finesse</tags>
+		
+		<value>1d4</value> 
+		<value>strMod</value> 
+		<value>dexMod</value>
+		<limits>attack</limits>
+		<cost></cost>
+	</modifier>
+	<modifier>
+		<name>Blowgun</name>
+		<tags>weapon ammunition loading</tags>
+		
+		<value>1</value> 
+		<value>dexMod</value>
+		<limits>attack</limits>
+		<cost></cost>
+	</modifier>
+	<modifier>
+		<name>Crossbow Hand</name>
+		<tags>weapon ammunition light loading</tags>
+		
+		<value>1d6</value> 
+		<value>dexMod</value>
+		<limits>attack</limits>
+		<cost></cost>
+	</modifier>
+	<modifier>
+		<name>Crossbow Heavy</name>
+		<tags>weapon ammunition heavy loading twoHand</tags>
+		
+		<value>1d10</value>  
+		<value>dexMod</value>
+		<limits>attack</limits>
+		<cost></cost>
+	</modifier>
+	<modifier>
+		<name>Longbow</name>
+		<tags>weapon ammunition heavy twoHand</tags>
+		
+		<value>1d8</value>  
+		<value>dexMod</value>
+		<limits>attack</limits>
+		<cost></cost>
+	</modifier>
+</class>
