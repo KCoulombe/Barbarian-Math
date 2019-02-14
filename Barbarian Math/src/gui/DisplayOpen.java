@@ -4,8 +4,11 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.LayoutManager;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -44,10 +47,16 @@ public class DisplayOpen extends DisplayPanel {
 		JLabel text = new JLabel("Barbarian Math");
 		//establish button
 		JButton startButton = new JButton(Constants.GOTO_MAIN_BUTTON_LABEL);
+		//establish dropDown
+		ArrayList<File> localFiles = c.localRulesets(new File(Constants.DATA_FOLDER_NAME));
+		
+		JComboBox rulesetSelect = new JComboBox();
 		//action commands are used for identifying what to do. 
 		startButton.setActionCommand(Constants.GOTO_MAIN_BUTTON);
 		//universal listener
 		startButton.addActionListener(l);
+		//populate dropdown
+		
 		//determine where the text will go in the grid
 		g.gridx = 1;//middle
 		g.gridy = 1;//middle

@@ -165,12 +165,8 @@ public class Ruleset
 	{
 		return new Value("DummyValue", 0);
 	}
-	/** 
-	 * Constructor for reading data from xml.
-	 * @param type The type of the thing to be loaded, "adv" for adventurer, "val" for modifier/bundle, and "build" for a charicter build
-	 * @throws ParserConfigurationException 
-	 */
-	public void Load(String name, String path, String type)
+	
+	public void Load(String name, String path)
 	{
 		
 	}
