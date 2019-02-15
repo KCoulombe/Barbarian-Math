@@ -399,4 +399,43 @@
 		<limit>action </limit>
 		<cost>spellSlot9  </cost>
 	</modifier>
-
+	<modifier>
+		<name>Acid Arrow </name>
+		<tags>spell rangedSpellAttack scaling </tags>
+		<value>acidArrowScaling </value>
+		<limit>action </limit>
+		<cost>spellSlot1  </cost>
+	</modifier>
+		<scalar>
+			<name>acidArrowScaling </name>
+			<tags>scaling </tags>
+			<value>spellSlot1:2d4 </value>
+			<value>spellSlot2:3d4 </value>
+			<value>spellSlot3:4d4 </value>
+			<value>spellSlot4:5d4 </value>
+			<value>spellSlot5:6d4 </value>
+			<value>spellSlot6:7d4 </value>
+			<value>spellSlot7:8d4 </value>
+			<value>spellSlot8:9d4 </value>
+			<value>spellSlot9:10d4 </value>
+		</scalar>
+	<modifier>
+		<name> </name>
+		<tags> </tags>
+		<value> </value>
+		<limit> </limit>
+		<cost>  </cost>
+	</modifier>
+		<scalar>
+			<name> </name>
+			<tags> </tags>
+			<value>spellSlot1: </value>
+			<value>spellSlot2: </value>
+			<value>spellSlot3: </value>
+			<value>spellSlot4: </value>
+			<value>spellSlot5: </value>
+			<value>spellSlot6: </value>
+			<value>spellSlot7: </value>
+			<value>spellSlot8: </value>
+			<value>spellSlot9: </value>
+		</scalar>
