@@ -107,6 +107,21 @@
 			<value>17:4d8</value>
 		</scalar>
 	<modifier>
+		<name>Eldritch Blast </name>
+		<tag> force cantrip scaling rangedSpellAttack</tag>
+		<value>eldritchBlastScaling </value>
+		<limit>action </limit>
+		<cost>action </cost>
+	</modifer>
+		<scalar>
+			<name>eldritchBlastScaling </name>
+			<tags>scaling </tags>
+			<value>1:1d10 </value>
+			<value>5:2d10 </value>
+			<value>11:3d10 </value>
+			<value>17:4d10 </value>
+		</scalar>
+	<modifier>
 		<name>shocking grasp </name>
 		<tags>meleeSpellAttack cantrop lightning scaling </tags>
 		<value>shockingGraspScaling </value>
@@ -140,6 +155,26 @@
 			<value>spellSlot7:9d6 </value>
 			<value>spellSlot8:10d6 </value>
 			<value>spellslot9:11d6 </value>
+		</scalar>
+	<modifier>
+		<name> </name>
+		<tag>spell </tag>
+		<value> </value>
+		<limit> </limit>
+		<cost> </cost>
+	</modifer>
+		<scalar>
+			<name> </name>
+			<tags> </tags>
+			<value>spellSlot1: </value>
+			<value>spellSlot2: </value>
+			<value>spellSlot3: </value>
+			<value>spellSlot4: </value>
+			<value>spellSlot5: </value>
+			<value>spellSlot6: </value>
+			<value>spellSlot7: </value>
+			<value>spellSlot8: </value>
+			<value>spellSlot9: </value>
 		</scalar>
 	<modifier>
 		<name>magic missile </name>
