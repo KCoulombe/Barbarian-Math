@@ -60,22 +60,46 @@ public class Core {
 	 */
 	public void setRuleset(String ruleset) throws ParserConfigurationException
 	{
-		Scanner scanner = new Scanner();
-		
 		if(activeRuleset == null)
 		{
-			activeRuleset = scanner.LoadRuleset(ruleset);
+			activeRuleset = new Ruleset(ruleset);
 		}
 	}
+	
+	/**
+	 * generates a list of tags. If any tag from contains is present in the component, all tags will be added.
+	 * @param any component containing a tag in this list will have all tags copied.
+	 * @return
+	 */
+	public ArrayList<String> getTags(ArrayList<String> contains)
+	{
+		ArrayList<String> tags = new ArrayList();
+		for(Component c : loadedComponents)
+		{
+			if(!(contains == null)&&c.tags.contains(contains))
+			{
+				for(String s : c.tags)
+				{
+					if(!tags.contains(s))
+					{
+						tags.add(s);
+					}
+				}
+					
+			}
+			else 
+			{
+				for(String s : c.tags)
+				{
+					if(!tags.contains(s))
+					{
+						tags.add(s);
+					}
+				}
+			}
+			
+			
+		}
+		return tags;
+	}
 }
-
-
-
-
-
-
-
-
-
-
-
