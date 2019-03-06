@@ -11,7 +11,6 @@ import java.util.Map;
  */
 public class Bundle extends Component
 {
-	public List<String> tags;
 	public Map<Integer, String> values;
 	
 	/** 
@@ -20,7 +19,7 @@ public class Bundle extends Component
 	public Bundle(String name, List<String> tags, Map<Integer, String> values)
 	{
 		super.name = name;
-		this.tags = tags;
+		super.tags = tags;
 		this.values = values;
 	}
 	
