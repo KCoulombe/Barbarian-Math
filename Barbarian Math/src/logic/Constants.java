@@ -34,7 +34,25 @@ public class Constants {
 	public static final String GOTO_MODIFIER_BUTTON_LABEL = "Modifier Manager";
 	public static final String GOTO_SAVE_BUTTON_LABEL = "Save";
 	public static final String GOTO_LOAD_BUTTON_LABEL = "Load";
-	public static final String DATA_FOLDER_NAME = "BarbarianMathData";
-	public static final CharSequence EXTENTION_RULESET = null;
+	
+	public static final String DATA_FOLDER_NAME = "./BarbarianMathData";
+	public static final String EXTENTION_RULESET = ".ruleset";
+	public static final String LABEL_MODIFIER_LOAD = "Load Modifier";
+	
+	
+	public static final String TAG_MODIFIER = "TAG_MODIFIER";
+	
+	public static final String LABEL_MODIFIER_LOAD_BUTTON = "Load";
+	public static final String ENTER_MODIFIER_LOAD = "ENTER_MODIFIER_LOAD";
+	public static final String LABEL_NAME_FIELD = "Name:";
+	public static final String TAG_NAME = "TAG_NAME";
+	public static final String TAG_ATTRIBUTE = "TAG_ATTRIBUTE";
+	public static final String LABEL_ATTRIBUTE_SELECT = "Attribute Used";
+	public static final String TAG_INTEGER = "INTEGER";
+	public static final String LABEL_COST_FIELD = "Cost Amount";
+	public static final String ENTER_COST = "ENTER_COST";
+	public static final String LABEL_ADD_BUTTON = "Add";
+	public static final String LABEL_TYPE_DROP = "Type: ";
+	public static final String ENTER_TYPE = "ENTER_TYPE";
 
 }
