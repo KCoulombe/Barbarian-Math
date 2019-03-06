@@ -1,0 +1,48 @@
+<?xml version = "1.0"?>
+<class>
+	<adventurer>
+		<bundle type = "mainclass">
+			<name>Barbarian</name><!--Name as shown in app-->
+			<tags>class</tags><!--For character classes, class should be enough-->
+			<value>1:rage</value><!--the learned abilities will be paired off as level:modifier if the ability does not help damage, its not worth including-->
+			<value>2:recklessSwing</value>
+			<value>3:subclass</value><!--this is the point where a subclass would be decided-->
+			<value>4:asi</value><!--will point to a decision to +2 to an attribute or a feat-->
+			<value>5:extraAttack1</value>
+			<value>8:asi</value>
+			<value>9:brutalCritical</value>
+			<value>12:asi</value>
+			<value>16:asi</value>
+			<value>19:asi</value>
+			<value>20:primalChampion</value>
+		</bundle>
+
+		<bundle type = "subclass"><!--One subclass for one character-->
+			<name>Berserker</name>
+			<tags>BarbarianSub</tags><!--Used to verify the subclass to its parent class-->
+			<value>3:frenzy</value>
+			<value>14:retaliate</value>
+		</bundle>
+
+		<bundle type = "subclass"><!--One subclass for one character-->
+			<name>Totem Warrior</name>
+			<tags>BarbarianSub</tags><!--Used to verify the subclass to its parent class-->
+		</bundle>
+
+		<modifier>
+			<name>Rage</name>
+			<tags>Barbarian meleeBonus</tags>
+			<values>rageScale</values><!---->
+			<limits>onMelee</limits><!--What does it apply to? onMelee, onAttack, oncePerTurn-->
+			<cost>bonusAction</cost><!--put things like "use a bonus action..." or "spend 1 ki point to..." here-->
+		</modifier>
+
+		<scalar>
+			<name>rageScale</name><!--Some abilities may improve over time, a scalar will be used for a modifier value-->
+			<tags>static scaling</tags><!--used to describe where it gets its numbers. This is more important for things that scale off of attributes such as dexMod.-->
+			<value>1:2</value><!--works in a level:value format-->
+			<value>9:3</value>
+			<value>16:4</value>
+		</scalar>
+	</adventurer>
+</class>

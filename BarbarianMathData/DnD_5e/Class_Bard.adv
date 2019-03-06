@@ -1,0 +1,29 @@
+<?xml version = "1.0"?>
+<class>
+	<adventurer>
+		<bundle type="mainclass">
+			<name> Bard </name>
+			<tags> class </tags>
+			<value>3:subclass </value>
+			<value>4:asi</value>
+			<value>8:asi</value>
+			<value>10:2 freeSpell</value>
+			<value>12:asi</value>
+			<value>16:asi</value>
+			<value>18:2 freeSpell</value>
+			<value>19:asi</value>
+			</bundle>
+
+		<bundle type="subclass">
+			<name> Loremaster Bard </name>
+			<tags>BardSub</tags>
+			<value>6: 2 freeSpell</value>
+		</bundle>
+
+		<bundle type="subclass">
+			<name> Valorous Bard </name>
+			<tags>BardSub</tags>
+			<value>6:extraAttack1</value>
+		</bundle>
+    </adventurer>
+</class>

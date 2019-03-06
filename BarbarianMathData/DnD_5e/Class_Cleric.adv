@@ -1,0 +1,73 @@
+<?xml version = "1.0"?>
+<class>
+    <adventurer>
+        <bundle type = "mainclass">	
+            <name>Cleric</name>
+            <tags>class</tags>
+            <value>1:subclass</value>
+            <value>4:asi</value>
+            <value>8:asi</value>
+            <value>12:asi</value>
+            <value>16:asi</value>
+            <value>19:asi</value>
+        </bundle>
+
+        <bundle type = "subclass">
+            <name>Knowledge</name>
+            <tags>ClericSub</tags>
+            <value>8: cantropAddWisdom</value>
+        </bundle>
+
+        <bundle type = "subclass">
+            <name> Tempest </name>
+            <tags>ClericSub</tags>
+            <value>1: wrathOftheStorm</value>
+            <value>8: divineStrikeStorm</value>
+        </bundle>
+
+        <bundle type = "subclass">
+            <name> Trickery </name>
+            <tags>ClericSub</tags>
+            <value>8: divineStrikeAcid</value>
+        </bundle>
+
+        <bundle type = "subclass">
+            <name> War </name>
+            <tags>ClericSub</tags>
+            <value>1: bonusActionAttack</value>
+            <value>8:divineStrikeWeapon</value>
+        </bundle>
+
+        <modifier>
+            <name>wrathOftheStorm</name>
+            <tags>reaction magic</tags>
+            <values>2d8</values>
+            <limits>whenHit</limits>
+            <cost>wisMod</cost>
+        </modifier>
+
+        <scalar>
+            <name> divineStrikeStorm </name>
+            <tags> spell scaling </tags>
+            <value>8: 1d8 lightning </value>
+            <value>14: 2d8 lightning </value>
+            <limit> oncePerTurn </limit>
+        </scalar>
+
+        <scalar>
+            <name> divineStrikeAcid </name>
+            <tags> spell scaling </tags>
+            <value>8: 1d8 acid </value>
+            <value>14: 2d8 acid </value>
+            <limit> oncePerTurn </limit>
+        </scalar>
+
+        <scalar>
+            <name> divineStrikeWeapon </name>
+            <tags> spell scaling </tags>
+            <value>8: 1d8</value>
+            <value>14: 2d8</value>
+            <limit> oncePerTurn </limit>
+        </scalar>
+    </adventurer>
+</class>
