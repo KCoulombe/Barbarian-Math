@@ -1,13 +1,17 @@
 import java.io.File;
+import java.io.IOException;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.w3c.dom.DOMException;
+
 import gui.DisplayMain;
+import jdk.internal.org.xml.sax.SAXException;
 import logic.*;
 
 public class TestMain {
 
-	public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException 
+	public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException, DOMException, org.xml.sax.SAXException 
 	{
 		DisplayMain maths = new DisplayMain();
 		maths.show();
