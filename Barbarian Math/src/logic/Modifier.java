@@ -10,7 +10,6 @@ import java.util.List;
 public class Modifier extends Component
 {
 	public List<Value> values;
-	public List<String> tags;
 	public List<String> limits;
 	public List<String> costs;
 

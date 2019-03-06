@@ -251,7 +251,7 @@
 	<modifier>
 		<name>Longbow</name>
 		<tags>weapon ammunition heavy twoHand</tags>
-		<values>1d8 dexMod</values>
+		<values>1d8 dexMod fire:2d4</values>
 		<limits>attack</limits>
 		<cost></cost>
 	</modifier>

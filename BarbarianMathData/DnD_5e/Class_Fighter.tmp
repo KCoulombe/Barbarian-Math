@@ -23,7 +23,7 @@
 					</subclass>
 					<subclass>
 								<name> Battle Master </name>
-								<parent> Fighter</name>
+								<parent> Fighter</parent>
 								<value>3:maneuvers</value>
 								<value>7:aditionalManeuvers</value>
 								<value>10:aditionalManeuvers</value>
@@ -45,5 +45,6 @@
 							<limit>rest</limit>
 						</scalar>
 					</modifier>
-					
+            </adventurer>
+</class>					
 							

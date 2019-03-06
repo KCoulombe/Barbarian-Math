@@ -60,31 +60,22 @@ public class Core {
 	 */
 	public void setRuleset(String ruleset) throws ParserConfigurationException
 	{
+		Scanner scanner = new Scanner();
+		
 		if(activeRuleset == null)
 		{
-			activeRuleset = new Ruleset(ruleset);
+			activeRuleset = scanner.LoadRuleset(ruleset);
 		}
-	}
-	/**
-	 * Returns a list of Files that contain Rulesets.
-	 * 
-	 * @param path
-	 * @return
-	 */
-	public ArrayList<File> localRulesets(File path)
-	{
-		ArrayList<File> rulesets = new ArrayList<>();
-		File f = new File(Constants.DATA_FOLDER_NAME);
-		File[] folders = f.listFiles();
-		for(int i = 0; i < f.length(); i++)
-		{
-			if(folders[i].isDirectory()) {
-				rulesets.addAll(localRulesets(folders[i]));
-			}
-			else if(folders[i].getName().contains(Constants.EXTENTION_RULESET)) {
-				rulesets.add(folders[i]);
-			}
-		}
-		return rulesets;
 	}
 }
+
+
+
+
+
+
+
+
+
+
+

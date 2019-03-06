@@ -1,0 +1,10 @@
+<?xml version = "1.0"?>
+
+<class>
+	<characterBuild>
+		<name>Generiko</name> <!--name of character-->
+		<modifiers>greatWeaponMaster greatSword</modifiers> <!--a list of modifiers separated by spaces-->
+		<bundles>barbarianZealot halfOrc</bundles> <!--a list of bundles seperated by spaces-->
+		<level>15</level><!--default level-->
+	</characterBuild>
+</class>

@@ -34,5 +34,7 @@ public class Constants {
 	public static final String GOTO_MODIFIER_BUTTON_LABEL = "Modifier Manager";
 	public static final String GOTO_SAVE_BUTTON_LABEL = "Save";
 	public static final String GOTO_LOAD_BUTTON_LABEL = "Load";
+	public static final String DATA_FOLDER_NAME = "BarbarianMathData";
+	public static final CharSequence EXTENTION_RULESET = null;
 
 }
