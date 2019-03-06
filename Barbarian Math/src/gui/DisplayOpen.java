@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 
 import logic.Constants;
 import logic.Core;
+import logic.Scanner;
 
 
 
@@ -39,6 +40,9 @@ public class DisplayOpen extends DisplayPanel {
 	
 	public void setup(int x, int y, ActionListener l, Core c)
 	{
+		File workingDirectory = new File("BarbarianMathData");
+		Scanner scanner = new Scanner();
+		
 		setSize(y,x);
 		
 		setLayout(new GridBagLayout());
@@ -48,7 +52,7 @@ public class DisplayOpen extends DisplayPanel {
 		//establish button
 		JButton startButton = new JButton(Constants.GOTO_MAIN_BUTTON_LABEL);
 		//establish dropDown
-		ArrayList<File> localFiles = c.localRulesets(new File(Constants.DATA_FOLDER_NAME));
+		File[] localFiles = scanner.ListRulesets(workingDirectory);
 		
 		JComboBox rulesetSelect = new JComboBox();
 		//action commands are used for identifying what to do. 
