@@ -67,6 +67,6 @@ public class Constants {
 	public static final String TAG_WIS_MOD ="wisMod";
 	public static final String TAG_DEX_MOD ="dexMod";
 	public static final String TAG_LIGHTNING = "lightning";
-	public static final String
+	public static final String TAG_ACID ="acid";
 	//End Tags from classes and other modifiers
 }
