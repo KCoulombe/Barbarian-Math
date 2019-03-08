@@ -54,5 +54,8 @@ public class Constants {
 	public static final String LABEL_ADD_BUTTON = "Add";
 	public static final String LABEL_TYPE_DROP = "Type: ";
 	public static final String ENTER_TYPE = "ENTER_TYPE";
-
+	
+	// start Tags from classes and other modifiers
+	public static final String TAG_WEAPON_FINESSE = "Weapon Finesse";
+	//End Tags from classes and other modifiers
 }
