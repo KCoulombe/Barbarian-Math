@@ -57,5 +57,16 @@ public class Constants {
 	
 	// start Tags from classes and other modifiers
 	public static final String TAG_WEAPON_FINESSE = "Weapon Finesse";
+	public static final String TAG_CLASS = "class";
+	public static final String TAG_REACTION = "reaction";
+	public static final String TAG_MAGIC = "magic";
+	public static final String TAG_SPELL = "spell";
+	public static final String TAG_SCALING = "scaling";
+	public static final String LIMIT_ONCE_PER_TURN = "oncePerTurn";
+	public static final String LIMIT_ON_HIT = "onHit":
+	public static final String TAG_WIS_MOD ="wisMod";
+	public static final String TAG_DEX_MOD ="dexMod";
+	public static final String TAG_LIGHTNING = "lightning";
+	public static final String
 	//End Tags from classes and other modifiers
 }
