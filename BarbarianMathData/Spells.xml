@@ -33,7 +33,7 @@
 	
 	<modifier>
 		<name> acidSplash </name>
-		<tags> acid cantrop scaling </tags>
+		<tags> acid cantrip scaling </tags>
 		<value> acidSplashScale </value>
 		<limit> action </limit>
 		<cost> action</cost>
@@ -48,7 +48,7 @@
 		</scalar>
 	<modifier>
 		<name> chill touch</name>
-		<tags>rangedSpellAttack necrotic cantrop scaling</tags>
+		<tags>rangedSpellAttack necrotic cantrip scaling</tags>
 		<value>chillTouchScale</value>
 		<limit> action</limit>
 		<cost>action </cost>
@@ -63,7 +63,7 @@
 		</scalar>
 	<modifier>
 		<name>fire bolt </name>
-		<tags>rangedSpellAttack fire cantrop scaling </tags>
+		<tags>rangedSpellAttack fire cantrip scaling </tags>
 		<value>fireBoltScaling </value>
 		<limit>action </limit>
 		<cost>action  </cost>
@@ -78,7 +78,7 @@
 		</scalar>
 		<modifier>
 		<name>poison spray </name>
-		<tags>poison cantrop scaling </tags>
+		<tags>poison cantrip scaling </tags>
 		<value>poisonSprayScaling </value>
 		<limit>action </limit>
 		<cost>action  </cost>
@@ -93,7 +93,7 @@
 		</scalar>
 	<modifier>
 		<name>ray of frost </name>
-		<tags>cold rangedSpellAttack cantrop scaling </tags>
+		<tags>cold rangedSpellAttack cantrip scaling </tags>
 		<value>rayOfFrostScaling </value>
 		<limit>action </limit>
 		<cost>action  </cost>
@@ -123,7 +123,7 @@
 		</scalar>
 	<modifier>
 		<name>shocking grasp </name>
-		<tags>meleeSpellAttack cantrop lightning scaling </tags>
+		<tags>meleeSpellAttack cantrip lightning scaling </tags>
 		<value>shockingGraspScaling </value>
 		<limit>action </limit>
 		<cost>action </cost>
