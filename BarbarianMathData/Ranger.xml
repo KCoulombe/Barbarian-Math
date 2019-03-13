@@ -1,0 +1,31 @@
+<?xml version = "1.0"?>
+<class>
+		<adventurer>
+				<bundle>
+					<name> Ranger </name>
+						<tag> class </tag>
+						<value>2: fightingStyle  </value>
+						<value>3: subclass </value>
+						<value>4: asi </value>
+						<value>5: extraAttack </value>
+						<value>8: asi </value>
+						<value>12: asi <value>
+						<value>16: asi </value>
+						<value>19: asi </value>
+				</bundle>
+			<subclass>
+				<name> Hunter </name>
+				<parent> Ranger </parent>
+				<value>3:hunterFeature1 </value>
+				<value>7: hunterFeature2</value>
+				<value>11:hunterFeature3 </value>
+				<value>15: hunterFeature4 </value>
+			</subclass>
+			
+			<modifier>
+				<name>Colossus Slayer </name>
+				<tags>hunterFeature1 decision oncePerTurn </tags>
+				<value> attack+1d8 </value>
+			</modifier>
+	
+				
