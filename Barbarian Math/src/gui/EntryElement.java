@@ -4,10 +4,12 @@ import java.awt.FlowLayout;
 import java.awt.LayoutManager;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -20,8 +22,12 @@ import logic.Core;
  *
  */
 public class EntryElement extends DisplayPanel {
-
-	public EntryElement() {
+	
+	String purpose = "";
+	HashMap<String,JComponent> parts;
+	public EntryElement(String l) {
+		parts = new HashMap<>();
+		purpose = l;
 	}
 
 	public EntryElement(LayoutManager layout) {
@@ -44,6 +50,8 @@ public class EntryElement extends DisplayPanel {
 		setLayout(new FlowLayout());
 		
 	}
+	
+	
 	/**
 	 * adds a textbox with given data.
 	 * @param label the outward name
@@ -54,6 +62,7 @@ public class EntryElement extends DisplayPanel {
 		JTextField t = new JTextField(label);
 		t.setActionCommand(tag);
 		add(t);
+		parts.put(label, t);
 	}
 	/**
 	 * Adds a ComboBox with the given components 
@@ -68,6 +77,7 @@ public class EntryElement extends DisplayPanel {
 			c.addItem(i);
 		}
 		add(c);
+		parts.put(label, c);
 	}
 	/**
 	 * Adds a ComboBox with the given components. Same as addDropdown, but for String arrays.
@@ -82,17 +92,28 @@ public class EntryElement extends DisplayPanel {
 			c.addItem(s);
 		}
 		add(c);
+		parts.put(label, c);
 	}
 	/**
 	 * Adds a Button with given name and event.
 	 * @param label outward name
 	 * @param event control used for Action Listener
 	 */
-	public void addButton(String label, String event)
+	public void addButton(String label, String event, ActionListener l)
 	{
 		JButton b = new JButton(label);
+		b.addActionListener(l);
 		b.setActionCommand(event);
 		add(b);
+		parts.put(label, b);
 	}
+
+	@Override
+	public String toString() {
+		String out = purpose +": ";
+		
+		return out;
+	}
+	
 
 }

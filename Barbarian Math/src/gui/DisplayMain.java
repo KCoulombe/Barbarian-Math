@@ -4,17 +4,18 @@ import java.awt.CardLayout;
 import java.awt.FlowLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
-
+import javax.xml.parsers.ParserConfigurationException;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import logic.Constants;
 import logic.Core;
+import logic.Scanner;
 
 /**
  * Holds and controls the operation of the GUI
@@ -26,6 +27,8 @@ public class DisplayMain {
 	private JFrame mainFrame;//the top level of the gui
 	private JPanel screens;//where each screen is held
 	String lastMode = Constants.MODE_START;//used for nested menus
+	
+	DisplayOpen view1;
 	
 	public DisplayMain() {
 		core = new Core();
@@ -100,7 +103,7 @@ public class DisplayMain {
 	private void prepareFrames()
 	{
 		//start
-		DisplayOpen view1 = new DisplayOpen();
+		view1 = new DisplayOpen();
 		view1.setup(Constants.WINDOW_X,Constants.WINDOW_Y, new ButtonClickListener(), core);
 		screens.add(view1, Constants.MODE_START);
 		//main menu
@@ -140,6 +143,17 @@ public class DisplayMain {
 			String a = e.getActionCommand();
 	    	switch(a)
 	    	{
+	    		case Constants.GOTO_FIRST_MAIN_BUTTON:
+	    			Scanner s = new Scanner();
+	    			File f = (File) view1.rulesetSelect.getSelectedItem();
+				try {
+					s.LoadRuleset(f);
+				} catch (ParserConfigurationException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+	    			setup(Constants.MODE_MAIN);
+	    			break;
 	    		case Constants.GOTO_MAIN_BUTTON:
 	    			setup(Constants.MODE_MAIN);
 	    			break;

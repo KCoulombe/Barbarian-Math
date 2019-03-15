@@ -19,7 +19,7 @@ import logic.Scanner;
 
 
 public class DisplayOpen extends DisplayPanel {
-	
+	JComboBox<File> rulesetSelect;
 	public DisplayOpen() {
 	}
 
@@ -54,13 +54,19 @@ public class DisplayOpen extends DisplayPanel {
 		//establish dropDown
 		File[] localFiles = scanner.ListRulesets(workingDirectory);
 		
-		JComboBox rulesetSelect = new JComboBox();
+		rulesetSelect = new JComboBox();
+		//rulesetSelect.addActionListener(l);
+		
 		//action commands are used for identifying what to do. 
-		startButton.setActionCommand(Constants.GOTO_MAIN_BUTTON);
+		startButton.setActionCommand(Constants.GOTO_FIRST_MAIN_BUTTON);
 		//universal listener
 		startButton.addActionListener(l);
 		//populate dropdown
-		
+		Scanner s = new Scanner();
+		for(File f : s.ListRulesets(Constants.DATA_FOLDER_NAME))
+		{
+			rulesetSelect.addItem(f);
+		}
 		//determine where the text will go in the grid
 		g.gridx = 1;//middle
 		g.gridy = 1;//middle
@@ -74,7 +80,8 @@ public class DisplayOpen extends DisplayPanel {
 		g.gridy = 2;//bottom
 		g.fill = GridBagConstraints.HORIZONTAL;
 		add(startButton, g);
-
+		g.gridx = 2;
+		add(rulesetSelect, g);
 	}
 
 }
