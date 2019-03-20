@@ -147,7 +147,8 @@ public class DisplayMain {
 	    			Scanner s = new Scanner();
 	    			File f = (File) view1.rulesetSelect.getSelectedItem();
 				try {
-					s.LoadRuleset(f);
+					//s.LoadRuleset(f);
+					core.setRuleset(s.LoadRuleset(f));
 				} catch (ParserConfigurationException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
