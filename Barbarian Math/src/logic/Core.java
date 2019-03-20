@@ -58,11 +58,17 @@ public class Core {
 	 * @param ruleset
 	 * @throws ParserConfigurationException 
 	 */
-	public void setRuleset(String ruleset) throws ParserConfigurationException
+	public void setRuleset(Ruleset ruleset) throws ParserConfigurationException
 	{
-		if(activeRuleset == null)
+		/*if(activeRuleset == null)
 		{
 			activeRuleset = new Ruleset(ruleset);
+		}*/
+		if(activeRuleset == null)
+		{
+			Scanner s = new Scanner();
+			activeRuleset = ruleset;
+			loadedComponents.addAll(activeRuleset.modifiers);
 		}
 	}
 	
