@@ -1,12 +1,12 @@
 package logic;
 
 import java.util.List;
-import java.util.Map;
+import java.util.HashMap;
 
 	
 public class Record{
 	String label;
-	HashMap<int, double> map;
+	HashMap<Integer, Double> map;
 	
 	public Record(CharacterBuild character){
 		label = character.name;
