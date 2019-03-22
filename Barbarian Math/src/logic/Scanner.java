@@ -6,16 +6,25 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.w3c.dom.Text;
 import org.xml.sax.SAXException;
 
 public class Scanner 
@@ -23,9 +32,16 @@ public class Scanner
 	/** 
 	 * Creates a ruleset object based off of xml files
 	 * @param directory a string containing the directory containing all of the xml files
+	 * @return 
 	 * @return A ruleset containing all of the data xml files
 	 */
-	public Ruleset LoadRuleset(String directory) throws ParserConfigurationException
+	
+	private Scanner()
+	{
+		
+	}
+	
+	static public Ruleset LoadRuleset(String directory) throws ParserConfigurationException
 	{
 		return LoadRuleset(new File(directory));
 	}
@@ -34,10 +50,11 @@ public class Scanner
 	 * @param directory a File object of the directory containing all of the xml files
 	 * @return A ruleset containing all of the data xml files
 	 */
-	public Ruleset LoadRuleset(File directory) throws ParserConfigurationException
+	static public Ruleset LoadRuleset(File directory) throws ParserConfigurationException
 	{
 		String name = "";
 		List<Modifier> modifiers = new ArrayList<Modifier>();
+		List<Scalar> scalars = new ArrayList<Scalar>();
 		List<Adventurer> adventurers = new ArrayList<Adventurer>();
 				
 		List<File> AdventurerFiles = new ArrayList<File>();
@@ -63,16 +80,23 @@ public class Scanner
 		        //load all of the .val files
 				if (file.getName().endsWith((".val"))) 
 				{
-					NodeList nList = doc.getElementsByTagName("modifier");
 					valueFiles.add(file);
-					modifiers = LoadModifiers(nList);
+					
+					NodeList modifierNodes = doc.getElementsByTagName("modifier");
+					modifiers.addAll(LoadModifiers(modifierNodes));
+				}
+				
+				if (file.getName().endsWith((".sca"))) 
+				{
+					NodeList scalarNodes = doc.getElementsByTagName("scalar");
+					scalars.addAll(LoadScalars(scalarNodes));
 				}
 				
 				if (file.getName().endsWith((".adv"))) 
 				{
 					NodeList nList = doc.getElementsByTagName("adventurer");
 					AdventurerFiles.add(file);
-					adventurers = LoadAdventurers(nList);
+					adventurers.addAll(LoadAdventurers(nList));
 					
 					//System.out.println(adventurers);
 				}
@@ -93,14 +117,14 @@ public class Scanner
 			}
 		}
 		
-		return new Ruleset(name, modifiers, adventurers);
+		return new Ruleset(name, modifiers, scalars, adventurers);
 	}
 	
-	public Element FindComponentInXML(String name, String filePath, String nodeType) throws ParserConfigurationException, SAXException, IOException
+	static public  Element FindComponentInXML(String name, String filePath, String nodeType) throws ParserConfigurationException, SAXException, IOException
 	{
 		return FindComponentInXML(name, new File(filePath), nodeType);
 	}
-	public Element FindComponentInXML(String name, File file, String componentType) throws ParserConfigurationException, SAXException, IOException
+	static public  Element FindComponentInXML(String name, File file, String componentType) throws ParserConfigurationException, SAXException, IOException
 	{
 		//load the xml file into memory
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -108,7 +132,11 @@ public class Scanner
         Document doc = dBuilder.parse(file);
         doc.getDocumentElement().normalize();
         
-        //get all of the tags that correspond to the componentType, then loop through them
+        return FindComponentInXML(name, doc, componentType);
+	}
+	static public  Element FindComponentInXML(String name, Document doc, String componentType) throws ParserConfigurationException, SAXException, IOException
+	{
+		 //get all of the tags that correspond to the componentType, then loop through them
         NodeList nList = doc.getElementsByTagName(componentType);
         for (int i = 0; i < nList.getLength(); i++) 
         {
@@ -121,6 +149,7 @@ public class Scanner
         		//if the element's name is the entered name, return it
         		if (eElement.getElementsByTagName("name").item(0).getTextContent().equals(name))
         		{
+        			System.out.println("A " + componentType + " named '" + eElement.getElementsByTagName("name").item(0).getTextContent() +  "' was found");
         			return eElement;
         		}
         	}
@@ -130,50 +159,443 @@ public class Scanner
         return null;
 	}
 	
-	public File[] ListRulesets(String directoryPath)
+	/** 
+	 * Lists all of the rulesets in the specified directory.
+	 * @param directoryPath the filepath of the directory as a string
+	 * @return A array of File objects for each ruleset in the specified directory
+	 */
+	static public  File[] ListRulesets(String directoryPath)
 	{
 		return ListRulesets(new File(directoryPath));
-	}	
-	public File[] ListRulesets(File directory)
+	}
+	
+	/** 
+	 * Lists all of the rulesets in the specified directory.
+	 * @param directory the directory as a File object
+	 * @return A array of File objects for each ruleset in the specified directory
+	 */
+	static public  File[] ListRulesets(File directory)
 	{
 		return directory.listFiles(File::isDirectory);
 	}
 	
-	public void Write(Modifier modifier, String filePath) throws ParserConfigurationException, SAXException, IOException
+	/** 
+	 * Writes a modifier object to the specified file.
+	 * @param modifier the modifier to be written.  if a modifier with the same name exists, it will be overwritten.
+	 * @param filePath the path to the file that will be written to.
+	 */
+	static public  void Write(Modifier modifier, String filePath) throws ParserConfigurationException, SAXException, IOException, TransformerException
 	{
 		Write(modifier, new File(filePath));
-	}	
-	public void Write(Modifier modifier, File file) throws ParserConfigurationException, SAXException, IOException
+	}
+	/** 
+	 * Writes a modifier object to the specified file.
+	 * @param modifier the modifier to be written.  if a modifier with the same name exists, it will be overwritten.
+	 * @param file the file that will be written to.
+	 */
+	static public  void Write(Modifier modifier, File file) throws ParserConfigurationException, SAXException, IOException, TransformerException
 	{
+		//load the xml file into memory
+		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+        Document doc = dBuilder.parse(file);
+        doc.getDocumentElement().normalize();
+		
 		//Check if the element we want to write already exists, and if so, delete it
-		Element existing = FindComponentInXML(modifier.name, file, "modifier");
+		Element existing = FindComponentInXML(modifier.name, doc, "modifier");
 		if(existing != null)
 		{
 			existing.getParentNode().removeChild(existing);
 		}
 		
-		
+        //Create the new Element
+        Element newModifier = doc.createElement("modifier");
+        
+        //create the name element
+        //Text modifierName = doc.createTextNode("name");
+        Element modifierName = doc.createElement("name");
+        modifierName.appendChild(doc.createTextNode(modifier.name));
+        //modifierName.setTextContent(modifier.name);
+        newModifier.appendChild(modifierName);
+        
+        //create the tags element    
+        Element modifierTags = doc.createElement("tags");
+        String tagsText = "";
+        if(modifier.tags.size() > 0)
+        {
+	        for(int i = 0; i < modifier.tags.size(); i++)
+	        {
+	        	tagsText += modifier.tags.get(i);
+	        	if(i != modifier.tags.size() - 1)
+	        	{
+	        		tagsText +=  " ";
+	        	}
+	        }
+        }
+        //tagsText += "\b";
+        modifierTags.appendChild(doc.createTextNode(tagsText));
+        newModifier.appendChild(modifierTags);
+        
+        //create the values element
+        Element modifierValues = doc.createElement("values");
+        String valuesText = "";
+        for(int i = 0; i < modifier.values.size(); i++)
+        {
+        	valuesText += modifier.values.get(i).name;
+        	if(i != modifier.values.size() - 1)
+        	{
+        		valuesText +=  " ";
+        	}
+        }
+        //valuesText += "\b";
+        modifierValues.appendChild(doc.createTextNode(valuesText));
+        newModifier.appendChild(modifierValues);
+        
+        //create the limits element
+        Element modifierLimits = doc.createElement("limits");
+        String limitsText = "";
+        for(int i = 0; i < modifier.limits.size(); i++)
+        {
+        	limitsText += modifier.limits.get(i);
+        	if(i != modifier.limits.size() - 1)
+        	{
+        		limitsText +=  " ";
+        	}
+        }
+        //limitsText += "\b";
+        modifierLimits.appendChild(doc.createTextNode(limitsText));
+        newModifier.appendChild(modifierLimits);
+        
+        //create the costs element
+        Element modifierCosts = doc.createElement("costs");
+        String costsText = "";
+        for(int i = 0; i < modifier.costs.size(); i++)
+        {
+        	costsText += modifier.costs.get(i);
+        	if(i != modifier.costs.size() - 1)
+        	{
+        		costsText +=  " ";
+        	}
+        }
+        //costsText += "\b";
+        modifierCosts.appendChild(doc.createTextNode(costsText));
+        newModifier.appendChild(modifierCosts);
+        
+        //add the new modifier to the document object
+        Node root = doc.getFirstChild();
+        root.appendChild(newModifier);
+        
+        //write the new modifier to the xml file
+        DOMSource source = new DOMSource(doc);
+        
+        TransformerFactory transformerFactory = TransformerFactory.newInstance();
+        Transformer transformer = transformerFactory.newTransformer();
+        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+        transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+        StreamResult result = new StreamResult(file);
+        transformer.transform(source, result);
 	}
 	
-	public void Write(Adventurer adventurer, String filePath) throws ParserConfigurationException, SAXException, IOException
+	static public  void Write(Scalar scalar, String filePath) throws ParserConfigurationException, SAXException, IOException, TransformerException
+	{
+		Write(scalar, new File(filePath));
+	}	
+	static public  void Write(Scalar scalar, File file) throws ParserConfigurationException, SAXException, IOException, TransformerException
+	{
+		//load the xml file into memory
+		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+        Document doc = dBuilder.parse(file);
+        doc.getDocumentElement().normalize();
+		
+		//Check if the element we want to write already exists, and if so, delete it
+		Element existing = FindComponentInXML(scalar.name, doc, "scalar");
+		if(existing != null)
+		{
+			existing.getParentNode().removeChild(existing);
+		}
+		
+        //Create a new scalar 
+        Node root = doc.getFirstChild();
+        root.appendChild(ScalarToXML(scalar, doc));
+        
+        //write the new modifier to the xml file
+        DOMSource source = new DOMSource(doc);
+        
+        TransformerFactory transformerFactory = TransformerFactory.newInstance();
+        Transformer transformer = transformerFactory.newTransformer();
+        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+        transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+        StreamResult result = new StreamResult(file);
+        transformer.transform(source, result);
+	}
+	
+	/** 
+	 * Takes a Scaler object and turns it into an XML element, Basically the inverse of @ParseScalar()
+	 * @param scalar the Scalar object to be turned into XML.
+	 * @param doc the document that the XML will be using
+	 * @return An XML element based off of the Scalar Object
+	 * @see Scanner#ParseScalar(Element eElement)
+	 */
+	static private  Element ScalarToXML(Scalar scalar, Document doc)
+	{
+		//A scalar is a subtype of bundle, so we can save some code by creating a bundle and using BundleToXML()
+		//then adding a limits element to the resulting xml
+		Bundle bundle = new Bundle(scalar.name, scalar.tags, null);
+		 //Create the new Element
+        Element newScalar = BundleToXML(bundle, doc);
+        
+        //create the value elements
+        if(scalar.values != null)
+        {
+	        //get a list of all of the keys
+	        List<Integer> keys = new ArrayList<Integer>(scalar.values.keySet());
+	        for(int i = 0; i < keys.size(); i++)
+	        {
+	        	//get key i
+	        	int key = keys.get(i);
+	        	
+	        	//turn the array of values into a string
+	        	String valuesText = "";
+	        	for(int n = 0; n < scalar.values.get(key).size(); n++)
+	 	        {
+	        		valuesText += scalar.values.get(key).get(n);
+	        		if(n != scalar.values.get(key).size() - n)
+	            	{
+	            		valuesText +=  " ";
+	            	}
+	 	        }
+	        	
+	        	//create a new element based on the keys
+	        	Element newValue = doc.createElement("value");
+	        	newValue.appendChild(doc.createTextNode(key + ":" + valuesText));
+	        	newScalar.appendChild(newValue);
+	        }
+        }
+             
+        //create the limits element
+        Element scalarLimits = doc.createElement("limits");
+        String limitsText = "";
+        for(int i = 0; i < scalar.limits.size(); i++)
+        {
+        	limitsText += scalar.limits.get(i);
+        	if(i != scalar.limits.size() - 1)
+        	{
+        		limitsText +=  " ";
+        	}
+        }
+        scalarLimits.appendChild(doc.createTextNode(limitsText));
+        newScalar.appendChild(scalarLimits);
+        
+        return newScalar;
+	}
+	
+	/** 
+	 * Takes a Bundle object and turns it into an XML element, Basically the inverse of ParseBundle()
+	 * @param bundle the Bundle object to be turned into XML.
+	 * @param doc the document that the XML will be using
+	 * @return An XML element based off of the Bundle Object
+	 * @see Scanner#ParseBundle(Element eElement)
+	 */
+	static private  Element BundleToXML(Bundle bundle, Document doc)
+	{
+		//Create the new Element
+        Element newBundle = doc.createElement("scalar");
+		
+		//create the name element
+        Element scalarName = doc.createElement("name");
+        scalarName.appendChild(doc.createTextNode(bundle.name));
+        newBundle.appendChild(scalarName);
+        
+        //create the tags element   
+        if(bundle.tags != null)
+        {
+	        Element bundleTags = doc.createElement("tags");
+	        String tagsText = "";
+	        for(int i = 0; i < bundle.tags.size(); i++)
+	        {
+	        	tagsText += bundle.tags.get(i);
+	        	if(i != bundle.tags.size() - 1)
+	        	{
+	        		tagsText +=  " ";
+	        	}
+	        }
+	        bundleTags.appendChild(doc.createTextNode(tagsText));
+	        newBundle.appendChild(bundleTags);
+        }
+        
+        //create the value elements
+        if(bundle.values != null)
+        {
+	        //get a list of all of the keys
+	        List<Integer> keys = new ArrayList<Integer>(bundle.values.keySet());
+	        for(int i = 0; i < keys.size(); i++)
+	        {
+	        	//get key i
+	        	int key = keys.get(i);
+	        	
+	        	//create a new element based on the keys
+	        	Element newValue = doc.createElement("value");
+	        	newValue.appendChild(doc.createTextNode(key + ":" + bundle.values.get(key)));
+	        	newBundle.appendChild(newValue);
+	        }
+        }
+        
+        return newBundle;
+	}
+	
+	static public  void Write(Adventurer adventurer, String filePath) throws ParserConfigurationException, SAXException, IOException, TransformerException
 	{
 		Write(adventurer, new File(filePath));
 	}	
-	public void Write(Adventurer adventurer, File file) throws ParserConfigurationException, SAXException, IOException
+	static public  void Write(Adventurer adventurer, File file) throws ParserConfigurationException, SAXException, IOException, TransformerException
 	{
+		//load the xml file into memory
+		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+        Document doc = dBuilder.parse(file);
+        doc.getDocumentElement().normalize();
+		
 		//Check if the element we want to write already exists, and if so, delete it
-		Element existing = FindComponentInXML(adventurer.name, file, "adventurer");
+		Element existing = FindComponentInXML(adventurer.name, doc, "adventurer");
 		if(existing != null)
 		{
 			existing.getParentNode().removeChild(existing);
 		}
+		
+		//Create a new adventurer 
+        Node root = doc.getFirstChild();
+        root.appendChild(AdventurerToXML(adventurer, doc));
+        
+        //write the new modifier to the xml file
+        DOMSource source = new DOMSource(doc);
+        
+        TransformerFactory transformerFactory = TransformerFactory.newInstance();
+        Transformer transformer = transformerFactory.newTransformer();
+        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+        transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+        StreamResult result = new StreamResult(file);
+        transformer.transform(source, result);
 	}
 	
-	public void Write(CharacterBuild characterBuild, String filePath) throws ParserConfigurationException, SAXException, IOException
+	static private  Element AdventurerToXML(Adventurer adventurer, Document doc)
+	{
+		//Create the new Element
+        Element newAdventurer = doc.createElement("adventurer");
+		
+		//create the main class element
+        Element mainClass = BundleToXML(adventurer.main_class, doc);
+        mainClass.setAttribute("type", "mainclass");
+        newAdventurer.appendChild(mainClass);
+        
+        //create all of the subclasses
+        for(int i = 0; i < adventurer.sub_classes.size(); i++)
+        {
+        	//create the main class element
+            Element subClass = BundleToXML(adventurer.sub_classes.get(i), doc);
+            subClass.setAttribute("type", "subclass");
+            newAdventurer.appendChild(subClass);
+        }
+        
+        //create all of the modifiers
+        for(int i = 0; i < adventurer.sub_classes.size(); i++)
+        {
+        	
+        }
+        
+        //create all of the scalars
+        for(int i = 0; i < adventurer.scalars.size(); i++)
+        {
+        	//create the main class element
+            Element newScalar = ScalarToXML(adventurer.scalars.get(i), doc);
+            newAdventurer.appendChild(newScalar);
+        }
+        
+      //create all of the scalars
+        for(int i = 0; i < adventurer.modifiers.size(); i++)
+        {
+        	//create the main class element
+            Element newScalar = ModifierToXML(adventurer.modifiers.get(i), doc);
+            newAdventurer.appendChild(newScalar);
+        }
+		
+		return newAdventurer;
+	}
+	
+	static private  Element ModifierToXML(Modifier modifier, Document doc)
+	{
+		//Create the new Element
+        Element newModifier = doc.createElement("modifier");
+		
+		//create the name element
+        Element modifierName = doc.createElement("name");
+        modifierName.appendChild(doc.createTextNode(modifier.name));
+        newModifier.appendChild(modifierName);
+        
+        //create the tags element    
+        Element modifierTags = doc.createElement("tags");
+        String tagsText = "";
+        for(int i = 0; i < modifier.tags.size(); i++)
+        {
+        	tagsText += modifier.tags.get(i);
+        	if(i != modifier.tags.size() - 1)
+        	{
+        		tagsText +=  " ";
+        	}
+        }
+        modifierTags.appendChild(doc.createTextNode(tagsText));
+        newModifier.appendChild(modifierTags);
+        
+        //create the values element    
+        Element modifierValues = doc.createElement("values");
+        String valuesText = "";
+        for(int i = 0; i < modifier.values.size(); i++)
+        {
+        	valuesText += modifier.values.get(i).name;
+        	if(i != modifier.values.size() - 1)
+        	{
+        		valuesText +=  " ";
+        	}
+        }
+        modifierValues.appendChild(doc.createTextNode(valuesText));
+        newModifier.appendChild(modifierValues);
+        
+        //create the limits element    
+        Element modifierLimits = doc.createElement("limits");
+        String limitsText = "";
+        for(int i = 0; i < modifier.limits.size(); i++)
+        {
+        	limitsText += modifier.limits.get(i);
+        	if(i != modifier.limits.size() - 1)
+        	{
+        		limitsText +=  " ";
+        	}
+        }
+        modifierLimits.appendChild(doc.createTextNode(limitsText));
+        newModifier.appendChild(modifierLimits);
+        
+        //create the cost element    
+        Element modifierCost = doc.createElement("tcostags");
+        String costText = "";
+        for(int i = 0; i < modifier.costs.size(); i++)
+        {
+        	costText += modifier.costs.get(i);
+        	if(i != modifier.costs.size() - 1)
+        	{
+        		costText +=  " ";
+        	}
+        }
+        modifierCost.appendChild(doc.createTextNode(costText));
+        newModifier.appendChild(modifierCost);
+		
+		return newModifier;
+	}
+	
+	static public  void Write(CharacterBuild characterBuild, String filePath) throws ParserConfigurationException, SAXException, IOException
 	{
 		Write(characterBuild, new File(filePath));
 	}
-	public void Write(CharacterBuild characterBuild, File file) throws ParserConfigurationException, SAXException, IOException
+	static public  void Write(CharacterBuild characterBuild, File file) throws ParserConfigurationException, SAXException, IOException
 	{
 		//Check if the element we want to write already exists, and if so, delete it
 		Element existing = FindComponentInXML(characterBuild.name, file, "characterBuild");
@@ -188,7 +610,7 @@ public class Scanner
 	 * @param nList a list of the adventurer xml elements
 	 * @return a list of adventurer objects based on the list of adventurer xml elements
 	 */
-	List<Adventurer> LoadAdventurers(NodeList nList)
+	static private  List<Adventurer> LoadAdventurers(NodeList nList)
 	{
 		//the list to return
 		List<Adventurer> adventurers = new ArrayList<Adventurer> ();
@@ -294,7 +716,7 @@ public class Scanner
 	 * @param eElement the bundle xml element
 	 * @return A bundle object based on the given xml element
 	 */
-	Bundle ParseBundle(Element eElement)
+	static private  Bundle ParseBundle(Element eElement)
 	{
 		//the name of the bundle
 		String bundleName = eElement.getElementsByTagName("name").item(0).getTextContent();
@@ -324,42 +746,15 @@ public class Scanner
 	 * @param eElement the bundle xml element
 	 * @return A scalar object based on the given xml element
 	 */
-	Scalar ParseScalar(Element eElement)
-	{
-		//Scalar is a subclass of Bundle, so we can re-use ParseBundle() to get most of what we need
-		Bundle bundle = ParseBundle(eElement);
-		
-		List<String> scalarLimits = new ArrayList<String>();
-		if(eElement.getElementsByTagName("limit").getLength() > 0)
-		{
-			scalarLimits = Arrays.asList(eElement.getElementsByTagName("limit").item(0).getTextContent().split(" "));
-		}
-		
-		return new Scalar(bundle.name, bundle.tags, bundle.values, scalarLimits);
-	}
 	
 	/** 
 	 * Takes a list of modifier xml elements and turns them into a list of modifier objects.
 	 * @param nList a list of the modifier xml elements
 	 * @return a list of modifier objects based on the list of modifier xml elements
 	 */
-	List<Modifier> LoadModifiers(NodeList nList)
+	static private  List<Modifier> LoadModifiers(NodeList nList)
 	{
 		List<Modifier> modifiers = new ArrayList<Modifier> ();
-		
-		/*load the xml file into memory
-		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-        Document doc = dBuilder.parse(inputFile);
-        doc.getDocumentElement().normalize();
-        
-        //print the path of the xml file, for debug purposes 
-        System.out.println("Path: " + inputFile.getAbsolutePath());
-        //Get the root element
-        System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
-        NodeList nList = doc.getElementsByTagName("modifier");*/
-        
-        //System.out.println(nList.getLength());
 		
         //Loop through all of the elements in the xml file
         for (int i = 0; i < nList.getLength(); i++) 
@@ -373,30 +768,8 @@ public class Scanner
                 
                 //add the modifier to the big list
                 modifiers.add(ParseModifier(eElement));
-                //System.out.println("Name : " + modifiers.get(i).name);
-                
-                /*for (int n = 0; n < modifiers.get(i).tags.size(); n++) 
-    	        {
-                	System.out.println("Tag " + n + ": " + modifiers.get(i).tags.get(n));
-    	        }
-                	                
-                for (int n = 0; n < modifiers.get(i).values.size(); n++) 
-    	        {
-                	System.out.println("Value " + modifiers.get(i).values.get(n).name + ": " + modifiers.get(i).values.get(n).value);
-    	        }
-                
-                for (int n = 0; n < modifiers.get(i).limits.size(); n++) 
-    	        {
-                	System.out.println("Limit " + n + ": " + modifiers.get(i).limits.get(n));
-    	        }
-                
-                for (int n = 0; n < modifiers.get(i).costs.size(); n++) 
-    	        {
-                	System.out.println("Costs " + n + ": " + modifiers.get(i).costs.get(n));
-    	        }*/
         	}
-        }
-        
+        } 
         return modifiers;
 	}
 	
@@ -405,94 +778,251 @@ public class Scanner
 	 * @param eElement the modifier xml element
 	 * @return A modifier object based on the given xml element
 	 */
-	Modifier ParseModifier(Element eElement)
+	static private  Modifier ParseModifier(Element eElement)
 	{
 		//The name of the modifier
         String modifierName = eElement.getElementsByTagName("name").item(0).getTextContent();      
         
         //The tags of the modifier
-        List<String> modifierTags = Arrays.asList(eElement.getElementsByTagName("tags").item(0).getTextContent().split(" "));
+        List<String> modifierTags;
+        if(eElement.getElementsByTagName("tags").getLength() > 0)
+    	{
+        	modifierTags = Arrays.asList(eElement.getElementsByTagName("tags").item(0).getTextContent().split(" "));
+    	}
+        else
+        {
+        	modifierTags = new ArrayList<String>();
+        }
                      
         //The values of the modifier
-        List<String> valueStrings = Arrays.asList(eElement.getElementsByTagName("values").item(0).getTextContent().split(" "));
         List<Value> modifierValues = new ArrayList<Value>();
-        for (int n = 0; n < valueStrings.size(); n++) 
-        {
-        	modifierValues.add(ParseValue(valueStrings.get(n)));
-        }
+        if(eElement.getElementsByTagName("values").getLength() > 0)
+    	{
+	        List<String> valueStrings = Arrays.asList(eElement.getElementsByTagName("values").item(0).getTextContent().split(" "));
+	        
+	        for (int n = 0; n < valueStrings.size(); n++) 
+	        {
+	        	modifierValues.add(ParseValue(valueStrings.get(n)));
+	        }
+    	}
        
         //The limits of the modifier
-        List<String> modifierLimits = Arrays.asList(eElement.getElementsByTagName("limits").item(0).getTextContent().split(" "));
+        List<String> modifierLimits;
+        if(eElement.getElementsByTagName("limits").getLength() > 0)
+    	{
+        	modifierLimits = Arrays.asList(eElement.getElementsByTagName("limits").item(0).getTextContent().split(" "));
+    	}
+        else
+        {
+        	modifierLimits = new ArrayList<String>();
+        }
         
         //The costs of the modifier
-        List<String> modifierCosts = Arrays.asList(eElement.getElementsByTagName("cost").item(0).getTextContent().split(" "));
+        List<String> modifierCosts;
+        if(eElement.getElementsByTagName("cost").getLength() > 0)
+    	{
+    		modifierCosts = Arrays.asList(eElement.getElementsByTagName("cost").item(0).getTextContent().split(" "));
+    	}
+        else
+        {
+        	modifierCosts = new ArrayList<String>();
+        }
         
         //add the modifier to the big list
         return new Modifier(modifierName, modifierValues, modifierTags, modifierLimits, modifierCosts);
 	}
+
+	static private  List<Scalar> LoadScalars(NodeList nList)
+	{
+		List<Scalar> scalars = new ArrayList<Scalar> ();
+		
+        //Loop through all of the elements in the xml file
+        for (int i = 0; i < nList.getLength(); i++) 
+        {
+        	Node nNode = nList.item(i);
+            //System.out.println("\nCurrent Element :" + nNode.getNodeName());
+
+        	if (nNode.getNodeType() == Node.ELEMENT_NODE) 
+        	{
+                Element eElement = (Element) nNode;
+                
+                //add the modifier to the big list
+                scalars.add(ParseScalar(eElement));
+        	}
+        } 
+        return scalars;
+	}
+	
+	static private  Scalar ParseScalar(Element eElement)
+	{
+		//Scalar is a subclass of Bundle, so we can re-use ParseBundle() to get some of what we need
+		Bundle bundle = ParseBundle(eElement);
+		
+		Map<Integer, List<Value>> valueMap = new TreeMap<Integer, List<Value>>();
+		
+		
+		List<String> scalarLimits = new ArrayList<String>();
+		if(eElement.getElementsByTagName("limit").getLength() > 0)
+		{
+			scalarLimits = Arrays.asList(eElement.getElementsByTagName("limit").item(0).getTextContent().split(" "));
+		}
+		
+		//the list of the value tags
+		NodeList valueNodes = eElement.getElementsByTagName("value");
+		
+		for (int i = 0; i < valueNodes.getLength(); i++) 
+        {
+			//a temporary list to store the values in the tag
+			List<Value> valueList = new ArrayList<Value>();
+			
+			//isolate the names and values
+			String[] s = valueNodes.item(i).getTextContent().split(":", 2); //we only split at the first colon
+			String[] v = s[1].split(" ");
+			
+			for (int n = 0; n < v.length; n++) 
+	        {
+				valueList.add(ParseValue(v[n]));
+	        }
+			
+			valueMap.put(Integer.parseInt(s[0]), valueList);
+        }
+		
+		return new Scalar(bundle.name, bundle.tags, valueMap, scalarLimits);
+	}
+	
 	
 	/** 
-	 * Takes a value string element and turns it into a value object
-	 * @param name the string value
+	 * Takes a value string element and turns it into a value object.  
+	 * 
+	 * @param string the string value. If it has a name, then the name cannot contain ':', '+', or any digits. It must be in one of the following forms:<br>
+	 * [name] ex "strMod" <br>
+	 * [value] ex "8"<br>
+	 * [name]:[value] ex "coldDmg:8"<br>
+	 * [dice]d[sides] ex "3d6"<br>
+	 * [name]:[dice]d[sides] ex "coldDmg:3d6"<br>
+	 * [dice]d[sides]+[value] ex "3d6+8"<br>
+	 * [name]:[dice]d[sides]+[value] ex "coldDmg:3d6+8"<br>
+	 * 
 	 * @return A value object based on the given string
 	 */
-	Value ParseValue(String name)
-	{
-		//if the string has no digits, then the value is based on a number that is not yet available, such as a charicters strength
-		boolean noDigits = true;
-		//if it has a colon, than it is a named value
-		boolean hasColon = false;
-		for(int i = 0; i < name.length(); i++) 
+	static public Value ParseValue(String string)
+	{	
+		//if the string has a colon, than it is a named value
+		boolean isNamed = false;
+		//if the string contains a number, then it has a value
+		boolean isValue = false;
+		//if the string has a 'd' in it then it is a die value
+		boolean isDie = false;
+		//if the string has a plus, than it is a hybrid values
+		boolean isHybrid = false;
+		
+		//loop through the string to tell if it has a name
+		for(int i = 0; i < string.length(); i++) 
 		{
-			if(!Character.isLetter(name.charAt(i)))
+			if(string.charAt(i) == ':')
 			{
-				noDigits = false;
-				
-				if(name.charAt(i) == ':')
-				{
-					hasColon = true;
-				}
+				isNamed = true;
 				break;
 			}
 		}
-		if(noDigits && !hasColon)
+		
+		//the name of the value, which is by default, the value
+		String name = string;
+		
+		//if it has a name, then separate it from the value
+		if(isNamed)
 		{
-			return new Value(name, 0);
+			String[] s = string.split(":");
+			
+			name = s[0];
+			string = s[1];
 		}
 		
-		String title = name;
-		if(hasColon)
+		//loop through the string to tell what type of value it is
+		for(int i = 0; i < string.length(); i++) 
 		{
-			String[] s = name.split(":");
+			if(Character.isDigit(string.charAt(i)))
+			{
+				isValue = true;
+			}
+			else if(string.charAt(i) == 'd')
+			{
+				isDie = true;
+			}
+			else if(string.charAt(i) == '+')
+			{
+				isHybrid = true;
+			}
+		}
+		
+		//if it is not a value then it is something that will be added in later, such as a dexMod
+		if(!isValue)
+		{
+			return new Value(string, 0);
+		}
+		
+		//if it is written as a hybrid, such as "3d6+5", then parse it as such
+		if(isHybrid)
+		{
+			//split "3d6+5" into "3d6" and "5"
+			String[] hybridNumbers = string.split("\\+");
+			//split "3d6" into "3" and "6"
+			String[] dieNumbers = hybridNumbers[0].split("d");
+	
+			System.out.println(string + " = " + dieNumbers[0] + "d" + dieNumbers[1] + "+" + hybridNumbers[1]);
+			
+			return new HybridValue(name, Integer.parseInt(dieNumbers[0]), Integer.parseInt(dieNumbers[1]), Integer.parseInt(hybridNumbers[1]));
+		}
+		else if(isDie) //if it is written as a die, such as "3d6", then parse it as such
+		{
+			//split "3d6" into "3" and "6"
+			String[] dieNumbers = string.split("d");
+			
+			return new DiceValue(name, Integer.parseInt(dieNumbers[0]), Integer.parseInt(dieNumbers[1]));
+		}
+		else //if it has a number, then it is a value
+		{
+			return new Value(name, Integer.parseInt(string));
+		}
+		
+		/*if(noDigits && !isNamed)
+		{
+			return new Value(string, 0);
+		}
+		
+		String title = string;
+		if(isNamed)
+		{
+			String[] s = string.split(":");
 			
 			title = s[0];
-			name = s[1];
+			string = s[1];
 		}
 		
 		//if it is in the format [Title]:[Value] then separate the value and the title
 		
 		//if it is only numbers, then it is a number (duh)
 		boolean onlyNumbers = true;
-		for(int i = 0; i < name.length(); i++) 
+		for(int i = 0; i < string.length(); i++) 
 		{
-			if(!Character.isDigit(name.charAt(i)))
+			if(!Character.isDigit(string.charAt(i)))
 			{
 				onlyNumbers = false;
 			}
 		}
 		if(onlyNumbers)
 		{
-			return new Value(title, Integer.parseInt(name));
+			return new Value(title, Integer.parseInt(string));
 		}
 		
 		//if the first and last chars are numbers and it contains only one d, then it is a dice number
 		boolean isDie = false;
-		if(Character.isDigit(name.charAt(0)) && Character.isDigit(name.charAt(name.length() - 1)))
+		if(Character.isDigit(string.charAt(0)) && Character.isDigit(string.charAt(string.length() - 1)))
 		{
-			for(int i = 0; i < name.length(); i++) 
+			for(int i = 0; i < string.length(); i++) 
 			{
 				//if the char is a d and the only d
-				if(name.charAt(i) == 'd')
+				if(string.charAt(i) == 'd')
 				{
 					if(isDie == true)
 					{
@@ -505,13 +1035,13 @@ public class Scanner
 		}
 		if(isDie)
 		{
-			String[] diceNumbers = name.split("d");
+			String[] diceNumbers = string.split("d");
 			
 			
 			//System.out.println(Integer.parseInt(diceNumbers[0]) + " " + Integer.parseInt(diceNumbers[1]));
 			return new DiceValue(title, Integer.parseInt(diceNumbers[0]), Integer.parseInt(diceNumbers[1]));
-		}
+		}*/
 		
-		throw new java.lang.Error("Value format unrecognised");
+		//throw new java.lang.Error("Value format unrecognised");
 	}
 }

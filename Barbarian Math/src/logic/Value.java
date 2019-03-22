@@ -21,4 +21,9 @@ public class Value extends Component
 		super.name = name;
 		this.value = number;
 	}
+	
+	public String toString()
+	{
+		return name + ":" + value;
+	}
 }

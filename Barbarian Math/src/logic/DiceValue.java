@@ -25,13 +25,13 @@ public class DiceValue extends Value
     public DiceValue (String name, int numDice, int sides)
     {
     	//give the superclass the name and the value
-        super(name, ((sides + 1) / 2) * numDice);
+        super(Integer.toString(numDice) + "d" + Integer.toString(sides), ((sides + 1) / 2) * numDice);
 
         this.numDice = numDice;
         this.sides = sides;
         
 
-        die_name = Integer.toString(numDice) + "d" + Integer.toString(sides);
+        die_name = numDice + "d" + sides;
 
         this.max_roll = numDice * sides;
         this.min_roll = numDice;
@@ -54,6 +54,11 @@ public class DiceValue extends Value
 
         return result;
     }
+    
+    public String toString()
+	{
+		return  name + ":" + die_name;
+	}
 }
 
 
