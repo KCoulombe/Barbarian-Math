@@ -1,0 +1,888 @@
+<?xml version="1.0" encoding="UTF-8"?><class>
+	<modifier>
+		<name>Poison Spray</name>
+		<tags>poison cantrip scaling </tags>
+		<value>poisonSprayScaling </value>
+		<limit>action</limit>
+		<cost>action</cost>
+	</modifier>
+
+	<scalar>
+		<name>poisonSprayScaling</name>
+		<tags>scaling</tags>
+		<value>1:1d12</value>
+		<value>5:2d12</value>
+		<value>11:3d12</value>
+		<value>17:4d12</value>
+	</scalar>
+
+	<modifier>
+		<name>Produce Flame </name>
+		<tags>cantrip fire scaling </tags>
+		<value>produceFlameScaling </value>
+		<limit>action </limit>
+		<cost> action </cost>
+	</modifier>
+
+	<scalar>
+		<name> </name>
+		<tags> </tags>
+		<value>1:1d8 </value>
+		<value>5:2d8 </value>
+		<value>11:3d8 </value>
+		<value>17:4d8 </value>
+	</scalar>
+	
+	<modifier>
+		<name> acidSplash </name>
+		<tags> acid cantrop scaling </tags>
+		<value> acidSplashScale </value>
+		<limit> action </limit>
+		<cost> action</cost>
+	</modifier>
+
+	<scalar>
+		<name>acidSplashScale</name>
+		<tags>static scaling </tags>
+		<value>1:1d6</value>
+		<value>5:2d6</value>
+		<value>11:3d6</value>
+		<value>17:4d6</value>
+	</scalar>
+
+	<modifier>
+		<name>chill touch</name>
+		<tags>rangedSpellAttack necrotic cantrop scaling</tags>
+		<value>chillTouchScale</value>
+		<limit> action</limit>
+		<cost>action </cost>
+	</modifier>
+
+	<scalar>
+		<name> chillTouchScale</name>
+		<tags> static scaling </tags>
+		<value>1:1d8</value>
+		<value>5:2d8</value>
+		<value>11:3d8</value>
+		<value>17:4d8</value>
+	</scalar>
+
+	<modifier>
+		<name>fire bolt </name>
+		<tags>rangedSpellAttack fire cantrop scaling </tags>
+		<value>fireBoltScaling </value>
+		<limit>action </limit>
+		<cost>action  </cost>
+	</modifier>
+	<scalar>
+		<name>fireBoltScaling </name>
+		<tags>static scaling </tags>
+		<value>1:1d10 </value>
+		<value>5:2d10 </value>
+		<value>11:3d10</value>
+		<value>17:4d10</value>
+	</scalar>
+
+	<modifier>
+		<name>poison spray </name>
+		<tags>poison cantrop scaling </tags>
+		<value>poisonSprayScaling </value>
+		<limit>action </limit>
+		<cost>action  </cost>
+	</modifier>
+
+	<scalar>
+		<name>poisonSprayScaling </name>
+		<tags>static scaling </tags>
+		<value>1:1d12 </value>
+		<value>5:2d12 </value>
+		<value>11:3d12 </value>
+		<value>17:4d12</value>
+	</scalar>
+
+	<modifier>
+		<name>ray of frost </name>
+		<tags>cold rangedSpellAttack cantrip scaling </tags>
+		<value>rayOfFrostScaling </value>
+		<limit>action </limit>
+		<cost>action  </cost>
+	</modifier>
+
+	<scalar>
+		<name>rayOfFrostScaling </name>
+		<tags> static scaling</tags>
+		<value>1:1d8 </value>
+		<value>5:2d8 </value>
+		<value>11:3d8</value>
+		<value>17:4d8</value>
+	</scalar>
+
+	<modifier>
+		<name>Eldritch Blast </name>
+		<tags> force cantrip scaling rangedSpellAttack</tags>
+		<value>eldritchBlastScaling </value>
+		<limit>action </limit>
+		<cost>action </cost>
+	</modifier>
+
+	<scalar>
+		<name>eldritchBlastScaling </name>
+		<tags>scaling </tags>
+		<value>1:1d10 </value>
+		<value>5:2d10 </value>
+		<value>11:3d10 </value>
+		<value>17:4d10 </value>
+	</scalar>
+
+	<modifier>
+		<name>shocking grasp </name>
+		<tags>meleeSpellAttack cantrop lightning scaling </tags>
+		<value>shockingGraspScaling </value>
+		<limit>action </limit>
+		<cost>action </cost>
+	</modifier>
+
+	<scalar>
+		<name>shockingGraspScaling </name>
+		<tags>static scaling </tags>
+		<value>1:1d8 </value>
+		<value>5:2d8 </value>
+		<value>11:3d8 </value>
+		<value>17:4d8 </value>
+	</scalar>
+
+	<modifier>
+		<name>burning hands </name>
+		<tags>fire spell scaling </tags>
+		<value>burningHandsScaling </value>
+		<limit>action </limit>
+		<cost>spellSlot1 </cost>
+	</modifier>
+
+	<scalar>
+		<name>burningHandsScaling </name>
+		<tags>scaling  </tags>
+		<value>1:3d6 </value>
+		<value>2:4d6 </value>
+		<value>3:5d6 </value>
+		<value>4:6d6 </value>
+		<value>5:7d6 </value>
+		<value>6:8d6 </value>
+		<value>7:9d6 </value>
+		<value>8:10d6 </value>
+		<value>9:11d6 </value>
+	</scalar>
+
+	<modifier>
+		<name>magic missile </name>
+		<tags>spell scaling </tags>
+		<value>magicMissileScaling </value>
+		<limit>action </limit>
+		<cost>spellSlot1  </cost>
+	</modifier>
+
+	<scalar>
+		<name>magicMissileScaling </name>
+		<tags>scaling</tags>
+		<value>1:1d4+1 1d4+1 1d4+1</value>
+		<value>2:1d4+1 1d4+1 1d4+1 1d4+1</value>
+		<value>3:1d4+1 1d4+1 1d4+1 1d4+1 1d4+1</value>
+		<value>4:1d4+1 1d4+1 1d4+1 1d4+1 1d4+1 1d4+1</value>
+		<value>5:1d4+1 1d4+1 1d4+1 1d4+1 1d4+1 1d4+1 1d4+1</value>
+		<value>6:1d4+1 1d4+1 1d4+1 1d4+1 1d4+1 1d4+1 1d4+1 1d4+1</value>
+		<value>7:1d4+1 1d4+1 1d4+1 1d4+1 1d4+1 1d4+1 1d4+1 1d4+1 1d4+1</value>
+		<value>8:1d4+1 1d4+1 1d4+1 1d4+1 1d4+1 1d4+1 1d4+1 1d4+1 1d4+1 1d4+1</value>
+		<value>9:1d4+1 1d4+1 1d4+1 1d4+1 1d4+1 1d4+1 1d4+1 1d4+1 1d4+1 1d4+1 1d4+1</value>
+	</scalar>
+
+	<modifier>
+		<name>thunderwave </name>
+		<tags>lightning spell scaling </tags>
+		<value>thunderwaveScaling </value>
+		<limit>action </limit>
+		<cost>spellSlot1  </cost>
+	</modifier>
+
+	<scalar>
+		<name>thunderwaveScaling </name>
+		<tags>scaling </tags>
+		<value>1:2d8 </value>
+		<value>2:3d8 </value>
+		<value>3:4d8 </value>
+		<value>4:5d8 </value>
+		<value>5:6d8 </value>
+		<value>6:7d8 </value>
+		<value>7:8d8 </value>
+		<value>8:9d8 </value>
+		<value>9:10d8 </value>
+	</scalar>
+
+	<modifier>
+		<name>Scorching ray </name>
+		<tags>fire spell scaling rangedSpellAttack</tags>
+		<value>scorchingRayScaling </value>
+		<limit>action</limit>
+		<cost>spellSlot2  </cost>
+	</modifier>
+
+	<scalar>
+		<name>scorchingRayScaling </name>
+		<tags>scaling </tags>
+		<value>2:6d6 </value>
+		<value>3:8d6 </value>
+		<value>4:10d6 </value>
+		<value>5:12d6 </value>
+		<value>6:14d6 </value>
+		<value>7:16d6 </value>
+		<value>8:18d6 </value>
+		<value>9:20d6 </value>
+	</scalar>
+
+	<modifier>
+		<name>Flame Blade </name>
+		<tags>flame spell scaling </tags>
+		<value>flameBladeScaling </value>
+		<limit>action </limit>
+		<cost>spellSlot2  </cost>
+	</modifier>
+
+	<scalar>
+		<name>flameBladeScaling </name>
+		<tags>scaling </tags>
+		<value>2:3d6 </value>
+		<value>4:4d6 </value>
+		<value>6:5d6 </value>
+		<value>8:6d6 </value>
+	</scalar>
+    <modifier>
+		<name>MoonBeam </name>
+		<tags>spell scaling radiant </tags>
+		<value>moonbeamScaling </value>
+		<limit>action </limit>
+		<cost>spellSlot2  </cost>
+	</modifier>
+
+	<scalar>
+		<name>moonbeamScaling </name>
+		<tags>scaling </tags>
+		<value>2:2d10 </value>
+		<value>3:3d10 </value>
+		<value>4:4d10 </value>
+		<value>5:5d10 </value>
+		<value>6:6d10 </value>
+		<value>7:7d10 </value>
+		<value>8:8d10 </value>
+		<value>9:9d10 </value>
+	</scalar>
+
+	<modifier>
+		<name>shatter </name>
+		<tags>thunder spell scaling </tags>
+		<value>shatterScaling </value>
+		<limit>action </limit>
+		<cost>spellSlot2  </cost>
+	</modifier>
+
+    <scalar>
+	    <name>shatterScaling </name>
+	    <tags>scaling </tags>
+	    <value>2:3d8 </value>
+	    <value>3:4d8 </value>
+	    <value>4:5d8 </value>
+	    <value>5:6d8 </value>
+	    <value>6:7d8 </value>
+	    <value>7:8d8 </value>
+	    <value>8:9d8 </value>
+	    <value>9:10d8 </value>
+    </scalar>
+
+	<modifier>
+		<name>Call Lightning </name>
+		<tags>spell lightning scaling </tags>
+		<value>callLightningScaling </value>
+		<limit>action </limit>
+		<cost>spellSlot3  </cost>
+	</modifier>
+
+	<scalar>
+		<name>callLightningScaling </name>
+		<tags>scaling </tags>
+		<value>3:4d10 </value>
+		<value>4:5d10 </value>
+		<value>5:6d10 </value>
+		<value>6:7d10 </value>
+		<value>7:8d10 </value>
+		<value>8:9d10 </value>
+		<value>9:10d10 </value>
+	</scalar>
+
+	<modifier>
+		<name>fireball </name>
+		<tags>fire spell scaling </tags>
+		<value>fireballScaling </value>
+		<limit>action </limit>
+		<cost>spellSlot3  </cost>
+	</modifier>
+
+	<scalar>
+		<name>fireballScaling </name>
+		<tags>scaling </tags>
+		<value>3:8d6 </value>
+		<value>4:9d6 </value>
+		<value>5:10d6 </value>
+		<value>6:11d6 </value>
+		<value>7:12d6 </value>
+		<value>8:13d6 </value>
+		<value>9:14d6 </value>
+	</scalar>
+
+	<modifier>
+		<name>Lightning Bolt </name>
+		<tags>lighting spell scaling </tags>
+		<value>lightningBoltScaling </value>
+		<limit>action </limit>
+		<cost>spellSlot3  </cost>
+	</modifier>
+
+	<scalar>
+		<name>lightingBoltScaling </name>
+		<tags>scaling </tags>
+		<value>3:8d6 </value>
+		<value>4:9d6 </value>
+		<value>5:10d6 </value>
+		<value>6:11d6 </value>
+		<value>7:12d6 </value>
+		<value>8:13d6 </value>
+		<value>9:14d6 </value>
+	</scalar>
+
+	<modifier>
+		<name>Ice Storm </name>
+		<tags>bludgeon cold spell scaling </tags>
+		<value>icestormScaling </value>
+		<limit>action </limit>
+		<cost>spellSlot4  </cost>
+	</modifier>
+
+	<scalar>
+		<name>icestormScaling </name>
+		<tags>scaling </tags>
+		<value>4:bludgeoning:2d8 cold:4d6</value>
+		<value>5:bludgeoning:3d8 cold:4d6</value>
+		<value>6:bludgeoning:4d8 cold:4d6</value>
+		<value>7:bludgeoning:5d8 cold:4d6</value>
+		<value>8:bludgeoning:6d8 cold:4d6</value>
+		<value>9:bludgeoning:7d8 cold:4d6</value>
+	</scalar>
+
+	<modifier>
+		<name>Wall of Fire </name>
+		<tags>fire scaling </tags>
+		<value>wallOfFireScaling </value>
+		<limit>action </limit>
+		<cost>spellSlot4  </cost>
+	</modifier>
+
+	<scalar>
+		<name>wallOfFireScaling </name>
+		<tags>scaling </tags>
+		<value>4:5d8 </value>
+		<value>5:6d8 </value>
+		<value>6:7d8 </value>
+		<value>7:8d8 </value>
+		<value>8:9d8 </value>
+		<value>9:10d8 </value>
+	</scalar>
+
+	<modifier>
+		<name>Cloudkill</name>
+		<tags>poison spell scaling </tags>
+		<value>cloudKillScaling </value>
+		<limit>action </limit>
+		<cost>spellSlot5  </cost>
+	</modifier>
+
+	<scalar>
+		<name>cloudKillScaling </name>
+		<tags>scaling </tags>
+		<value>5:5d8 </value>
+		<value>6:6d8 </value>
+		<value>7:7d8 </value>
+		<value>8:8d8 </value>
+		<value>9:9d8 </value>
+	</scalar>
+
+	<modifier>
+		<name>Cone of Cold </name>
+		<tags>cold spell scaling </tags>
+		<value>coneOfColdScaling </value>
+		<limit>action </limit>
+		<cost>spellSLot5  </cost>
+	</modifier>
+
+	<scalar>
+		<name>coneOfColdScaling </name>
+		<tags>scaling </tags>
+		<value>5:8d8 </value>
+		<value>6:9d8 </value>
+		<value>7:10d8 </value>
+		<value>8:11d8 </value>
+		<value>9:12d8 </value>
+	</scalar>
+
+	<modifier>
+		<name>Insect Plague </name>
+		<tags>piercing spell scaling </tags>
+		<value>insectPlagueScaling </value>
+		<limit>action </limit>
+		<cost>spellSlot5  </cost>
+	</modifier>
+
+	<scalar>
+		<name>insectPlagueScaling </name>
+		<tags>scaling </tags>
+		<value>5:4d10 </value>
+		<value>6:5d10 </value>
+		<value>7:6d10 </value>
+		<value>8:7d10 </value>
+		<value>9:8d10 </value>
+	</scalar>
+
+	<modifier>
+		<name>Wall of Thorns </name>
+		<tags>spell scaling piercing </tags>
+		<value>wallOfThornsScaling </value>
+		<limit>action </limit>
+		<cost>spellSlot6  </cost>
+	</modifier>
+
+	<scalar>
+		<name>wallOfThornsScalling </name>
+		<tags>scaling </tags>
+		<value>6:7d8 </value>
+		<value>7:8d8 </value>
+		<value>8:9d8 </value>
+		<value>9:10d8 </value>
+	</scalar>
+
+	<modifier>
+		<name>Chain Lighting </name>
+		<tags>lighting spell </tags>
+		<value>10d8 lighting </value>
+		<limit>action </limit>
+		<cost>spellSlot6  </cost>
+	</modifier>
+
+	<modifier>
+		<name>Circle of Death </name>
+		<tags>necrotic scaling spell </tags>
+		<value>circleOfDeathScaling </value>
+		<limit>action </limit>
+		<cost>spellSlot6  </cost>
+	</modifier>
+
+	<scalar>
+		<name>circleOfDeathScaling </name>
+		<tags>scaling </tags>
+		<value>6:8d6 </value>
+		<value>7:10d6 </value>
+		<value>8:12d6 </value>
+		<value>9:14d6 </value>
+	</scalar>
+
+	<modifier>
+		<name>Disintegrate </name>
+		<tags>scaling force </tags>
+		<value>disintegrateScaling </value>
+		<limit>action </limit>
+		<cost>spellSlot6  </cost>
+	</modifier>
+
+	<scalar>
+		<name>disintegrateScaling </name>
+		<tags>scaling </tags>
+		<value>6:10d6+40 </value>
+		<value>7:13d6+40 </value>
+		<value>8:16d6+40 </value>
+		<value>9:19d6+40 </value>
+	</scalar>
+
+	<modifier>
+		<name>Sun Beam </name>
+		<tags>radiant spell scaling </tags>
+		<value>6d8 radiant </value>
+		<limit>action </limit>
+		<cost>spellSlot6  </cost>
+	</modifier>
+
+	<modifier>
+		<name>Delayed Blast Fireball </name>
+		<tags>fire spell scaling delayed:1d6</tags>
+		<value>DBFScaling </value>
+		<limit>action </limit>
+		<cost>spellSlot7  </cost>
+	</modifier>
+
+	<scalar>
+		<name>DBFScaling </name>
+		<tags>scaling </tags>
+		<value>7:12d6 </value>
+		<value>8:13d6 </value>
+		<value>9:14d6 </value>
+	</scalar>
+
+	<modifier>
+		<name>Finger of Death </name>
+		<tags>necrotic spell </tags>
+		<value>7d8+30 </value>
+		<limit>action </limit>
+		<cost>spellSlot7  </cost>
+	</modifier>
+
+    <modifier>
+		<name>FireStorm </name>
+		<tags>fire spell </tags>
+		<value>7d10 </value>
+		<limit>action </limit>
+		<cost>spellSlot7  </cost>
+	</modifier>
+
+	<modifier>
+		<name>Incendiary Cloud </name>
+		<tags>spell fire </tags>
+		<value>10d8 </value>
+		<limit>action </limit>
+		<cost>spellSlot8  </cost>
+	</modifier>
+
+	<modifier>
+		<name>Sunburst </name>
+		<tags>radiant spell </tags>
+		<value>12d6 radiant </value>
+		<limit>action </limit>
+		<cost>spellSlot8  </cost>
+	</modifier>
+
+	<modifier>
+		<name>Meteor Swarm </name>
+		<tags>fire spell  </tags>
+		<value>20d6 fire 20d6 bludgeon </value>
+		<limit>action </limit>
+		<cost>spellSlot9  </cost>
+	</modifier>
+
+	<modifier>
+		<name>Storm of Vengeance </name>
+		<tags>thunder spell  </tags>
+		<value>2d6 </value>
+		<limit>action </limit>
+		<cost> spellSlot9 </cost>
+	</modifier>
+
+	<modifier>
+		<name>Acid Arrow </name>
+		<tags>spell rangedSpellAttack scaling </tags>
+		<value>acidArrowScaling </value>
+		<limit>action </limit>
+		<cost>spellSlot1  </cost>
+	</modifier>
+
+	<scalar>
+		<name>acidArrowScaling </name>
+		<tags>scaling </tags>
+		<value>1:2d4 </value>
+		<value>2:3d4 </value>
+		<value>3:4d4 </value>
+		<value>4:5d4 </value>
+		<value>5:6d4 </value>
+		<value>6:7d4 </value>
+		<value>7:8d4 </value>
+		<value>8:9d4 </value>
+		<value>9:10d4 </value>
+	</scalar>
+
+	<modifier>
+		<name>Flaming Sphere </name>
+		<tags>spell fire scaling </tags>
+		<value>flamingSphereScaling </value>
+		<limit>action </limit>
+		<cost>spellSlot2  </cost>
+	</modifier>
+
+	<scalar>
+		<name>flamingSphereScaling </name>
+		<tags>scaling </tags>
+		<value>2:2d6 </value>
+		<value>3:3d6 </value>
+		<value>4:4d6 </value>
+		<value>5:5d6 </value>
+		<value>6:6d6 </value>
+		<value>7:7d6 </value>
+		<value>8:8d6 </value>
+		<value>9:9d6 </value>
+	</scalar>
+
+	<modifier>
+		<name>Vampiric Touch </name>
+		<tags>spell scaling necrotic </tags>
+		<value>vampiricTouchScaling </value>
+		<limit>action </limit>
+		<cost>spellSlot3  </cost>
+	</modifier>
+
+	<scalar>
+		<name>vampiricTouchScaling </name>
+		<tags>scaling </tags>
+		<value>3:3d6 </value>
+		<value>4:4d6 </value>
+		<value>5:5d6 </value>
+		<value>6:6d6 </value>
+		<value>7:7d6 </value>
+		<value>8:8d6 </value>
+		<value>9:9d6 </value>
+	</scalar>
+
+	<modifier>
+		<name>Black Tentacles </name>
+		<tags>spell  </tags>
+		<value>3d6 bludgeon </value>
+		<limit>action </limit>
+		<cost>spellSlot4  </cost>
+	</modifier>
+
+	<modifier>
+		<name>Phantasmal Killer </name>
+		<tags>spell psychic scaling </tags>
+		<value>phantasmalKillerScaling </value>
+		<limit>action </limit>
+		<cost>spellSlot4  </cost>
+	</modifier>
+
+	<scalar>
+		<name>phantasmalKillerScaling </name>
+		<tags>scaling </tags>
+		<value>4:4d10 </value>
+		<value>5:5d10 </value>
+		<value>6:6d10 </value>
+		<value>7:7d10 </value>
+		<value>8:8d10 </value>
+		<value>9:9d10 </value>
+	</scalar>
+
+	<modifier>
+		<name>Arcane Hand Clenched </name>
+		<tags>scaling spell force </tags>
+		<value>arcaneHandClenchedScaling </value>
+		<limit>action </limit>
+		<cost>spellSlot5  </cost>
+	</modifier>
+
+	<scalar>
+		<name>arcaneHandClenchedScaling </name>
+		<tags>scaling </tags>
+		<value>5:4d8 </value>
+		<value>6:6d8 </value>
+		<value>7:8d8 </value>
+		<value>8:10d8 </value>
+		<value>9:12d8 </value>
+	</scalar>
+
+	<modifier>
+		<name>Freezing Sphere </name>
+		<tags>spell scaling cold </tags>
+		<value>freezingSphereScaling </value>
+		<limit>action </limit>
+		<cost>spellSlot6  </cost>
+	</modifier>
+
+	<scalar>
+		<name>freezingSphereScaling </name>
+		<tags>scaling </tags>
+		<value>6:10d6 </value>
+		<value>7:11d6 </value>
+		<value>8:12d6 </value>
+		<value>9:13d6 </value>
+	</scalar>
+
+	<modifier>
+		<name>Wall of Ice </name>
+		<tags>spell cold scaling </tags>
+		<value>wallOfIceScaling </value>
+		<limit>action </limit>
+		<cost>spellSlot6  </cost>
+	</modifier>
+
+	<scalar>
+		<name>wallOfScaling </name>
+		<tags>scaling </tags>
+		<value>6:10d6 </value>
+		<value>7:12d6 </value>
+		<value>8:14d6 </value>
+		<value>9:16d6 </value>
+	</scalar>
+
+	<modifier>
+		<name>Arcane Sword </name>
+		<tags>spell force </tags>
+		<value>3d10 force </value>
+		<limit>action </limit>
+		<cost> spellSlot7 </cost>
+	</modifier>
+
+	<modifier>
+		<name>Incediary Cloud </name>
+		<tags>spell fire </tags>
+		<value>10d8 </value>
+		<limit>action </limit>
+		<cost>spellSlot8 </cost>
+	</modifier>
+
+	<modifier>
+		<name>Vicous Mockery </name>
+		<tags>psychic cantrip scaling </tags>
+		<value>vicousMockeryScaling </value>
+		<limit>action </limit>
+		<cost>cantrip  </cost>
+	</modifier>
+
+	<scalar>
+		<name>viciousMockeryScaling </name>
+		<tags>scaling </tags>
+		<value>1:1d4 </value>
+		<value>5:2d4 </value>
+		<value>11:3d4 </value>
+		<value>17: 4d4</value>
+	</scalar>
+
+	<modifier>
+		<name>Hunters Mark </name>
+		<tags>spell  </tags>
+		<value>1d6 </value>
+		<limit>bonusAction onAttack</limit>
+		<cost>spellSlot1  </cost>
+	</modifier>
+
+	<modifier>
+		<name>Sacred Flame </name>
+		<tags>catrip radiant scaling </tags>
+		<value>sacredFlameScaling </value>
+		<limit>action </limit>
+		<cost>action  </cost>
+	</modifier>
+
+	<scalar>
+		<name>sacredFlameScaling </name>
+		<tags>scaling </tags>
+		<value>1:1d8 </value>
+		<value>5:2d8 </value>
+		<value>11:3d8 </value>
+		<value>17:4d8 </value>
+	</scalar>
+
+	<modifier>
+		<name>Guiding Bolt </name>
+		<tags>scaling spell radiant </tags>
+		<value>guidingBoltScaling </value>
+		<limit>action </limit>
+		<cost>spellSlot1  </cost>
+	</modifier>
+
+	<scalar>
+		<name>guidingBoltScaling </name>
+		<tags>scaling </tags>
+		<value>1:4d6 </value>
+		<value>2:5d6 </value>
+		<value>3:6d6 </value>
+		<value>4:7d6 </value>
+		<value>5:8d6 </value>
+		<value>6:9d6 </value>
+		<value>7:10d6 </value>
+		<value>8:11d6 </value>
+		<value>9:12d6 </value>
+	</scalar>
+
+	<modifier>
+		<name>Inflict Wounds </name>
+		<tags> spell scaling necrotic</tags>
+		<value>inflictWoundScaling </value>
+		<limit/>
+		<cost>spellSlot1  </cost>
+	</modifier>
+
+	<scalar>
+		<name>inflictWoundScaling </name>
+		<tags>scaling </tags>
+		<value>1:3d10 </value>
+		<value>2:4d10 </value>
+		<value>3:5d10 </value>
+		<value>4:6d10 </value>
+		<value>5:7d10 </value>
+		<value>6:8d10 </value>
+		<value>7:9d10 </value>
+		<value>8:10d10 </value>
+		<value>9:11d10 </value>
+	</scalar>
+
+	<modifier>
+		<name>Spiritual Weapon </name>
+		<tags>spell force scaling </tags>
+		<value>spiritualWeaponScaling </value>
+		<limit>bonusAction onAttack </limit>
+		<cost>spellSlot2  </cost>
+	</modifier>
+
+	<scalar>
+		<name>spritualWeaponScaling </name>
+		<tags>scaling </tags>
+		<value>2:1d8 spellCastingMod </value>
+		<value>4:2d8 spellCastingMod </value>
+		<value>6:3d8 spellCastingMod </value>
+		<value>8:4d8 spellCastingMod </value>
+	</scalar>
+
+	<modifier>
+		<name>Flame Strike </name>
+		<tags>scaling spell fire radiant </tags>
+		<value>flameStrikeScaling </value>
+		<limit>action </limit>
+		<cost>spellSlot5  </cost>
+	</modifier>
+
+	<scalar>
+		<name>flameStrikeScaling </name>
+		<tags>scaling </tags>
+		<value>5:8d6 </value>
+		<value>6:9d6 </value>
+		<value>7:10d6 </value>
+		<value>8:11d6 </value>
+		<value>9:12d6 </value>
+	</scalar>
+
+	<modifier>
+		<name>Harm </name>
+		<tag> spell necrotic</tag>
+		<value>14d6 </value>
+		<limit>action </limit>
+		<cost>spellSlot6 </cost>
+	</modifier>
+
+
+
+
+
+
+
+
+
+
+
+<scalar>
+    <name>Test Scalar</name>
+    <tags>tag1 tag2 tag3</tags>
+    <value>1:2d6</value>
+    <value>2:2d10</value>
+    <value>4:60</value>
+    <value>9:9d20</value>
+    <limits>limit1 limit2</limits>
+  </scalar>
+</class>
