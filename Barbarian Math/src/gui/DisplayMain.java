@@ -29,7 +29,7 @@ public class DisplayMain {
 	String lastMode = Constants.MODE_START;//used for nested menus
 	
 	DisplayOpen view1;
-	
+	DisplayModifier view5;
 	public DisplayMain() {
 		core = new Core();
 		//generate basic association of GUI
@@ -81,6 +81,7 @@ public class DisplayMain {
 			break;
 		case Constants.MODE_MODIFIER:
 			c = (CardLayout) screens.getLayout();
+			view5.updateContents();
 			c.show(screens, Constants.MODE_MODIFIER);
 			break;
 		case Constants.MODE_CALCULATE:
@@ -119,7 +120,7 @@ public class DisplayMain {
 		view4.setup(Constants.WINDOW_X,Constants.WINDOW_Y, new ButtonClickListener(), core);
 		screens.add(view4, Constants.MODE_BUILD);
 		//modifier
-		DisplayModifier view5 = new DisplayModifier();
+		view5 = new DisplayModifier();
 		view5.setup(Constants.WINDOW_X,Constants.WINDOW_Y, new ButtonClickListener(), core);
 		screens.add(view5, Constants.MODE_MODIFIER);
 		//save

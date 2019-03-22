@@ -80,6 +80,19 @@ public class EntryElement extends DisplayPanel {
 		parts.put(label, c);
 	}
 	/**
+	 * Updates ComboBox 
+	 * @param label
+	 * @param items
+	 */
+	public void updateDropdown(String label, ArrayList<Component> items)
+	{
+		JComboBox<Component> c =(JComboBox<Component>) parts.get(label);
+		for(Component i : items)
+		{
+			c.addItem(i);
+		}
+	}
+	/**
 	 * Adds a ComboBox with the given components. Same as addDropdown, but for String arrays.
 	 * @param label outward name
 	 * @param items list of Strings
@@ -94,6 +107,15 @@ public class EntryElement extends DisplayPanel {
 		add(c);
 		parts.put(label, c);
 	}
+	public void updateStringDropdown(String label, ArrayList<String> items)
+	{
+		JComboBox<String> c =(JComboBox<String>) parts.get(label);
+		for(String s : items)
+		{
+			c.addItem(s);
+		}
+	}
+	
 	/**
 	 * Adds a Button with given name and event.
 	 * @param label outward name

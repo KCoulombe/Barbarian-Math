@@ -12,10 +12,13 @@ import logic.Constants;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import logic.Core;
+import logic.Modifier;
+import logic.Value;
 
 public class DisplayModifier extends DisplayPanel {
 
@@ -36,7 +39,8 @@ public class DisplayModifier extends DisplayPanel {
 		super(layout, isDoubleBuffered);
 
 	}
-
+	Core core;
+	
 	EntryElement loadMod;
 	EntryElement name;
 	EntryElement type;
@@ -49,12 +53,12 @@ public class DisplayModifier extends DisplayPanel {
 	JScrollPane scroll;
 	@Override
 	public void setup(int x, int y, ActionListener l, Core c) {
-		
+		core = c;
 		setSize(x,y);
 		setLayout(new GridBagLayout());
 		GridBagConstraints g = new GridBagConstraints();
 		//holds the vertical list
-		//uses BoxLayout to list vertivally.
+		//uses BoxLayout to list vertically.
 		JPanel optionContainer = new JPanel();
 		optionContainer.setLayout(new BoxLayout(optionContainer, BoxLayout.Y_AXIS));
 		//initialize elements
@@ -80,6 +84,8 @@ public class DisplayModifier extends DisplayPanel {
 		//attribute
 		filter.add(Constants.TAG_ATTRIBUTE);
 		attribute.addDropdown(Constants.LABEL_ATTRIBUTE_SELECT, c.getSublist(filter, null));
+		attribute.addTextBox(Constants.LABEL_STATIC_ATTRIBUTE_FIELD, Constants.TAG_STATIC_ATTRIBUTE);
+		attribute.addButton(Constants.LABEL_ADD_BUTTON, Constants.ENTER_ATTRIBUTE, new ModifierButtonListener());
 		//cost
 		cost.addTextBox(Constants.LABEL_COST_FIELD, Constants.TAG_INTEGER);
 		cost.addButton(Constants.LABEL_ADD_BUTTON, Constants.ENTER_COST, new ModifierButtonListener());
@@ -114,15 +120,87 @@ public class DisplayModifier extends DisplayPanel {
 		g.gridy = 0;
 		g.fill = GridBagConstraints.VERTICAL;
 		add(selection, g);
-		//
+		////back button
 		JButton back = new JButton();
 		back.setText(Constants.LABEL_BACK_BUTTON);
 		back.addActionListener(l);
 		back.setActionCommand(Constants.GOTO_MAIN_BUTTON);
 		g.gridy = 2;
 		add(back, g);
+		////confirm button
+		JButton confirm = new JButton();
+		confirm.setText(Constants.LABEL_CONFIRM_BUTTON);
+		confirm.addActionListener(new ModifierButtonListener());
+		confirm.setActionCommand(Constants.ENTER_CREATE_MODIFIER);
+		g.gridx = 1;
+		add(confirm, g);
 		
 	}
+	public void updateContents()
+	{
+		ArrayList<String> filter = new ArrayList<String>();
+		loadMod.updateDropdown(Constants.LABEL_MODIFIER_LOAD, core.getSublist(filter, null));
+		type.updateStringDropdown(Constants.LABEL_TYPE_DROP, core.getTags(null));
+		attribute.updateDropdown(Constants.LABEL_ATTRIBUTE_SELECT, core.getSublist(filter, null));
+		limit.updateStringDropdown(Constants.LABEL_LIMIT_DROP, core.getTags(filter));
+		loadMod.setVisible(false);
+		type.setVisible(false);
+		attribute.setVisible(false);
+		limit.setVisible(false);
+		loadMod.setVisible(true);
+		type.setVisible(true);
+		attribute.setVisible(true);
+		limit.setVisible(true);
+	}
+	/**
+	 * creates Modifier out of materials in selection and other fields.
+	 * adds new Modifier to loadedComponents in core.
+	 */
+	protected void createModifier()
+	{
+		//get name
+		String n = name.parts.get(Constants.LABEL_NAME_FIELD).getToolTipText();
+		//get attributes
+		/**VALUE CREATION NEEDS HELP*/
+		ArrayList<Value> v = new ArrayList<>();
+		for(EntryElement e : totalList)
+		{
+			if(e.parts.containsKey(Constants.LABEL_ATTRIBUTE_SELECT))
+			{
+				//Value newValue = new Value(e.parts.get(Constants.LABEL_ATTRIBUTE_SELECT).getToolTipText(), flags);
+			}
+			if(e.parts.containsKey(Constants.LABEL_STATIC_ATTRIBUTE_FIELD))
+			{
+				
+			}
+		}
+		//get tags and limits
+		ArrayList<String> tags = new ArrayList<>();
+		ArrayList<String> limits = new ArrayList<>();
+		for(EntryElement e : totalList)
+		{
+			if(e.parts.containsKey(Constants.LABEL_TYPE_DROP))
+			{
+				JComboBox<String>  drop =(JComboBox) e.parts.get(Constants.LABEL_TYPE_DROP);
+				tags.add((String) drop.getSelectedItem());
+			}
+			if(e.parts.containsKey(Constants.LABEL_LIMIT_DROP))
+			{
+				JComboBox<String>  drop =(JComboBox) e.parts.get(Constants.LABEL_LIMIT_DROP);
+				limits.add((String) drop.getSelectedItem());
+			}
+		}
+		
+		
+		//get costs
+		
+		Modifier m = new Modifier(n, v, tags, limits, null);
+		core.loadedComponents.add(m);
+	}
+	/**
+	 * Adds selection to the right hand side
+	 * @param e EntryElement being referenced
+	 */
 	protected void insertToSelection(EntryElement e)
 	{
 		totalList.add(e);
@@ -149,8 +227,15 @@ public class DisplayModifier extends DisplayPanel {
 	    		case Constants.ENTER_MODIFIER_LOAD:
 	    			
 	    			break;
+	    		case Constants.ENTER_ATTRIBUTE:
+	    			insertToSelection(attribute);
+	    			break;
 	    		case Constants.ENTER_TYPE:
 	    			insertToSelection(type);
+	    			break;
+	    		case Constants.ENTER_CREATE_MODIFIER:
+	    			createModifier();
+	    			
 	    			break;
 	    	}
 	    }
