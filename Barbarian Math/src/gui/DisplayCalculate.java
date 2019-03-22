@@ -93,7 +93,7 @@ public class DisplayCalculate extends DisplayPanel {
 		add(optionsBox, g);
 		/**OutputBox****************/
 		resultTable = new JTable();
-		setResults(null, 20);
+		setResults();
 		g.gridy = 0;
 		g.gridx = 2;
 		add(resultTable, g);
