@@ -32,6 +32,9 @@ public class Constants {
 	public static final String GOTO_FIRST_MAIN_BUTTON = "GOTO_FIRST_MAIN_BUTTON";
 	public static final String ENTER_TYPE = "ENTER_TYPE";
 	public static final String ENTER_COST = "ENTER_COST";
+	public static final String ENTER_CREATE_MODIFIER = "ENTER_CREATE_MODIFIER";
+	public static final String ENTER_ATTRIBUTE = "ENTER_ATTRIBUTE";
+	public static final String ENTER_CALCULATE = "ENTER_CALCULATE";
 	
 	//labels for buttons
 	public static final String GOTO_MAIN_BUTTON_LABEL = "Start";
@@ -50,6 +53,15 @@ public class Constants {
 	public static final String LABEL_LIMIT_DROP = "Limit: ";
 	public static final String LABEL_LOAD_MOD_ROW = "Mod Loaded";
 	public static final String LABEL_BACK_BUTTON = "Back";
+	public static final String LABEL_CALCULATE_AVERAGE_CHECK = "Average Damage";
+	public static final String LABEL_CALCULATE_MAX_CHECK = "Max Damage";
+	public static final String LABEL_CALCULATE_MIN_CHECK = "Min Damage";
+	public static final String LABEL_CONFIRM_BUTTON = "Confirm";
+	public static final String LABEL_STATIC_ATTRIBUTE_FIELD = "Static Attribute";
+	public static final String LABEL_LEVEL_RANGE_FIELD = "Level Max";
+	public static final String LABEL_SUBMIT_CALCULATE = "Submit";
+	public static final String LABEL_TABLE_NAME = "Name";
+	
 	
 	public static final String DATA_FOLDER_NAME = "./BarbarianMathData";
 	public static final String EXTENTION_RULESET = ".ruleset";
