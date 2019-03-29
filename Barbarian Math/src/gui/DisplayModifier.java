@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import logic.Component;
 import logic.Constants;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -15,9 +16,11 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 
 import logic.Core;
 import logic.Modifier;
+import logic.Scanner;
 import logic.Value;
 
 public class DisplayModifier extends DisplayPanel {
@@ -167,11 +170,16 @@ public class DisplayModifier extends DisplayPanel {
 		{
 			if(e.parts.containsKey(Constants.LABEL_ATTRIBUTE_SELECT))
 			{
-				//Value newValue = new Value(e.parts.get(Constants.LABEL_ATTRIBUTE_SELECT).getToolTipText(), flags);
+				JComboBox<Component> cbo = (JComboBox) e.parts.get(Constants.LABEL_ATTRIBUTE_SELECT);
+				Component comp = (Component) cbo.getSelectedItem();
+				Value val = new Value(comp.name, 0);
+				val.tags.add(Constants.TAG_ATTRIBUTE);
+				v.add(val);
 			}
 			if(e.parts.containsKey(Constants.LABEL_STATIC_ATTRIBUTE_FIELD))
 			{
-				
+				JTextField txt = (JTextField)e.parts.get(Constants.LABEL_STATIC_ATTRIBUTE_FIELD);
+				v.add(Scanner.ParseValue(txt.getText()));
 			}
 		}
 		//get tags and limits
@@ -191,10 +199,11 @@ public class DisplayModifier extends DisplayPanel {
 			}
 		}
 		
+		ArrayList<String> costs = new ArrayList<>();
 		
 		//get costs
 		
-		Modifier m = new Modifier(n, v, tags, limits, null);
+		Modifier m = new Modifier(n, v, tags, limits, costs);
 		core.loadedComponents.add(m);
 	}
 	/**

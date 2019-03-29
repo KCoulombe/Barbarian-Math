@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 import logic.CharacterBuild;
 import logic.Constants;
@@ -30,6 +31,7 @@ public class DisplayCalculate extends DisplayPanel {
 	JPanel optionsBox;
 	JPanel resultBox;
 	JTable resultTable;
+	DefaultTableModel resultModel;
 	JPanel buttonBox;
 	HashMap<CharacterBuild, JCheckBox> buildMap;
 	HashMap<String, JComponent> optionsMap;
@@ -92,11 +94,13 @@ public class DisplayCalculate extends DisplayPanel {
 		g.gridy = 2;
 		add(optionsBox, g);
 		/**OutputBox****************/
-		resultTable = new JTable();
-		setResults();
+		
+		resultModel = new DefaultTableModel();
+		resultTable = new JTable(resultModel);
 		g.gridy = 0;
 		g.gridx = 2;
 		add(resultTable, g);
+		setResults();
 		/**ButtonBox****************/
 		//initialize
 		buttonMap = new HashMap<>();
@@ -133,10 +137,36 @@ public class DisplayCalculate extends DisplayPanel {
 	 */
 	protected void setResults()
 	{
+		
 		JTextField rangeBox = (JTextField) optionsMap.get(Constants.LABEL_LEVEL_RANGE_FIELD);
 		String rangeText = rangeBox.getText();
+		int x =  20;
+		//x = Integer.parseInt(rangeText);
+		Record dummy = new Record(x);
+		resultTable.clearSelection();
+		resultModel.addRow(dummy.toRow().toArray());
+		//
+		ArrayList<CharacterBuild> chosenBuilds = new ArrayList<>();
+		for(CharacterBuild c : buildMap.keySet())
+		{
+			if(buildMap.get(c).isSelected())
+			{
+				chosenBuilds.add(c);
+			}
+		}
+		ArrayList<Record> results;
+		results = new ArrayList<Record>();
+		//results.add(dummy);
+		//results = Mathemagics.makeRecords(chosenBuilds);
 		
-		//Record dummy = new Record(20);
+		
+		//do table
+		for (Record r : results)
+		{
+			resultModel.addRow(r.toRow().toArray());
+		}
+		resultTable.setVisible(false);
+		resultTable.setVisible(true);
 	}
 	private class CalculateButtonListener implements ActionListener
 	{

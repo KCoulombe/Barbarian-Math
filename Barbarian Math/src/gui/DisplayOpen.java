@@ -41,7 +41,7 @@ public class DisplayOpen extends DisplayPanel {
 	public void setup(int x, int y, ActionListener l, Core c)
 	{
 		File workingDirectory = new File("BarbarianMathData");
-		Scanner scanner = new Scanner();
+		
 		
 		setSize(y,x);
 		
@@ -52,7 +52,7 @@ public class DisplayOpen extends DisplayPanel {
 		//establish button
 		JButton startButton = new JButton(Constants.GOTO_MAIN_BUTTON_LABEL);
 		//establish dropDown
-		File[] localFiles = scanner.ListRulesets(workingDirectory);
+		File[] localFiles = Scanner.ListRulesets(workingDirectory);
 		
 		rulesetSelect = new JComboBox();
 		//rulesetSelect.addActionListener(l);
@@ -62,8 +62,8 @@ public class DisplayOpen extends DisplayPanel {
 		//universal listener
 		startButton.addActionListener(l);
 		//populate dropdown
-		Scanner s = new Scanner();
-		for(File f : s.ListRulesets(Constants.DATA_FOLDER_NAME))
+		
+		for(File f : Scanner.ListRulesets(Constants.DATA_FOLDER_NAME))
 		{
 			rulesetSelect.addItem(f);
 		}
