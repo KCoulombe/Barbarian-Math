@@ -66,7 +66,7 @@ public class Core {
 		}*/
 		if(activeRuleset == null)
 		{
-			Scanner s = new Scanner();
+			
 			activeRuleset = ruleset;
 			loadedComponents.addAll(activeRuleset.modifiers);
 		}

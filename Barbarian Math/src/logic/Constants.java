@@ -91,6 +91,7 @@ public class Constants {
 		public static final String TAG_SPELL_SLOT="spellslot";
 		public static final String TAG_FULL_CASTER = "fullCaster";
 	//End Tags from classes and other modifiers
+		public static final String TAG_STATIC_ATTRIBUTE = "statticAttribute";
 	
 	
 	
