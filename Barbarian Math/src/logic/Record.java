@@ -1,5 +1,6 @@
 package logic;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class Record{
 	public Record(int n)
 	{
 		int nlevels = n;
-		if(nlevels > 1)
+		if(nlevels < 1)
 		{
 			nlevels = 1;
 		}
@@ -33,6 +34,16 @@ public class Record{
 		{
 			map.put(i,(double)i);
 		}
+	}
+	public ArrayList<String> toRow()
+	{
+		ArrayList<String> row = new ArrayList<>();
+		row.add(label);
+		for(Double d : map.values())
+		{
+			row.add(d.toString());
+		}
+		return row;
 	}
 }
 	
