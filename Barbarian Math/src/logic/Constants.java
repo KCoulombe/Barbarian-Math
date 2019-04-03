@@ -66,7 +66,10 @@ public class Constants {
 	public static final String DATA_FOLDER_NAME = "./BarbarianMathData";
 	public static final String EXTENTION_RULESET = ".ruleset";
 	
-	
+	//Math Control
+	public static final String MATH_MODE_AVG= "MATH_MODE_AVG";
+	public static final String MATH_MODE_MAX= "MATH_MODE_MAX";
+	public static final String MATH_MODE_MIN= "MATH_MODE_MIN";
 	//Tags
 	public static final String TAG_MODIFIER = "TAG_MODIFIER";
 	public static final String TAG_LIMIT = "TAG_LIMIT";
