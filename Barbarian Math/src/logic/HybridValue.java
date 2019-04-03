@@ -12,8 +12,8 @@ public class HybridValue extends DiceValue
 		//the DiceValue value is the average roll of the dice, HybridValue's is that plus the static number
 		super.value += staticNum;
 		
-		super.max_roll += staticNum;
-		super.min_roll += staticNum;
+		super.max += staticNum;
+		super.min += staticNum;
 		
 	}
 

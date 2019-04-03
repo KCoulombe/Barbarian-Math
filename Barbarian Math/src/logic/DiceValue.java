@@ -12,9 +12,6 @@ public class DiceValue extends Value
     public int numDice;
 
     public String die_name;
-
-    public int max_roll;
-    public int min_roll;
     
     /** 
 	 * Constructor for DiceValue
@@ -33,8 +30,8 @@ public class DiceValue extends Value
 
         die_name = numDice + "d" + sides;
 
-        this.max_roll = numDice * sides;
-        this.min_roll = numDice;
+        super.max = numDice * sides;
+        super.min = numDice;
     }
 
     /**

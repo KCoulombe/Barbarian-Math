@@ -10,6 +10,8 @@ package logic;
 public class Value extends Component
 {
 	public float value;
+	public int max;
+    public int min;
 	
 	/** 
 	 * Constructor for receiving data directly from whatever created this object
@@ -20,6 +22,8 @@ public class Value extends Component
 	{
 		super.name = name;
 		this.value = number;
+		this.max = number;
+		this.min = number;
 	}
 	
 	public String toString()
