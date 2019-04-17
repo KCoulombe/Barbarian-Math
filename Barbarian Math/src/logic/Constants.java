@@ -35,6 +35,8 @@ public class Constants {
 	public static final String ENTER_CREATE_MODIFIER = "ENTER_CREATE_MODIFIER";
 	public static final String ENTER_ATTRIBUTE = "ENTER_ATTRIBUTE";
 	public static final String ENTER_CALCULATE = "ENTER_CALCULATE";
+	public static final String CHARACTER_BUILD_SAVE_POPUP = "CHARACTER_BUILD_SAVE_POPUP";
+
 	
 	//labels for buttons
 	public static final String GOTO_MAIN_BUTTON_LABEL = "Start";
