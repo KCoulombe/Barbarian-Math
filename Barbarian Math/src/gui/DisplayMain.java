@@ -6,8 +6,11 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.filechooser.FileSystemView;
 import javax.xml.parsers.ParserConfigurationException;
 
 import java.awt.event.ActionEvent;
@@ -15,6 +18,7 @@ import java.awt.event.ActionListener;
 
 import logic.Constants;
 import logic.Core;
+import logic.Ruleset;
 import logic.Scanner;
 
 /**
@@ -174,7 +178,43 @@ public class DisplayMain {
 	    		case Constants.GOTO_SAVE_BUTTON:
 	    			setup(Constants.MODE_SAVE);
 	    			break;
+			case Constants.CHARACTER_BUILD_SAVE_POPUP:
+	    			System.out.println("Looking for a file...");
+	    			System.out.println("Found: " + chooseFile("BarbarianMathData", true));
+	    			break;
 	    	}
 	    }
 	}  
+	
+	/** 
+	 * Opens a popup that allows the user to choose a file
+	 * @param startDir the directory the file chooser window will start in
+	 * @param saveOrOpen whether you are saving a file or opening it.<br>  true = save<br> false = open
+	 * @return Returns the file the user chose.  Returns null if the user did not choose a file.
+	 */
+	private File chooseFile(String startDir, boolean saveOrOpen)
+	{
+		JFileChooser jfc = new JFileChooser(startDir);
+		jfc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("Barbarian Math Data Files", "val", "sca", "adv", "char", "ruleset");
+		jfc.addChoosableFileFilter(filter);
+		jfc.setFileFilter(filter);
+		
+		int returnValue;
+		
+		if(saveOrOpen)
+		{
+			returnValue = jfc.showSaveDialog(null);
+		}
+		else
+		{
+			returnValue = jfc.showOpenDialog(null);
+		}
+		// int returnValue = jfc.showSaveDialog(null);
+
+		if (returnValue == JFileChooser.APPROVE_OPTION) {
+			return jfc.getSelectedFile();
+		}
+		return null;
+	}
 }
