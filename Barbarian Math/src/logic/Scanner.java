@@ -50,12 +50,14 @@ public class Scanner
 	 * @param directory a File object of the directory containing all of the xml files
 	 * @return A ruleset containing all of the data xml files
 	 */
+	
 	static public Ruleset LoadRuleset(File directory) throws ParserConfigurationException
 	{
 		String name = "";
 		List<Modifier> modifiers = new ArrayList<Modifier>();
 		List<Scalar> scalars = new ArrayList<Scalar>();
 		List<Adventurer> adventurers = new ArrayList<Adventurer>();
+		List<CharacterBuild> characters = new ArrayList<CharacterBuild>();
 				
 		List<File> AdventurerFiles = new ArrayList<File>();
 		List<File> valueFiles = new ArrayList<File>();
@@ -82,14 +84,18 @@ public class Scanner
 				{
 					valueFiles.add(file);
 					
-					NodeList modifierNodes = doc.getElementsByTagName("modifier");
-					modifiers.addAll(LoadModifiers(modifierNodes));
+					/*NodeList modifierNodes = doc.getElementsByTagName("modifier");
+					modifiers.addAll(LoadModifiers(modifierNodes));*/
+					
+					modifiers.addAll(GetModifiersFromFile(file));
 				}
 				
 				if (file.getName().endsWith((".sca"))) 
 				{
-					NodeList scalarNodes = doc.getElementsByTagName("scalar");
-					scalars.addAll(LoadScalars(scalarNodes));
+					//NodeList scalarNodes = doc.getElementsByTagName("scalar");
+					//scalars.addAll(LoadScalars(scalarNodes));
+					
+					scalars.addAll(GetScalarFromFile(file));
 				}
 				
 				if (file.getName().endsWith((".adv"))) 
@@ -104,6 +110,9 @@ public class Scanner
 				if (file.getName().endsWith((".char"))) 
 				{
 					characterFiles.add(file);
+					NodeList characterNodes = doc.getElementsByTagName("character");
+					characters.addAll(LoadCharacters(characterNodes));
+					System.out.println(characters.get(0).name);
 				}
 				
 				if (file.getName().endsWith((".ruleset"))) 
@@ -157,6 +166,60 @@ public class Scanner
         
         //if there is no element of the entered type and name, return null
         return null;
+	}
+	
+	/** 
+	 * Gets all modifiers in an xml file
+	 * @param filePath the filepath of the file as a string
+	 * @return A list of Modifier objects in the specified file
+	 */
+	public static List<Modifier> GetModifiersFromFile(String filePath) throws SAXException, IOException, ParserConfigurationException
+	{
+		return GetModifiersFromFile(new File(filePath));
+	}
+	/** 
+	 * Gets all modifiers in an xml file
+	 * @param file the file
+	 * @return A list of Modifier objects in the specified file
+	 */
+	public static List<Modifier> GetModifiersFromFile(File file) throws SAXException, IOException, ParserConfigurationException
+	{
+		//load the xml file into memory
+		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+        Document doc = dBuilder.parse(file);
+        doc.getDocumentElement().normalize();
+        		
+		NodeList modifierNodes = doc.getElementsByTagName("modifier");
+		
+		return (LoadModifiers(modifierNodes));
+	}
+	
+	/** 
+	 * Gets all Scalars in an xml file
+	 * @param filePath the filepath of the file as a string
+	 * @return A list of Scalar objects in the specified file
+	 */
+	public static List<Scalar> GetScalarFromFile(String filePath) throws SAXException, IOException, ParserConfigurationException
+	{
+		return GetScalarFromFile(new File(filePath));
+	}
+	/** 
+	 * Gets all Scalars in an xml file
+	 * @param file the file
+	 * @return A list of Scalar objects in the specified file
+	 */
+	public static List<Scalar> GetScalarFromFile(File file) throws SAXException, IOException, ParserConfigurationException
+	{
+		//load the xml file into memory
+		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+        Document doc = dBuilder.parse(file);
+        doc.getDocumentElement().normalize();
+        		
+		NodeList scalarNodes = doc.getElementsByTagName("scalar");
+		
+		return (LoadScalars(scalarNodes));
 	}
 	
 	/** 
@@ -613,8 +676,7 @@ public class Scanner
 	static private  List<Adventurer> LoadAdventurers(NodeList nList)
 	{
 		//the list to return
-		List<Adventurer> adventurers = new ArrayList<Adventurer> ();
-		//System.out.println(nList.getLength());
+		List<Adventurer> adventurers = new ArrayList<Adventurer>();
         //Loop through all of the adventurer elements
         for (int i = 0; i < nList.getLength(); i++) 
         {
@@ -709,6 +771,82 @@ public class Scanner
         }
         
         return adventurers;
+	}
+	
+	static private  List<CharacterBuild> LoadCharacters(NodeList nList)
+	{
+		List<CharacterBuild> characters = new ArrayList<CharacterBuild>();
+		
+		//Loop through all of the character elements
+        for (int i = 0; i < nList.getLength(); i++) 
+        {
+        	//get the character we are currently working on
+        	Node nNode = nList.item(i);	
+			
+			
+			if (nNode.getNodeType() == Node.ELEMENT_NODE) 
+	    	{
+				
+	    		
+	    		Element eElement = (Element) nNode;
+	    		
+	    		//the name
+	    		String name = eElement.getElementsByTagName("name").item(0).getTextContent();
+	    		
+	    		//all of the class data
+	    		List<String> classNames = new ArrayList<String>();
+				List<Integer> classLevels = new ArrayList<Integer>();
+				List<String> classSubclasses = new ArrayList<String>();
+				
+				//get all of the modifiers
+	    		List<String> modifierNames = Arrays.asList(eElement.getElementsByTagName("modifiers").item(0).getTextContent().split(" "));
+				List<String> scalarNames = Arrays.asList(eElement.getElementsByTagName("scalars").item(0).getTextContent().split(" "));
+				
+				//all of the attributes
+				Map<String, Value> attributes = new TreeMap<String, Value>();
+				
+	    		//get all of the class tags, then loop through them
+	    		NodeList classList = eElement.getElementsByTagName("class");
+	    		for (int n = 0; n < classList.getLength(); n++) 
+	            {
+	    			//get the current modifier
+        			Node classNode = classList.item(i);
+                    //System.out.println("\nCurrent Element: " + modifierNode.getNodeName());
+                    
+                    //then parse it and add it to the list of modifiers
+                	if (classNode.getNodeType() == Node.ELEMENT_NODE) 
+                	{
+                		Element classElement = (Element) classNode;
+                		
+                		//The name of the class
+                		classNames.add(classElement.getElementsByTagName("name").item(0).getTextContent());
+                		classLevels.add(Integer.parseInt(classElement.getElementsByTagName("level").item(0).getTextContent()));
+                		classSubclasses.add(classElement.getElementsByTagName("subclass").item(0).getTextContent());
+                	}
+	            }
+				
+				Node attributesNode = eElement.getElementsByTagName("attributes").item(0);
+				//get all of the item tags, and loop through them
+				NodeList itemList = ((Element) attributesNode).getElementsByTagName("item");
+	    		for (int n = 0; n < itemList.getLength(); n++) 
+	            {
+	    			//get the current modifier
+        			Node itemNode = itemList.item(i);
+                    
+                    //then parse it and add it to the list of modifiers
+                	if (itemNode.getNodeType() == Node.ELEMENT_NODE) 
+                	{
+                		Element itemElement = (Element) itemNode;
+                		String[] itemStrings = itemElement.getTextContent().split(":");
+                		attributes.put(itemStrings[0], ParseValue(itemStrings[1]));
+                	}
+	            }
+	    		
+	    		characters.add(new CharacterBuild(name, modifierNames, scalarNames, classNames, classLevels, classSubclasses,attributes));
+	    	}
+        }
+		
+		return characters;
 	}
 	
 	/** 
