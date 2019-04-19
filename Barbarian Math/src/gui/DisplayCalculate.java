@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.LayoutManager;
@@ -12,6 +13,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -94,13 +96,32 @@ public class DisplayCalculate extends DisplayPanel {
 		g.gridy = 2;
 		add(optionsBox, g);
 		/**OutputBox****************/
+		resultBox = new JPanel();
+		//resultBox.setLayout(new FlowLayout());
 		
-		resultModel = new DefaultTableModel();
+		resultBox.setLayout(new BoxLayout(resultBox, BoxLayout.Y_AXIS));
+		
+		String[][] datab = {{" ", " "}};
+		
+		String[] headb = new String[21];
+		headb[0]= Constants.LABEL_TABLE_NAME;
+		for (int i = 1; i <21; i++)
+		{
+			headb[i] = ""+i;
+		}
+		resultModel = new DefaultTableModel(datab, headb);
+		
 		resultTable = new JTable(resultModel);
+		
 		g.gridy = 0;
 		g.gridx = 2;
-		add(resultTable, g);
-		setResults();
+		g.fill = GridBagConstraints.EAST;
+		resultPane = new JScrollPane(resultTable);
+		
+		//setResults();
+		
+		add(resultPane, g);
+		
 		/**ButtonBox****************/
 		//initialize
 		buttonMap = new HashMap<>();
@@ -137,15 +158,15 @@ public class DisplayCalculate extends DisplayPanel {
 	 */
 	protected void setResults()
 	{
-		
-		JTextField rangeBox = (JTextField) optionsMap.get(Constants.LABEL_LEVEL_RANGE_FIELD);
-		String rangeText = rangeBox.getText();
-		int x =  20;
-		//x = Integer.parseInt(rangeText);
-		Record dummy = new Record(x);
-		resultTable.clearSelection();
-		resultModel.addRow(dummy.toRow().toArray());
-		//
+		// clear the old data
+		if (resultModel.getRowCount()>0)
+		{
+			for(int i = resultModel.getRowCount()-1; i>=0; i--)
+			{
+				resultModel.removeRow(i);
+			}
+		}
+		//get builds that are selected
 		ArrayList<CharacterBuild> chosenBuilds = new ArrayList<>();
 		for(CharacterBuild c : buildMap.keySet())
 		{
@@ -156,18 +177,23 @@ public class DisplayCalculate extends DisplayPanel {
 		}
 		ArrayList<Record> results;
 		results = new ArrayList<Record>();
-		//results.add(dummy);
-		//results = Mathemagics.makeRecords(chosenBuilds);
-		
-		
-		//do table
+		results.add(new Record(20));///dummy
+		//add to model
 		for (Record r : results)
 		{
-			resultModel.addRow(r.toRow().toArray());
+			resultModel.addRow(r.toRow().toArray(new String[0]));
 		}
+		resultTable.validate();
+		resultTable.repaint();
 		resultTable.setVisible(false);
 		resultTable.setVisible(true);
+		resultPane.setVisible(false);
+		resultPane.setVisible(true);
+		setVisible(false);
+		setVisible(true);
 	}
+	
+	
 	private class CalculateButtonListener implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e) 
