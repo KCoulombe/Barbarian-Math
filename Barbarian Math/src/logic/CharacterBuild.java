@@ -12,9 +12,9 @@ import java.util.Map;
 public class CharacterBuild extends Component
 {
 	public List<Modifier> modifiers;
-	public List<Modifier> classModifiers;
+	public List<Modifier> classModifiers = new ArrayList<Modifier>();
 	private List<String> modifierNames;
-	private List<String> classModifierNames;
+	private List<String> classModifierNames = new ArrayList<String>();
 	
 	public List<Scalar> scalars;
 	private List<String> scalarNames;
@@ -74,18 +74,22 @@ public class CharacterBuild extends Component
 		for(Adventurer adv : classes)
 		{	
 			for(int i = adv.level; i > 0; i--)
-			{	
+			{					
 				if(adv.main_class.values.get(i) != null)
 				{
-					classModifierNames.add(adv.main_class.values.get(i))
+					classModifierNames.add(adv.main_class.values.get(i));
 				}
 				
-				if(adv.sub_classes.get(adv.chosenSubclass))
+				if(adv.sub_classes.get(adv.chosenSubclass).values.get(i) != null && adv.chosenSubclass > 0)
 				{
-					classModifierNames.add(adv.main_class.values.get(i))
+					classModifierNames.add(adv.sub_classes.get(adv.chosenSubclass).values.get(i));
 				}
 			}
+			
+			System.out.println(adv.level);
+			System.out.println(classModifierNames);
 		}
+		
 	}
 	
 	public void UpdateModifiers(Ruleset ruleset)
@@ -101,6 +105,15 @@ public class CharacterBuild extends Component
 				if(ruleset.modifiers.get(i).name.equals(modifierNames.get(n)))
 				{
 					modifiers.add(ruleset.modifiers.get(i));
+				}
+			}
+			for(int n = 0; n < classModifierNames.size(); n++)
+			{		
+				if(ruleset.modifiers.get(i).name.equals(classModifierNames.get(n)))
+				{
+					System.out.println(ruleset.modifiers.get(i).name + "=" + classModifierNames.get(n));
+					
+					classModifiers.add(ruleset.modifiers.get(i));
 				}
 			}
 		}
