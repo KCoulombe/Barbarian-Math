@@ -8,7 +8,7 @@
 			<value>2:recklessSwing</value>
 			<value>3:subclass</value><!--this is the point where a subclass would be decided-->
 			<value>4:asi</value><!--will point to a decision to +2 to an attribute or a feat-->
-			<value>5:extraAttack1</value>
+			<value>5:extraAttack</value>
 			<value>8:asi</value>
 			<value>9:brutalCritical</value>
 			<value>12:asi</value>
