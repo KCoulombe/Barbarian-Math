@@ -1,0 +1,20 @@
+<?xml version = "1.0"?>
+	<adventurer>
+		<bundle>	
+				<name> Wizard </name>
+				<tag> class </tag>
+				<value>2:Arcane Tradition</value>
+				<value>4:asi</value>
+				<value>6:classFeature</value>
+				<value>8:asi</value>
+				<value>10:classFeature</value>
+				<value>12:asi</value>
+				<value>16:asi</value>
+				<value>19:asi</value>
+		</bundle>
+		<subclass>
+			<name>Evocation </name>
+			<parent> Wizard </parent>
+			<value>10: +intMod </value>
+		</subclass>
+	</adventurer>
