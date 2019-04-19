@@ -53,11 +53,13 @@ public class Scanner
 	
 	static public Ruleset LoadRuleset(File directory) throws ParserConfigurationException
 	{
-		String name = "";
+		Ruleset ruleset = new Ruleset("", new ArrayList<Modifier>(), new ArrayList<Scalar>(), new ArrayList<Adventurer>(), new ArrayList<CharacterBuild>());
+		
+		/*String name = "";
 		List<Modifier> modifiers = new ArrayList<Modifier>();
 		List<Scalar> scalars = new ArrayList<Scalar>();
 		List<Adventurer> adventurers = new ArrayList<Adventurer>();
-		List<CharacterBuild> characters = new ArrayList<CharacterBuild>();
+		List<CharacterBuild> characters = new ArrayList<CharacterBuild>();*/
 				
 		List<File> AdventurerFiles = new ArrayList<File>();
 		List<File> valueFiles = new ArrayList<File>();
@@ -87,7 +89,7 @@ public class Scanner
 					/*NodeList modifierNodes = doc.getElementsByTagName("modifier");
 					modifiers.addAll(LoadModifiers(modifierNodes));*/
 					
-					modifiers.addAll(GetModifiersFromFile(file));
+					ruleset.modifiers.addAll(GetModifiersFromFile(file));
 				}
 				
 				if (file.getName().endsWith((".sca"))) 
@@ -95,14 +97,16 @@ public class Scanner
 					//NodeList scalarNodes = doc.getElementsByTagName("scalar");
 					//scalars.addAll(LoadScalars(scalarNodes));
 					
-					scalars.addAll(GetScalarFromFile(file));
+					ruleset.scalars.addAll(GetScalarsFromFile(file));
 				}
 				
 				if (file.getName().endsWith((".adv"))) 
 				{
-					NodeList nList = doc.getElementsByTagName("adventurer");
+					//NodeList nList = doc.getElementsByTagName("adventurer");
 					AdventurerFiles.add(file);
-					adventurers.addAll(LoadAdventurers(nList));
+					//adventurers.addAll(LoadAdventurers(nList));
+					
+					ruleset.adventurers.addAll(GetAdventurersFromFile(file));
 					
 					//System.out.println(adventurers);
 				}
@@ -110,14 +114,17 @@ public class Scanner
 				if (file.getName().endsWith((".char"))) 
 				{
 					characterFiles.add(file);
-					NodeList characterNodes = doc.getElementsByTagName("character");
-					characters.addAll(LoadCharacters(characterNodes));
-					System.out.println(characters.get(0).name);
+					//NodeList characterNodes = doc.getElementsByTagName("character");
+					//characters.addAll(LoadCharacters(characterNodes));
+					
+					ruleset.characters.addAll(GetCharacterBuildsFromFile(file));
+					
+					
 				}
 				
 				if (file.getName().endsWith((".ruleset"))) 
 				{
-					name = doc.getElementsByTagName("name").item(0).getTextContent();
+					ruleset.name = doc.getElementsByTagName("name").item(0).getTextContent();
 				}
 			}
 			catch (Exception e) 
@@ -126,7 +133,23 @@ public class Scanner
 			}
 		}
 		
-		return new Ruleset(name, modifiers, scalars, adventurers);
+		//link all of the character to their values
+		ruleset.LinkCharactersToValues();
+		
+		System.out.println("\n" + ruleset.characters.get(0).name + "\n" );
+		
+		System.out.println("\n" + ruleset.characters.get(0).classes.get(0).main_class + "\n" );
+		System.out.println("\n" + ruleset.characters.get(0).classes.get(0).level + "\n" );
+		System.out.println("\n" + ruleset.characters.get(0).classes.get(0).GetSubclass() + "\n" );
+		
+		System.out.println("\n" + ruleset.characters.get(0).classes.get(1).main_class + "\n" );
+		System.out.println("\n" + ruleset.characters.get(0).classes.get(1).level + "\n" );
+		System.out.println("\n" + ruleset.characters.get(0).classes.get(1).GetSubclass() + "\n" );
+		
+		System.out.println("\n" + ruleset.characters.get(0).modifiers + "\n" );
+		System.out.println("\n" + ruleset.characters.get(0).scalars + "\n" );
+		
+		return ruleset;
 	}
 	
 	static public  Element FindComponentInXML(String name, String filePath, String nodeType) throws ParserConfigurationException, SAXException, IOException
@@ -200,16 +223,16 @@ public class Scanner
 	 * @param filePath the filepath of the file as a string
 	 * @return A list of Scalar objects in the specified file
 	 */
-	public static List<Scalar> GetScalarFromFile(String filePath) throws SAXException, IOException, ParserConfigurationException
+	public static List<Scalar> GetScalarsFromFile(String filePath) throws SAXException, IOException, ParserConfigurationException
 	{
-		return GetScalarFromFile(new File(filePath));
+		return GetScalarsFromFile(new File(filePath));
 	}
 	/** 
 	 * Gets all Scalars in an xml file
 	 * @param file the file
 	 * @return A list of Scalar objects in the specified file
 	 */
-	public static List<Scalar> GetScalarFromFile(File file) throws SAXException, IOException, ParserConfigurationException
+	public static List<Scalar> GetScalarsFromFile(File file) throws SAXException, IOException, ParserConfigurationException
 	{
 		//load the xml file into memory
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -220,6 +243,60 @@ public class Scanner
 		NodeList scalarNodes = doc.getElementsByTagName("scalar");
 		
 		return (LoadScalars(scalarNodes));
+	}
+	
+	/** 
+	 * Gets all Adventurers in an xml file
+	 * @param filePath the filepath of the file as a string
+	 * @return A list of Adventurer objects in the specified file
+	 */
+	public static List<Adventurer> GetAdventurersFromFile(String filePath) throws SAXException, IOException, ParserConfigurationException
+	{
+		return GetAdventurersFromFile(new File(filePath));
+	}
+	/** 
+	 * Gets all Adventurers in an xml file
+	 * @param file the file
+	 * @return A list of Adventurer objects in the specified file
+	 */
+	public static List<Adventurer> GetAdventurersFromFile(File file) throws SAXException, IOException, ParserConfigurationException
+	{
+		//load the xml file into memory
+		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+        Document doc = dBuilder.parse(file);
+        doc.getDocumentElement().normalize();
+        		
+		NodeList adventurerNodes = doc.getElementsByTagName("adventurer");
+		
+		return (LoadAdventurers(adventurerNodes));
+	}
+	
+	/** 
+	 * Gets all Adventurers in an xml file
+	 * @param filePath the filepath of the file as a string
+	 * @return A list of Adventurer objects in the specified file
+	 */
+	public static List<CharacterBuild> GetCharacterBuildsFromFile(String filePath) throws SAXException, IOException, ParserConfigurationException
+	{
+		return GetCharacterBuildsFromFile(new File(filePath));
+	}
+	/** 
+	 * Gets all characters in an xml file
+	 * @param file the file
+	 * @return A list of Adventurer objects in the specified file
+	 */
+	public static List<CharacterBuild> GetCharacterBuildsFromFile(File file) throws SAXException, IOException, ParserConfigurationException
+	{
+		//load the xml file into memory
+		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+        Document doc = dBuilder.parse(file);
+        doc.getDocumentElement().normalize();
+        		
+		NodeList characterNodes = doc.getElementsByTagName("character");
+		
+		return (LoadCharacters(characterNodes));
 	}
 	
 	/** 
@@ -791,7 +868,7 @@ public class Scanner
 	    		Element eElement = (Element) nNode;
 	    		
 	    		//the name
-	    		String name = eElement.getElementsByTagName("name").item(0).getTextContent();
+	    		String name = eElement.getElementsByTagName("name").item(0).getTextContent().trim();
 	    		
 	    		//all of the class data
 	    		List<String> classNames = new ArrayList<String>();
@@ -799,8 +876,8 @@ public class Scanner
 				List<String> classSubclasses = new ArrayList<String>();
 				
 				//get all of the modifiers
-	    		List<String> modifierNames = Arrays.asList(eElement.getElementsByTagName("modifiers").item(0).getTextContent().split(" "));
-				List<String> scalarNames = Arrays.asList(eElement.getElementsByTagName("scalars").item(0).getTextContent().split(" "));
+	    		List<String> modifierNames = Arrays.asList(eElement.getElementsByTagName("modifiers").item(0).getTextContent().trim().split(" "));
+				List<String> scalarNames = Arrays.asList(eElement.getElementsByTagName("scalars").item(0).getTextContent().trim().split(" "));
 				
 				//all of the attributes
 				Map<String, Value> attributes = new TreeMap<String, Value>();
@@ -857,7 +934,7 @@ public class Scanner
 	static private  Bundle ParseBundle(Element eElement)
 	{
 		//the name of the bundle
-		String bundleName = eElement.getElementsByTagName("name").item(0).getTextContent();
+		String bundleName = eElement.getElementsByTagName("name").item(0).getTextContent().trim();
 		
 		//the tags of the bundle
 		List<String> bundleTags =  Arrays.asList(eElement.getElementsByTagName("tags").item(0).getTextContent().split(" "));
@@ -919,7 +996,7 @@ public class Scanner
 	static private  Modifier ParseModifier(Element eElement)
 	{
 		//The name of the modifier
-        String modifierName = eElement.getElementsByTagName("name").item(0).getTextContent();      
+        String modifierName = eElement.getElementsByTagName("name").item(0).getTextContent().trim();      
         
         //The tags of the modifier
         List<String> modifierTags;
@@ -1107,7 +1184,7 @@ public class Scanner
 			//split "3d6" into "3" and "6"
 			String[] dieNumbers = hybridNumbers[0].split("d");
 	
-			System.out.println(string + " = " + dieNumbers[0] + "d" + dieNumbers[1] + "+" + hybridNumbers[1]);
+			//System.out.println(string + " = " + dieNumbers[0] + "d" + dieNumbers[1] + "+" + hybridNumbers[1]);
 			
 			return new HybridValue(name, Integer.parseInt(dieNumbers[0]), Integer.parseInt(dieNumbers[1]), Integer.parseInt(hybridNumbers[1]));
 		}

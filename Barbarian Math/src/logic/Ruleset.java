@@ -15,18 +15,30 @@ public class Ruleset
 	public List<Modifier> modifiers;
 	public List<Scalar> scalars;
 	public List<Adventurer> adventurers;
+	public List<CharacterBuild> characters;
 	public List<String> dataFiles;
 	
 	/** 
 	 * Constructor for receiving data directly from whatever created this object
 	 */
-	public Ruleset(String name, List<Modifier> modifiers, List<Scalar> scalars, List<Adventurer> adventurers)
+	public Ruleset(String name, List<Modifier> modifiers, List<Scalar> scalars, List<Adventurer> adventurers, List<CharacterBuild> characters)
 	{
 		this.name = name;
 		this.modifiers = modifiers;
 		this.scalars = scalars;
 		this.adventurers = adventurers;
+		this.characters = characters;
 	}
+	
+	public void LinkCharactersToValues()
+	{
+		for(CharacterBuild character : characters)
+		{
+			character.UpdateAll(this);
+		}
+	}
+}
+
 
 
 
