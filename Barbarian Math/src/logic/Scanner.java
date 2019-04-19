@@ -136,7 +136,7 @@ public class Scanner
 		//link all of the character to their values
 		ruleset.LinkCharactersToValues();
 		
-		System.out.println("\n" + ruleset.characters.get(0).name + "\n" );
+		/*System.out.println("\n" + ruleset.characters.get(0).name + "\n" );
 		
 		System.out.println("\n" + ruleset.characters.get(0).classes.get(0).main_class + "\n" );
 		System.out.println("\n" + ruleset.characters.get(0).classes.get(0).level + "\n" );
@@ -147,7 +147,8 @@ public class Scanner
 		System.out.println("\n" + ruleset.characters.get(0).classes.get(1).GetSubclass() + "\n" );
 		
 		System.out.println("\n" + ruleset.characters.get(0).modifiers + "\n" );
-		System.out.println("\n" + ruleset.characters.get(0).scalars + "\n" );
+		System.out.println("\n" + ruleset.characters.get(0).classModifiers + "\n" );
+		System.out.println("\n" + ruleset.characters.get(0).scalars + "\n" );*/
 		
 		return ruleset;
 	}
@@ -887,7 +888,7 @@ public class Scanner
 	    		for (int n = 0; n < classList.getLength(); n++) 
 	            {
 	    			//get the current modifier
-        			Node classNode = classList.item(i);
+        			Node classNode = classList.item(n);
                     //System.out.println("\nCurrent Element: " + modifierNode.getNodeName());
                     
                     //then parse it and add it to the list of modifiers
@@ -919,7 +920,9 @@ public class Scanner
                 	}
 	            }
 	    		
-	    		characters.add(new CharacterBuild(name, modifierNames, scalarNames, classNames, classLevels, classSubclasses,attributes));
+	    		//System.out.println("--------------" + classNames + "--------------" );
+	    		
+	    		characters.add(new CharacterBuild(name, modifierNames, scalarNames, classNames, classLevels, classSubclasses, attributes));
 	    	}
         }
 		
