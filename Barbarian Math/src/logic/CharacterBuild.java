@@ -14,6 +14,7 @@ public class CharacterBuild extends Component
 	public List<Modifier> modifiers;
 	public List<Modifier> classModifiers;
 	private List<String> modifierNames;
+	private List<String> classModifierNames;
 	
 	public List<Scalar> scalars;
 	private List<String> scalarNames;
@@ -57,9 +58,34 @@ public class CharacterBuild extends Component
 	
 	public void UpdateAll(Ruleset ruleset)
 	{
-		UpdateModifiers(ruleset);
-		UpdateScalars(ruleset);
+		//Link all of the classes
 		UpdateClasses(ruleset);
+		//Get all of the modifiers from the classes based on the class level
+		UpdateCassModifiers();
+		//Link all of the modifiers
+		UpdateModifiers(ruleset);
+		//Link all of the sclalars
+		UpdateScalars(ruleset);
+		
+	}
+	
+	public void UpdateCassModifiers()
+	{
+		for(Adventurer adv : classes)
+		{	
+			for(int i = adv.level; i > 0; i--)
+			{	
+				if(adv.main_class.values.get(i) != null)
+				{
+					classModifierNames.add(adv.main_class.values.get(i))
+				}
+				
+				if(adv.sub_classes.get(adv.chosenSubclass))
+				{
+					classModifierNames.add(adv.main_class.values.get(i))
+				}
+			}
+		}
 	}
 	
 	public void UpdateModifiers(Ruleset ruleset)

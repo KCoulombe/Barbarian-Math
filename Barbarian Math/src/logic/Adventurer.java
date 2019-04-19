@@ -10,6 +10,8 @@ import java.util.List;
 public class Adventurer extends Component
 {
 	public Bundle main_class;
+	public int level;
+	public int chosenSubclass = -1; //a chosenSubclass of less than 0 means no subclass
 	public List<Bundle> sub_classes;
 	public List<Modifier> modifiers;
 	public List<Scalar> scalars;
@@ -26,12 +28,36 @@ public class Adventurer extends Component
 		this.scalars = scalars;
 	}
 	
-	/** 
-	 * Constructor for reading data from xml.
-	 */
-	public Adventurer(String name, String path)
+	public Adventurer(String name, Bundle main_class, List<Bundle> sub_classes, List<Modifier> modifiers, List<Scalar> scalars,
+			int level, int chosenSubclass)
 	{
-		
+		super.name = name;
+		this.main_class = main_class;
+		this.sub_classes = sub_classes;
+		this.modifiers = modifiers;
+		this.scalars = scalars;
+		this.level = level;
+		this.chosenSubclass = chosenSubclass;
+	}
+	
+	public Bundle GetSubclass()
+	{
+		if(chosenSubclass >= 0)
+		{
+			return sub_classes.get(chosenSubclass);
+		}
+		else
+		{
+			return null;
+		}
+	}
+	
+	public void SetSubclass(int subclassID)
+	{
+		if(subclassID < sub_classes.size())
+		{
+			chosenSubclass = subclassID;
+		}
 	}
 	
 	public String toString()
