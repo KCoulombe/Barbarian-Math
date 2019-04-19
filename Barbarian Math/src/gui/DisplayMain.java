@@ -149,11 +149,11 @@ public class DisplayMain {
 	    	switch(a)
 	    	{
 	    		case Constants.GOTO_FIRST_MAIN_BUTTON:
-	    			Scanner s = new Scanner();
+	    			
 	    			File f = (File) view1.rulesetSelect.getSelectedItem();
 				try {
 					//s.LoadRuleset(f);
-					core.setRuleset(s.LoadRuleset(f));
+					core.setRuleset(Scanner.LoadRuleset(f));
 				} catch (ParserConfigurationException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
