@@ -1,10 +1,32 @@
 <?xml version = "1.0"?>
 
 <class>
-	<characterBuild>
+	<character>
 		<name>Generiko</name> <!--name of character-->
-		<modifiers>greatWeaponMaster greatSword</modifiers> <!--a list of modifiers separated by spaces-->
-		<bundles>barbarianZealot halfOrc</bundles> <!--a list of bundles seperated by spaces-->
-		<level>15</level><!--default level-->
-	</characterBuild>
+
+        <class>
+            <name>Barbarian</name>
+            <level>12</level>
+            <subclass>Berserker</subclass>
+        </class>
+
+        <class>
+            <name>Cleric</name>
+            <level>7</level>
+            <subclass>War</subclass>
+        </class>
+
+        <modifiers>wrathOftheStorm Greatsword</modifiers>
+
+        <scalars>flameStrikeScaling vampiricTouchScaling</scalars>
+
+        <attributes>
+		    <item>strength:22</item>
+		    <item>dexterity:13</item>
+		    <item>constitution:23</item>
+		    <item>intelligence:7</item>
+            <item>wisdom:9</item>
+            <item>charisma:4</item>
+	    </attributes>
+	</character>
 </class>
