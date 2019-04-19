@@ -30,42 +30,42 @@ public class Mathemagics {
 		//cycles through all of the modifiers in the characterbuild
 		for(Modifier m: player.modifiers) {
 			String result = ABorC(m);	
-				if(result=="A" && mode=="AVG") {
+				if(result=="A" && mode.equals("MATH_MODE_AVG")) {
 					for(int i =0; i< m.values.size(); i++) {
 						A += m.values.get(i).value;
 					}
 				}
-				if(result=="A" && mode.contains("MAX")) {
+				if(result=="A" && mode.equals("MATH_MODE_MAX")) {
 					for(int i =0; i< m.values.size(); i++) {
 						A += m.values.get(i).max;
 					}
 				}
-				if(result=="A" && mode.contains("MIN")) {
+				if(result=="A" && mode.equals("MATH_MODE_MIN")) {
 					for(int i =0; i< m.values.size(); i++) {
 						A += m.values.get(i).min;
 					}
 				}
-				if(result=="B" && mode.contains("AVG")) {
+				if(result=="B" && mode.equals("MATH_MODE_AVG")) {
 					for(int i =0; i< m.values.size(); i++) {
 						B += m.values.get(i).value;
 					}
-				}if(result=="B" && mode.contains("MAX")) {
+				}if(result=="B" && mode.equals("MATH_MODE_MAX")) {
 					for(int i =0; i< m.values.size(); i++) {
 						B += m.values.get(i).max;
 					}
-				}if(result=="B" && mode.contains("MIN")) {
+				}if(result=="B" && mode.equals("MATH_MODE_MIN")) {
 					for(int i =0; i< m.values.size(); i++) {
 						B += m.values.get(i).min;
 					}
-				}if(result=="C" && mode.contains("AVG")) {
+				}if(result=="C" && mode.equals("MATH_MODE_AVG")) {
 					for(int i =0; i< m.values.size(); i++) {
 						C += m.values.get(i).value;
 					}
-				}if(result=="C" && mode.contains("MAX")) {
+				}if(result=="C" && mode.equals("MATH_MODE_MAX")) {
 					for(int i =0; i< m.values.size(); i++) {
 						C += m.values.get(i).max;
 					}
-				}if(result=="C" && mode.contains("MIN")) {
+				}if(result=="C" && mode.equals("MATH_MODE_MIN")) {
 					for(int i =0; i< m.values.size(); i++) {
 						C += m.values.get(i).min;
 					}
