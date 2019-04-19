@@ -11,7 +11,9 @@
 							<value>5:extraAttack</value>
 							<value>6:asi</value>
 							<value>8:asi</value>
+							<value>11:extraAttack</value>
 							<value>12:asi</value>
+							<value>20:extraAttack</value>
 							
 					</bundle>
 					<subclass>
