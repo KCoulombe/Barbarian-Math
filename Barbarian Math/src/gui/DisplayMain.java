@@ -35,6 +35,7 @@ public class DisplayMain {
 	String lastMode = Constants.MODE_START;//used for nested menus
 	
 	DisplayOpen view1;
+	DisplayCalculate view3;
 	DisplayModifier view5;
 	//the build manager
 	DisplayBuild view4;
@@ -120,7 +121,7 @@ public class DisplayMain {
 		view2.setup(Constants.WINDOW_X,Constants.WINDOW_Y, new ButtonClickListener(), core);
 		screens.add(view2, Constants.MODE_MAIN);
 		//calculator
-		DisplayCalculate view3 = new DisplayCalculate();
+		view3 = new DisplayCalculate();
 		view3.setup(Constants.WINDOW_X,Constants.WINDOW_Y, new ButtonClickListener(), core);
 		screens.add(view3, Constants.MODE_CALCULATE);
 		//build
@@ -175,6 +176,7 @@ public class DisplayMain {
 	    			setup(Constants.MODE_MODIFIER);
 	    			break;
 	    		case Constants.GOTO_CALCULATOR_BUTTON:
+				view3.setCharacterBar();
 	    			setup(Constants.MODE_CALCULATE);
 	    			break;
 	    		case Constants.GOTO_LOAD_BUTTON:
