@@ -58,7 +58,8 @@ public class DisplayCalculate extends DisplayPanel {
 	}
 
 	@Override
-	public void setup(int x, int y, ActionListener l, Core c) {
+	public void setup(int x, int y, ActionListener l, Core c) 
+	{
 		//initial
 		setSize(x,y);
 		setLayout(new GridBagLayout());

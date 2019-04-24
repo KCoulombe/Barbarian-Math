@@ -15,6 +15,8 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import logic.Constants;
 import logic.Core;
@@ -34,6 +36,8 @@ public class DisplayMain {
 	
 	DisplayOpen view1;
 	DisplayModifier view5;
+	//the build manager
+	DisplayBuild view4;
 	public DisplayMain() {
 		core = new Core();
 		//generate basic association of GUI
@@ -120,7 +124,7 @@ public class DisplayMain {
 		view3.setup(Constants.WINDOW_X,Constants.WINDOW_Y, new ButtonClickListener(), core);
 		screens.add(view3, Constants.MODE_CALCULATE);
 		//build
-		DisplayBuild view4 = new DisplayBuild();
+		view4 = new DisplayBuild();
 		view4.setup(Constants.WINDOW_X,Constants.WINDOW_Y, new ButtonClickListener(), core);
 		screens.add(view4, Constants.MODE_BUILD);
 		//modifier
@@ -164,6 +168,7 @@ public class DisplayMain {
 	    			setup(Constants.MODE_MAIN);
 	    			break;
 	    		case Constants.GOTO_BUILD_BUTTON:
+	    			view4.updateData(core);
 	    			setup(Constants.MODE_BUILD);
 	    			break;
 	    		case Constants.GOTO_MODIFIER_BUTTON:
@@ -178,13 +183,29 @@ public class DisplayMain {
 	    		case Constants.GOTO_SAVE_BUTTON:
 	    			setup(Constants.MODE_SAVE);
 	    			break;
-			case Constants.CHARACTER_BUILD_SAVE_POPUP:
+	    		case Constants.CHARACTER_BUILD_SAVE_POPUP:
 	    			System.out.println("Looking for a file...");
 	    			System.out.println("Found: " + chooseFile("BarbarianMathData", true));
 	    			break;
+	    		case Constants.SELECTED_CHARACTER_CHANGED:
+	    			
+	    			break;
 	    	}
 	    }
-	}  
+	} 
+	
+	/*private class ItemChangeListener implements ItemListener
+	{
+	    @Override
+	    public void itemStateChanged(ItemEvent event) 
+	    {
+	       if (event.getStateChange() == ItemEvent.SELECTED)
+	       {
+	          Object item = event.getItem();
+	          // do something with object
+	       }
+	    }       
+	}*/
 	
 	/** 
 	 * Opens a popup that allows the user to choose a file
