@@ -21,7 +21,7 @@ public class CharacterBuild extends Component
 	
 	public List<Adventurer> classes;
 	private List<String> classNames;
-	private List<Integer> classLevels;
+	public List<Integer> classLevels = new ArrayList<Integer>();
 	private List<String> classSubclasses;
 	
 	
@@ -52,8 +52,7 @@ public class CharacterBuild extends Component
 		
 		modifiers = new ArrayList<Modifier>();
 		scalars = new ArrayList<Scalar>();
-		classes = new ArrayList<Adventurer>();
-		
+		classes = new ArrayList<Adventurer>();	
 	}
 	
 	/** 
@@ -64,11 +63,12 @@ public class CharacterBuild extends Component
 	 */
 	public void SetClassLevel(String className, int level, Ruleset ruleset)
 	{
-		for(Adventurer adv : classes)
+		for(int i = 0; i < classes.size(); i++)
 		{
-			if(adv.name.equalsIgnoreCase(className))
+			if(classes.get(i).name.equalsIgnoreCase(className))
 			{
-				adv.level = level;
+				classes.get(i).level = level;
+				classLevels.set(i, level);
 				UpdateCassModifiers(ruleset);
 				
 				break;
