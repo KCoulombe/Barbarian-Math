@@ -12,6 +12,7 @@ import java.util.HashMap;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -23,6 +24,7 @@ import javax.swing.table.DefaultTableModel;
 import logic.CharacterBuild;
 import logic.Constants;
 import logic.Core;
+import logic.Mathemagics;
 import logic.Record;
 
 public class DisplayCalculate extends DisplayPanel {
@@ -38,7 +40,7 @@ public class DisplayCalculate extends DisplayPanel {
 	HashMap<CharacterBuild, JCheckBox> buildMap;
 	HashMap<String, JComponent> optionsMap;
 	HashMap<String, JButton> buttonMap;
-	
+	Core core;
 	public DisplayCalculate() {
 	}
 
@@ -58,25 +60,18 @@ public class DisplayCalculate extends DisplayPanel {
 	}
 
 	@Override
-	public void setup(int x, int y, ActionListener l, Core c) 
-	{
+	public void setup(int x, int y, ActionListener l, Core c) {
 		//initial
 		setSize(x,y);
 		setLayout(new GridBagLayout());
 		GridBagConstraints g = new GridBagConstraints();
-		
+		core = c;
 		/**BuildBox******************/
 		buildBox = new JPanel();
 		buildBox.setLayout(new BoxLayout(buildBox, BoxLayout.Y_AXIS));
 		//populate map
 		buildMap = new HashMap<>();
-		for(CharacterBuild b : c.loadedCharacterBuilds)
-		{
-			JCheckBox check = new JCheckBox();
-			check.setText(b.name);
-			buildMap.put(b, check);
-			buildBox.add(check);
-		}
+		//setCharacterBar(c);
 		buildPane = new JScrollPane(buildBox);
 		g.gridx = 0;
 		g.gridy = 0;
@@ -86,7 +81,13 @@ public class DisplayCalculate extends DisplayPanel {
 		optionsBox = new JPanel();
 		optionsBox.setLayout(new BoxLayout(optionsBox, BoxLayout.Y_AXIS));
 		optionsMap = new HashMap<>();
-		optionsMap.put(Constants.LABEL_LEVEL_RANGE_FIELD, new JTextField(Constants.LABEL_LEVEL_RANGE_FIELD));
+		JComboBox<Integer> levels = new JComboBox();
+		
+		for(int i = 1; i <= 20; i++)
+		{
+			levels.addItem(i);
+		}
+		optionsMap.put(Constants.LABEL_LEVEL_RANGE_FIELD, levels);
 		optionsMap.put(Constants.LABEL_CALCULATE_AVERAGE_CHECK, new JCheckBox(Constants.LABEL_CALCULATE_AVERAGE_CHECK));
 		optionsMap.put(Constants.LABEL_CALCULATE_MAX_CHECK, new JCheckBox(Constants.LABEL_CALCULATE_MAX_CHECK));
 		optionsMap.put(Constants.LABEL_CALCULATE_MIN_CHECK, new JCheckBox(Constants.LABEL_CALCULATE_MIN_CHECK));
@@ -179,6 +180,10 @@ public class DisplayCalculate extends DisplayPanel {
 		ArrayList<Record> results;
 		results = new ArrayList<Record>();
 		results.add(new Record(20));///dummy
+		for(CharacterBuild build : chosenBuilds)
+		{
+			results.add(Mathemagics.MathLogic(build, Constants.MATH_MODE_AVG));
+		}
 		//add to model
 		for (Record r : results)
 		{
@@ -194,7 +199,20 @@ public class DisplayCalculate extends DisplayPanel {
 		setVisible(true);
 	}
 	
-	
+	public void setCharacterBar()
+	{
+		for(CharacterBuild b : core.activeRuleset.characters)
+		{
+			if(!buildMap.containsKey(b))
+			{
+				JCheckBox check = new JCheckBox();
+				check.setText(b.name);
+				buildMap.put(b, check);
+				buildBox.add(check);
+			}
+			
+		}
+	}
 	private class CalculateButtonListener implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e) 
