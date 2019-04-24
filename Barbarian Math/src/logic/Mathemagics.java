@@ -1,6 +1,7 @@
 package logic;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Does the math, all the math. 
@@ -16,11 +17,28 @@ public class Mathemagics {
 	 * @param builds The CharacterBuilds to be parsed
 	 * @return
 	 */
-	public static Record makeRecords(ArrayList<CharacterBuild> builds)
+	public static ArrayList<Record> makeRecords(ArrayList<CharacterBuild> builds, int levelMax, String mode)
 	{
+		//b.classLLevels.
+		/*for(CharacterBuild b : builds)
+		{	
+			
+			
+			for(int i = 1; i <= b.classes.size() ; i++)
+			{
+				List<Integer> maxLevels = b.classLevels;
+				
+				for(int n = 1; n <= maxLevel ; n++)
+				{
+					b.SetClassLevel(adv.name, n, c.aciveRuleset);
+					
+					//
+				}
+			}
+		}*/
 		return null;
 	}
-	public Record MathLogic( CharacterBuild player, String mode) {
+	public static Record MathLogic( CharacterBuild player, String mode) {
 		Record r = new Record(player); // create the record
 		double A = 0.0; // A is dmg done via features
 		double B = 0.0;// B is number of hits
@@ -72,10 +90,10 @@ public class Mathemagics {
 				}
 		}
 		damage = smashingGoodFun(A,B,C);
-		r.map.put(player.level,damage);
+		r.map.put(/*player.level*/1,damage);
 		return r;	//return the record
 	}
-	public String ABorC (Modifier m) {
+	public static String ABorC (Modifier m) {
 		String Albatross = "";
 		if(m.tags.contains("oncePerTurn")) {
 			Albatross = "C";
