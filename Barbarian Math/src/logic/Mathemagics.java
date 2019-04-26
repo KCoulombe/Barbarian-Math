@@ -1,6 +1,7 @@
 package logic;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Does the math, all the math. 
@@ -16,11 +17,28 @@ public class Mathemagics {
 	 * @param builds The CharacterBuilds to be parsed
 	 * @return
 	 */
-	public static Record makeRecords(ArrayList<CharacterBuild> builds)
+	public static ArrayList<Record> makeRecords(ArrayList<CharacterBuild> builds, int levelMax, String mode)
 	{
+		//b.classLLevels.
+		/*for(CharacterBuild b : builds)
+		{	
+			
+			
+			for(int i = 1; i <= b.classes.size() ; i++)
+			{
+				List<Integer> maxLevels = b.classLevels;
+				
+				for(int n = 1; n <= maxLevel ; n++)
+				{
+					b.SetClassLevel(adv.name, n, c.aciveRuleset);
+					
+					//
+				}
+			}
+		}*/
 		return null;
 	}
-	public Record MathLogic( CharacterBuild player, String mode) {
+	public static Record MathLogic( CharacterBuild player, String mode) {
 		Record r = new Record(player); // create the record
 		double A = 0.0; // A is dmg done via features
 		double B = 0.0;// B is number of hits
@@ -30,52 +48,52 @@ public class Mathemagics {
 		//cycles through all of the modifiers in the characterbuild
 		for(Modifier m: player.modifiers) {
 			String result = ABorC(m);	
-				if(result=="A" && mode=="AVG") {
+				if(result=="A" && mode.equals("MATH_MODE_AVG")) {
 					for(int i =0; i< m.values.size(); i++) {
 						A += m.values.get(i).value;
 					}
 				}
-				if(result=="A" && mode.contains("MAX")) {
+				if(result=="A" && mode.equals("MATH_MODE_MAX")) {
 					for(int i =0; i< m.values.size(); i++) {
 						A += m.values.get(i).max;
 					}
 				}
-				if(result=="A" && mode.contains("MIN")) {
+				if(result=="A" && mode.equals("MATH_MODE_MIN")) {
 					for(int i =0; i< m.values.size(); i++) {
 						A += m.values.get(i).min;
 					}
 				}
-				if(result=="B" && mode.contains("AVG")) {
+				if(result=="B" && mode.equals("MATH_MODE_AVG")) {
 					for(int i =0; i< m.values.size(); i++) {
 						B += m.values.get(i).value;
 					}
-				}if(result=="B" && mode.contains("MAX")) {
+				}if(result=="B" && mode.equals("MATH_MODE_MAX")) {
 					for(int i =0; i< m.values.size(); i++) {
 						B += m.values.get(i).max;
 					}
-				}if(result=="B" && mode.contains("MIN")) {
+				}if(result=="B" && mode.equals("MATH_MODE_MIN")) {
 					for(int i =0; i< m.values.size(); i++) {
 						B += m.values.get(i).min;
 					}
-				}if(result=="C" && mode.contains("AVG")) {
+				}if(result=="C" && mode.equals("MATH_MODE_AVG")) {
 					for(int i =0; i< m.values.size(); i++) {
 						C += m.values.get(i).value;
 					}
-				}if(result=="C" && mode.contains("MAX")) {
+				}if(result=="C" && mode.equals("MATH_MODE_MAX")) {
 					for(int i =0; i< m.values.size(); i++) {
 						C += m.values.get(i).max;
 					}
-				}if(result=="C" && mode.contains("MIN")) {
+				}if(result=="C" && mode.equals("MATH_MODE_MIN")) {
 					for(int i =0; i< m.values.size(); i++) {
 						C += m.values.get(i).min;
 					}
 				}
 		}
 		damage = smashingGoodFun(A,B,C);
-		r.map.put(player.level,damage);
+		r.map.put(/*player.level*/1,damage);
 		return r;	//return the record
 	}
-	public String ABorC (Modifier m) {
+	public static String ABorC (Modifier m) {
 		String Albatross = "";
 		if(m.tags.contains("oncePerTurn")) {
 			Albatross = "C";

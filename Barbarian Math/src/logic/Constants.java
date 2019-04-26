@@ -8,7 +8,7 @@ import javax.swing.Icon;
  */
 public class Constants {
 	//default settings
-	public static final int WINDOW_Y = 600;
+	public static final int WINDOW_Y = 800;
 	public static final int WINDOW_X = 800;
 	//mode tags, used to convey which screen is in use.
 	public static final String MODE_START = "MODE_START";
@@ -36,7 +36,10 @@ public class Constants {
 	public static final String ENTER_ATTRIBUTE = "ENTER_ATTRIBUTE";
 	public static final String ENTER_CALCULATE = "ENTER_CALCULATE";
 	public static final String CHARACTER_BUILD_SAVE_POPUP = "CHARACTER_BUILD_SAVE_POPUP";
+	public static final String CHARACTER_BUILD_LOAD_POPUP = "CHARACTER_BUILD_LOAD_POPUP";
 
+	//miscellaneous action events
+	public static final String SELECTED_CHARACTER_CHANGED = "SELECTED_CHARACTER_CHANGED";
 	
 	//labels for buttons
 	public static final String GOTO_MAIN_BUTTON_LABEL = "Start";
@@ -81,22 +84,22 @@ public class Constants {
 	
 	
 	// start Tags from classes and other modifiers
-		public static final String TAG_WEAPON_FINESSE = "Weapon Finesse";
-		public static final String TAG_CLASS = "class";
-		public static final String TAG_REACTION = "reaction";
-		public static final String TAG_MAGIC = "magic";
-		public static final String TAG_SPELL = "spell";
-		public static final String TAG_SCALING = "scaling";
-		public static final String LIMIT_ONCE_PER_TURN = "oncePerTurn";
-		public static final String LIMIT_ON_HIT = "onHit";
-		public static final String TAG_WIS_MOD ="wisMod";
-		public static final String TAG_DEX_MOD ="dexMod";
-		public static final String TAG_LIGHTNING = "lightning";
-		public static final String TAG_ACID ="acid";
-		public static final String TAG_SPELL_SLOT="spellslot";
-		public static final String TAG_FULL_CASTER = "fullCaster";
+	public static final String TAG_WEAPON_FINESSE = "Weapon Finesse";
+	public static final String TAG_CLASS = "class";
+	public static final String TAG_REACTION = "reaction";
+	public static final String TAG_MAGIC = "magic";
+	public static final String TAG_SPELL = "spell";
+	public static final String TAG_SCALING = "scaling";
+	public static final String LIMIT_ONCE_PER_TURN = "oncePerTurn";
+	public static final String LIMIT_ON_HIT = "onHit";
+	public static final String TAG_WIS_MOD ="wisMod";
+	public static final String TAG_DEX_MOD ="dexMod";
+	public static final String TAG_LIGHTNING = "lightning";
+	public static final String TAG_ACID ="acid";
+	public static final String TAG_SPELL_SLOT="spellslot";
+	public static final String TAG_FULL_CASTER = "fullCaster";
 	//End Tags from classes and other modifiers
-		public static final String TAG_STATIC_ATTRIBUTE = "statticAttribute";
+	public static final String TAG_STATIC_ATTRIBUTE = "statticAttribute";
 	
 	
 	

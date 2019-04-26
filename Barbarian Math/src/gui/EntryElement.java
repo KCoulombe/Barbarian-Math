@@ -10,10 +10,12 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import logic.Component;
+import logic.Constants;
 import logic.Core;
 /**
  * Serves as a single row for entry fields. 
@@ -28,6 +30,8 @@ public class EntryElement extends DisplayPanel {
 	public EntryElement(String l) {
 		parts = new HashMap<>();
 		purpose = l;
+		JLabel label = new JLabel(purpose);
+		add(label);
 	}
 
 	public EntryElement(LayoutManager layout) {
@@ -132,8 +136,33 @@ public class EntryElement extends DisplayPanel {
 
 	@Override
 	public String toString() {
-		String out = purpose +": ";
 		
+		String out = purpose +": ";
+		if(purpose.equals(Constants.LABEL_NAME_FIELD))
+		{
+			JTextField f =(JTextField) parts.get(Constants.LABEL_NAME_FIELD);
+			out = out + f.getText();
+		}
+		if(purpose.equals(Constants.LABEL_TYPE_DROP))
+		{
+			JComboBox<String> b = (JComboBox) parts.get(Constants.LABEL_TYPE_DROP);
+			out = out + b.getSelectedItem();
+		}
+		if(purpose.equals(Constants.LABEL_ATTRIBUTE_SELECT))
+		{
+			JComboBox<Component> b = (JComboBox) parts.get(Constants.LABEL_ATTRIBUTE_SELECT);
+			out = out + b.getSelectedItem();
+		}
+		if(purpose.equals(Constants.LABEL_COST_FIELD))
+		{
+			JTextField f =(JTextField) parts.get(Constants.LABEL_COST_FIELD);
+			out = out + f.getText();
+		}
+		if(purpose.equals(Constants.LABEL_LIMIT_DROP))
+		{
+			JComboBox<String> b = (JComboBox) parts.get(Constants.LABEL_LIMIT_DROP);
+			out = out + b.getSelectedItem();
+		}
 		return out;
 	}
 	

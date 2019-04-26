@@ -15,6 +15,8 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import logic.Constants;
 import logic.Core;
@@ -33,7 +35,10 @@ public class DisplayMain {
 	String lastMode = Constants.MODE_START;//used for nested menus
 	
 	DisplayOpen view1;
+	DisplayCalculate view3;
 	DisplayModifier view5;
+	//the build manager
+	DisplayBuild view4;
 	public DisplayMain() {
 		core = new Core();
 		//generate basic association of GUI
@@ -116,11 +121,11 @@ public class DisplayMain {
 		view2.setup(Constants.WINDOW_X,Constants.WINDOW_Y, new ButtonClickListener(), core);
 		screens.add(view2, Constants.MODE_MAIN);
 		//calculator
-		DisplayCalculate view3 = new DisplayCalculate();
+		view3 = new DisplayCalculate();
 		view3.setup(Constants.WINDOW_X,Constants.WINDOW_Y, new ButtonClickListener(), core);
 		screens.add(view3, Constants.MODE_CALCULATE);
 		//build
-		DisplayBuild view4 = new DisplayBuild();
+		view4 = new DisplayBuild();
 		view4.setup(Constants.WINDOW_X,Constants.WINDOW_Y, new ButtonClickListener(), core);
 		screens.add(view4, Constants.MODE_BUILD);
 		//modifier
@@ -149,11 +154,11 @@ public class DisplayMain {
 	    	switch(a)
 	    	{
 	    		case Constants.GOTO_FIRST_MAIN_BUTTON:
-	    			Scanner s = new Scanner();
+	    			
 	    			File f = (File) view1.rulesetSelect.getSelectedItem();
 				try {
 					//s.LoadRuleset(f);
-					core.setRuleset(s.LoadRuleset(f));
+					core.setRuleset(Scanner.LoadRuleset(f));
 				} catch (ParserConfigurationException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -164,12 +169,14 @@ public class DisplayMain {
 	    			setup(Constants.MODE_MAIN);
 	    			break;
 	    		case Constants.GOTO_BUILD_BUTTON:
+	    			view4.initData(core);
 	    			setup(Constants.MODE_BUILD);
 	    			break;
 	    		case Constants.GOTO_MODIFIER_BUTTON:
 	    			setup(Constants.MODE_MODIFIER);
 	    			break;
 	    		case Constants.GOTO_CALCULATOR_BUTTON:
+				view3.setCharacterBar();
 	    			setup(Constants.MODE_CALCULATE);
 	    			break;
 	    		case Constants.GOTO_LOAD_BUTTON:
@@ -178,13 +185,33 @@ public class DisplayMain {
 	    		case Constants.GOTO_SAVE_BUTTON:
 	    			setup(Constants.MODE_SAVE);
 	    			break;
-			case Constants.CHARACTER_BUILD_SAVE_POPUP:
+	    		case Constants.CHARACTER_BUILD_SAVE_POPUP:
 	    			System.out.println("Looking for a file...");
 	    			System.out.println("Found: " + chooseFile("BarbarianMathData", true));
 	    			break;
+			case Constants.CHARACTER_BUILD_LOAD_POPUP:
+	    			System.out.println("Looking for a file...");
+	    			System.out.println("Found: " + chooseFile("BarbarianMathData", false));
+	    			break;
+	    		case Constants.SELECTED_CHARACTER_CHANGED:
+	    			
+	    			break;
 	    	}
 	    }
-	}  
+	} 
+	
+	/*private class ItemChangeListener implements ItemListener
+	{
+	    @Override
+	    public void itemStateChanged(ItemEvent event) 
+	    {
+	       if (event.getStateChange() == ItemEvent.SELECTED)
+	       {
+	          Object item = event.getItem();
+	          // do something with object
+	       }
+	    }       
+	}*/
 	
 	/** 
 	 * Opens a popup that allows the user to choose a file

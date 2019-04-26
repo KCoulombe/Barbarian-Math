@@ -15,6 +15,7 @@ public class HybridValue extends DiceValue
 		super.max += staticNum;
 		super.min += staticNum;
 		
+		this.valueName = numDice + "d" + sides + "+" + staticNum;
 	}
 
 	public int Roll()

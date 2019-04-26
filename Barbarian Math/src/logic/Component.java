@@ -15,4 +15,9 @@ public class Component
 {
 	public String name;
 	public List<String> tags;
+	public boolean active = false;
+	@Override
+	public String toString() {
+		return "Component [name=" + name + "]";
+	}
 }

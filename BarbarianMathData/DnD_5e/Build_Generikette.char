@@ -1,0 +1,32 @@
+<?xml version = "1.0"?>
+
+<class>
+	<character>
+		<name>Generikette</name> <!--name of character-->
+
+        <class>
+            <name>Bard</name>
+            <level>16</level>
+            <subclass>Valorous Bard</subclass>
+        </class>
+
+        <class>
+            <name>Cleric</name>
+            <level>3</level>
+            <subclass>Knowledge</subclass>
+        </class>
+
+        <modifiers>Shortsword Spear</modifiers>
+
+        <scalars>shatterScaling</scalars>
+
+        <attributes>
+		    <item>strength:10</item>
+		    <item>dexterity:16</item>
+		    <item>constitution:15</item>
+		    <item>intelligence:12</item>
+            <item>wisdom:16</item>
+            <item>charisma:26</item>
+	    </attributes>
+	</character>
+</class>

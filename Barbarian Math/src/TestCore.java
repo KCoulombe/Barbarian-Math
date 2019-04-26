@@ -65,7 +65,7 @@ class TestCore {
 		
 		List<Modifier> charList = new ArrayList<>();
 		charList.add(m2);
-		CharacterBuild c = new CharacterBuild("C", 1, charList, null, null);
+		CharacterBuild c = new CharacterBuild("C",  charList, null, null, null, null);
 		assertEquals("charbuild add", 1, testCore.getSublist(reqList, c).size());
 	}
 
@@ -73,11 +73,10 @@ class TestCore {
 	void testSetRuleset() throws ParserConfigurationException 
 	{
 		File workingDirectory = new File("BarbarianMathData");
-		Scanner scanner = new Scanner();
 		
 		Core c = new Core();
 		//Ruleset r = new Ruleset("A");
-		c.setRuleset("BarbarianMathData/DnD_5e");
+		c.setRuleset(Scanner.LoadRuleset("BarbarianMathData/DnD_5e"));
 		assertNotNull("Ruleset", c.activeRuleset);
 	}
 
@@ -85,11 +84,10 @@ class TestCore {
 	void testLocalRulesets() 
 	{
 		File workingDirectory = new File("BarbarianMathData");
-		Scanner scanner = new Scanner();
 		
-		System.out.println(scanner.ListRulesets(workingDirectory));
+		System.out.println(Scanner.ListRulesets(workingDirectory));
 		
-		assertTrue("Local Ruleset", scanner.ListRulesets(workingDirectory).length > 0);
+		assertTrue("Local Ruleset", Scanner.ListRulesets(workingDirectory).length > 0);
 	}
 
 	

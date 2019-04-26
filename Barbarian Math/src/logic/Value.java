@@ -12,6 +12,7 @@ public class Value extends Component
 	public float value;
 	public int max;
     public int min;
+    public String valueName;
 	
 	/** 
 	 * Constructor for receiving data directly from whatever created this object
@@ -24,6 +25,7 @@ public class Value extends Component
 		this.value = number;
 		this.max = number;
 		this.min = number;
+		this.valueName = Integer.toString(number);
 	}
 	
 	public String toString()
