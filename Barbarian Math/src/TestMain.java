@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 
 import org.w3c.dom.DOMException;
 
@@ -11,13 +12,14 @@ import logic.*;
 
 public class TestMain {
 
-	public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException, DOMException, org.xml.sax.SAXException 
+	public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException, DOMException, org.xml.sax.SAXException, TransformerException 
 	{
 		DisplayMain maths = new DisplayMain();
 		maths.show();
 		
+		/*Scanner scanner = new Scanner();
+		
 		File workingDirectory = new File("BarbarianMathData");
-		Scanner scanner = new Scanner();
 		
 		File[] rulesets = scanner.ListRulesets(workingDirectory);
 		
@@ -36,7 +38,7 @@ public class TestMain {
 		System.out.println(scanner.FindComponentInXML("Dagger", "BarbarianMathData/DnD_5e/Modifiers_Weapons.val", "modifier").getElementsByTagName("tags").item(0).getTextContent());
 		
 		Modifier testModifier = new Modifier("Dagger", null, null, null, null);
-		scanner.Write(testModifier, "BarbarianMathData/DnD_5e/Modifiers_Weapons.val");
+		scanner.Write(testModifier, "BarbarianMathData/DnD_5e/Modifiers_Weapons.val");*/
 	}
 
 }

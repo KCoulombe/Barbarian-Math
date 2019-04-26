@@ -28,7 +28,7 @@ public class DiceValue extends Value
         this.sides = sides;
         
 
-        die_name = numDice + "d" + sides;
+        this.valueName = numDice + "d" + sides;
 
         super.max = numDice * sides;
         super.min = numDice;

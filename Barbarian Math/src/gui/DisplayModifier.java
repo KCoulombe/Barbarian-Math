@@ -89,6 +89,7 @@ public class DisplayModifier extends DisplayPanel {
 		attribute.addDropdown(Constants.LABEL_ATTRIBUTE_SELECT, c.getSublist(filter, null));
 		attribute.addTextBox(Constants.LABEL_STATIC_ATTRIBUTE_FIELD, Constants.TAG_STATIC_ATTRIBUTE);
 		attribute.addButton(Constants.LABEL_ADD_BUTTON, Constants.ENTER_ATTRIBUTE, new ModifierButtonListener());
+		
 		//cost
 		cost.addTextBox(Constants.LABEL_COST_FIELD, Constants.TAG_INTEGER);
 		cost.addButton(Constants.LABEL_ADD_BUTTON, Constants.ENTER_COST, new ModifierButtonListener());
@@ -164,7 +165,7 @@ public class DisplayModifier extends DisplayPanel {
 		//get name
 		String n = name.parts.get(Constants.LABEL_NAME_FIELD).getToolTipText();
 		//get attributes
-		/**VALUE CREATION NEEDS HELP*/
+		
 		ArrayList<Value> v = new ArrayList<>();
 		for(EntryElement e : totalList)
 		{

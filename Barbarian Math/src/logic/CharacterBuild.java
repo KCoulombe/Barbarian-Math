@@ -12,15 +12,16 @@ import java.util.Map;
 public class CharacterBuild extends Component
 {
 	public List<Modifier> modifiers;
-	public List<Modifier> classModifiers;
+	public List<Modifier> classModifiers = new ArrayList<Modifier>();
 	private List<String> modifierNames;
+	private List<String> classModifierNames = new ArrayList<String>();
 	
 	public List<Scalar> scalars;
 	private List<String> scalarNames;
 	
 	public List<Adventurer> classes;
 	private List<String> classNames;
-	private List<Integer> classLevels;
+	public List<Integer> classLevels = new ArrayList<Integer>();
 	private List<String> classSubclasses;
 	
 	
@@ -51,21 +52,109 @@ public class CharacterBuild extends Component
 		
 		modifiers = new ArrayList<Modifier>();
 		scalars = new ArrayList<Scalar>();
-		classes = new ArrayList<Adventurer>();
-		
+		classes = new ArrayList<Adventurer>();	
+	}
+	
+	/** 
+	 * Sets the level of the chosen class, then updates the modifiers the charicter should have
+	 * @param className the name of the class you want to update
+	 * @param level the number you want to update the classes level to
+	 * @param ruleset the ruleset that contains the modifiers
+	 */
+	public void SetClassLevel(String className, int level, Ruleset ruleset)
+	{
+		for(int i = 0; i < classes.size(); i++)
+		{
+			if(classes.get(i).name.equalsIgnoreCase(className))
+			{
+				classes.get(i).level = level;
+				classLevels.set(i, level);
+				UpdateCassModifiers(ruleset);
+				
+				break;
+			}
+		}
+	}
+	
+	/** 
+	 * Sets the level of the chosen class, then updates the modifiers the charicter should have
+	 * @param classIndex the index of the class you want to update
+	 * @param level the number you want to update the classes level to
+	 * @param ruleset the ruleset that contains the modifiers
+	 */
+	public void SetClassLevel(int classIndex, int level, Ruleset ruleset)
+	{
+		classes.get(classIndex).level = level;
+		UpdateCassModifiers(ruleset);
 	}
 	
 	public void UpdateAll(Ruleset ruleset)
 	{
-		UpdateModifiers(ruleset);
-		UpdateScalars(ruleset);
+		//Link all of the classes
 		UpdateClasses(ruleset);
+		//Get all of the modifiers from the classes based on the class level
+		UpdateCassModifiers(ruleset);
+		//Link all of the modifiers
+		UpdateModifiers(ruleset);
+		//Link all of the sclalars
+		UpdateScalars(ruleset);
+		
+	}
+	
+	public void UpdateCassModifiers(Ruleset ruleset)
+	{
+		//find the names of the modifiers from the classes
+		classModifierNames.clear();
+		for(Adventurer adv : classes)
+		{	
+			for(int i = adv.level; i > 0; i--)
+			{					
+				if(adv.main_class.values.get(i) != null)
+				{
+					classModifierNames.add(adv.main_class.values.get(i));
+				}
+				
+				if(adv.sub_classes.get(adv.chosenSubclass).values.get(i) != null && adv.chosenSubclass > 0)
+				{
+					classModifierNames.add(adv.sub_classes.get(adv.chosenSubclass).values.get(i));
+				}
+			}
+			
+			//System.out.println(adv.level);
+			//System.out.println(classModifierNames);
+		}
+		
+		//find the modifiers in the ruleset
+		classModifiers.clear();
+		
+		List<String> remainingModifiers = new ArrayList<String>();
+		remainingModifiers.addAll(classModifierNames);
+		
+		//Search the modifiers in the ruleset
+		for(int i = 0; i < ruleset.modifiers.size(); i++)
+		{
+			for(int n = 0; n < classModifierNames.size(); n++)
+			{		
+				if(ruleset.modifiers.get(i).name.equals(classModifierNames.get(n)))
+				{
+					//System.out.println(ruleset.modifiers.get(i).name + "=" + classModifierNames.get(n));
+					
+					classModifiers.add(ruleset.modifiers.get(i));
+					remainingModifiers.remove(classModifierNames.get(n));
+				}
+			}
+		}
+		
+		System.out.println("The following class modifiers for character '" + name +  "'  were not found in ruleset '" + ruleset.name + "':" + remainingModifiers + "\n");
 	}
 	
 	public void UpdateModifiers(Ruleset ruleset)
 	{
 		//Empty all existing modifiers
 		modifiers.clear();
+		
+		List<String> remainingModifiers = new ArrayList<String>();
+		remainingModifiers.addAll(modifierNames);
 		
 		//Search the modifiers in the ruleset
 		for(int i = 0; i < ruleset.modifiers.size(); i++)
@@ -75,9 +164,13 @@ public class CharacterBuild extends Component
 				if(ruleset.modifiers.get(i).name.equals(modifierNames.get(n)))
 				{
 					modifiers.add(ruleset.modifiers.get(i));
+					remainingModifiers.remove(modifierNames.get(n));
 				}
 			}
+			
 		}
+		
+		System.out.println("The following modifiers for character '" + name +  "'  were not found in ruleset '" + ruleset.name + "':" + remainingModifiers + "\n");
 	}
 	
 	public void UpdateScalars(Ruleset ruleset)
@@ -105,7 +198,7 @@ public class CharacterBuild extends Component
 		//Empty all existing classes
 		classes.clear();
 		
-		System.out.println("\n" + classSubclasses + "\n" );
+		//System.out.println("\n" + classSubclasses + "\n" );
 				
 		//Search the modifiers in the classes
 		for(int i = 0; i < ruleset.adventurers.size(); i++)

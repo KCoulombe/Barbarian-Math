@@ -37,8 +37,10 @@ public class Modifier extends Component
     
     public String toString()
 	{
-		return "Name: " + name + "\nTags: " + tags + "\nValues: " + values + "\nLimits: " + limits + "\nCosts " + costs;
+    	return name;
+		//return "Name: " + name + "\nTags: " + tags + "\nValues: " + values + "\nLimits: " + limits + "\nCosts " + costs;
 	}
+    
 }
 
 
