@@ -65,7 +65,7 @@ class TestCore {
 		
 		List<Modifier> charList = new ArrayList<>();
 		charList.add(m2);
-		CharacterBuild c = new CharacterBuild("C",  charList, null, null, null);
+		CharacterBuild c = new CharacterBuild("C",  charList, null, null, null, null);
 		assertEquals("charbuild add", 1, testCore.getSublist(reqList, c).size());
 	}
 
