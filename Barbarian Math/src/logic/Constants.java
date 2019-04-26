@@ -9,7 +9,7 @@ import javax.swing.Icon;
 public class Constants {
 	//default settings
 	public static final int WINDOW_Y = 800;
-	public static final int WINDOW_X = 600;
+	public static final int WINDOW_X = 800;
 	//mode tags, used to convey which screen is in use.
 	public static final String MODE_START = "MODE_START";
 	public static final String MODE_MAIN = "MODE_MAIN";
