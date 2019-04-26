@@ -169,7 +169,7 @@ public class DisplayMain {
 	    			setup(Constants.MODE_MAIN);
 	    			break;
 	    		case Constants.GOTO_BUILD_BUTTON:
-	    			view4.updateData(core);
+	    			view4.initData(core);
 	    			setup(Constants.MODE_BUILD);
 	    			break;
 	    		case Constants.GOTO_MODIFIER_BUTTON:
