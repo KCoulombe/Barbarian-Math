@@ -21,7 +21,7 @@ public class CharacterBuild extends Component
 	
 	public List<Adventurer> classes;
 	private List<String> classNames;
-	public List<Integer> classLevels = new ArrayList<Integer>();
+	private List<Integer> classLevels = new ArrayList<Integer>();
 	private List<String> classSubclasses;
 	
 	
@@ -30,13 +30,19 @@ public class CharacterBuild extends Component
 	/** 
 	 * Constructor for receiving data directly from whatever created this object
 	 */
-	public CharacterBuild(String name, List<Modifier> modifiers, List<Scalar> scalars, List<Adventurer> classes, Map<String, Value> attributes)
+	public CharacterBuild(String name, List<Modifier> modifiers, List<Modifier> classModifiers, List<Scalar> scalars, List<Adventurer> classes,  Map<String, Value> attributes)
 	{
 		super.name = name;
 		this.modifiers = modifiers;
+		this.classModifiers = classModifiers;
 		this.scalars = scalars;
 		this.classes = classes;
 		this.attributes = attributes;
+		
+		for(Adventurer adv : classes)
+		{
+			classLevels.add(adv.level);
+		}
 	}
 
 	public CharacterBuild(String name, List<String> modifierNames, List<String> scalarNames, 
@@ -52,7 +58,8 @@ public class CharacterBuild extends Component
 		
 		modifiers = new ArrayList<Modifier>();
 		scalars = new ArrayList<Scalar>();
-		classes = new ArrayList<Adventurer>();	
+		classes = new ArrayList<Adventurer>();
+		
 	}
 	
 	/** 
@@ -63,12 +70,11 @@ public class CharacterBuild extends Component
 	 */
 	public void SetClassLevel(String className, int level, Ruleset ruleset)
 	{
-		for(int i = 0; i < classes.size(); i++)
+		for(Adventurer adv : classes)
 		{
-			if(classes.get(i).name.equalsIgnoreCase(className))
+			if(adv.name.equalsIgnoreCase(className))
 			{
-				classes.get(i).level = level;
-				classLevels.set(i, level);
+				adv.level = level;
 				UpdateCassModifiers(ruleset);
 				
 				break;
@@ -145,7 +151,7 @@ public class CharacterBuild extends Component
 			}
 		}
 		
-		System.out.println("The following class modifiers for character '" + name +  "'  were not found in ruleset '" + ruleset.name + "':" + remainingModifiers + "\n");
+		//System.out.println("The following class modifiers for character '" + name +  "'  were not found in ruleset '" + ruleset.name + "':" + remainingModifiers + "\n");
 	}
 	
 	public void UpdateModifiers(Ruleset ruleset)
@@ -170,7 +176,7 @@ public class CharacterBuild extends Component
 			
 		}
 		
-		System.out.println("The following modifiers for character '" + name +  "'  were not found in ruleset '" + ruleset.name + "':" + remainingModifiers + "\n");
+		//System.out.println("The following modifiers for character '" + name +  "'  were not found in ruleset '" + ruleset.name + "':" + remainingModifiers + "\n");
 	}
 	
 	public void UpdateScalars(Ruleset ruleset)
