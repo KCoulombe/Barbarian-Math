@@ -189,6 +189,10 @@ public class DisplayMain {
 	    			System.out.println("Looking for a file...");
 	    			System.out.println("Found: " + chooseFile("BarbarianMathData", true));
 	    			break;
+			case Constants.CHARACTER_BUILD_LOAD_POPUP:
+	    			System.out.println("Looking for a file...");
+	    			System.out.println("Found: " + chooseFile("BarbarianMathData", false));
+	    			break;
 	    		case Constants.SELECTED_CHARACTER_CHANGED:
 	    			
 	    			break;
