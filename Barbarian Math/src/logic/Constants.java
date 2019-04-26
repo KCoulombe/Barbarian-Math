@@ -36,6 +36,7 @@ public class Constants {
 	public static final String ENTER_ATTRIBUTE = "ENTER_ATTRIBUTE";
 	public static final String ENTER_CALCULATE = "ENTER_CALCULATE";
 	public static final String CHARACTER_BUILD_SAVE_POPUP = "CHARACTER_BUILD_SAVE_POPUP";
+	public static final String CHARACTER_BUILD_LOAD_POPUP = "CHARACTER_BUILD_LOAD_POPUP";
 
 	//miscellaneous action events
 	public static final String SELECTED_CHARACTER_CHANGED = "SELECTED_CHARACTER_CHANGED";
