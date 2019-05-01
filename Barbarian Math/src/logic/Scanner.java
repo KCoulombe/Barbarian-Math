@@ -321,6 +321,51 @@ public class Scanner
 	}
 	
 	/** 
+	 * Lists all of the rulesets in the specified directory.
+	 * @param directoryPath the filepath of the directory as a string
+	 * @return A array of File objects for each ruleset in the specified directory
+	 * @throws IOException 
+	 * @throws SAXException 
+	 * @throws ParserConfigurationException 
+	 */
+	static public  List<String> ListRulesetNames(String directoryPath) throws ParserConfigurationException, SAXException, IOException
+	{
+		return ListRulesetNames(new File(directoryPath));
+	}
+	
+	/** 
+	 * Lists all of the rulesets in the specified directory.
+	 * @param directory the directory as a File object
+	 * @return A array of File objects for each ruleset in the specified directory
+	 * @throws ParserConfigurationException 
+	 * @throws IOException 
+	 * @throws SAXException 
+	 */
+	static public  List<String> ListRulesetNames(File directory) throws ParserConfigurationException, SAXException, IOException
+	{
+		List<String> rulesetNames = new ArrayList<String>();
+		
+		for(File dir : directory.listFiles(File::isDirectory))
+		{
+			for (File file : dir.listFiles()) 
+			{
+				if (file.getName().endsWith((".ruleset"))) 
+				{
+					//load the xml file into memory
+					DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+			        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+			        Document doc = dBuilder.parse(file);
+			        doc.getDocumentElement().normalize();
+					//return directory.listFiles(File::isDirectory);
+			        rulesetNames.add(doc.getElementsByTagName("name").item(0).getTextContent());
+		        }
+			}
+		}
+		
+		return rulesetNames;
+	}
+	
+	/** 
 	 * Writes a modifier object to the specified file.
 	 * @param modifier the modifier to be written.  if a modifier with the same name exists, it will be overwritten.
 	 * @param filePath the path to the file that will be written to.
