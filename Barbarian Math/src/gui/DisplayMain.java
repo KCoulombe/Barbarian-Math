@@ -155,7 +155,7 @@ public class DisplayMain {
 	    	{
 	    		case Constants.GOTO_FIRST_MAIN_BUTTON:
 	    			
-	    			File f = (File) view1.rulesetSelect.getSelectedItem();
+	    			File f = (File) view1.getSelectedRuleset();
 				try {
 					//s.LoadRuleset(f);
 					core.setRuleset(Scanner.LoadRuleset(f));
