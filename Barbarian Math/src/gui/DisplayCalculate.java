@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -114,12 +115,18 @@ public class DisplayCalculate extends DisplayPanel {
 		resultModel = new DefaultTableModel(datab, headb);
 		
 		resultTable = new JTable(resultModel);
-		
+		//resultTable.setPreferredScrollableViewportSize(new Dimension(300, 200));
+		resultTable.getColumnModel().getColumn(0).setPreferredWidth(90);
+		for(int i = 1; i < 21; i++)
+		{
+			resultTable.getColumnModel().getColumn(i).setPreferredWidth(30);
+		}
+		resultTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		g.gridy = 0;
 		g.gridx = 2;
 		g.fill = GridBagConstraints.EAST;
-		resultPane = new JScrollPane(resultTable);
-		
+		resultPane = new JScrollPane(resultTable, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		//resultPane.setPreferredSize(new Dimension(400,100));
 		add(resultPane, g);
 		
 		/**ButtonBox****************/
@@ -175,14 +182,31 @@ public class DisplayCalculate extends DisplayPanel {
 				chosenBuilds.add(c);
 			}
 		}
+		//get levels
+		JComboBox lvDrop = (JComboBox) optionsMap.get(Constants.LABEL_LEVEL_RANGE_FIELD);
+		int levelRange = (Integer) lvDrop.getSelectedItem();
+		//get modes
+		ArrayList<String> modes = new ArrayList<>();
+		JCheckBox checkBox = (JCheckBox) optionsMap.get(Constants.LABEL_CALCULATE_AVERAGE_CHECK);
+		if(checkBox.isSelected())
+		{
+			modes.add(Constants.MATH_MODE_AVG);
+		}
+		checkBox = (JCheckBox) optionsMap.get(Constants.LABEL_CALCULATE_MIN_CHECK);
+		if(checkBox.isSelected())
+		{
+			modes.add(Constants.MATH_MODE_MIN);
+		}
+		checkBox = (JCheckBox) optionsMap.get(Constants.LABEL_CALCULATE_MAX_CHECK);
+		if(checkBox.isSelected())
+		{
+			modes.add(Constants.MATH_MODE_MAX);
+		}
+		//get resulting records
 		ArrayList<Record> results;
 		results = new ArrayList<Record>();
-		results.add(new Record(20));///dummy
-		/*for(CharacterBuild build : chosenBuilds)
-		{
-			results.add(Mathemagics.MathLogic(build, Constants.MATH_MODE_AVG));
-		}*/
-		results.addAll(Mathemagics.makeRecords(chosenBuilds, 5, Constants.MATH_MODE_AVG, core));
+		
+		results.addAll(Mathemagics.makeRecords(chosenBuilds, levelRange, Constants.MATH_MODE_AVG, core));
 		//add to model
 		for (Record r : results)
 		{
@@ -197,7 +221,9 @@ public class DisplayCalculate extends DisplayPanel {
 		setVisible(false);
 		setVisible(true);
 	}
-	
+	/**
+	 * sets character checkboxes on lefthand side
+	 */
 	public void setCharacterBar()
 	{
 		for(CharacterBuild b : core.activeRuleset.characters)
