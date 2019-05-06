@@ -75,16 +75,22 @@ public class Mathemagics {
 				}
 				if(result.equals("B") && mode.equals("MATH_MODE_AVG")) {
 					for(int i =0; i< m.values.size(); i++) {
-						B += m.values.get(i).value;
+						//B += m.values.get(i).value;
+						
 					}
+					B++;
 				}if(result.equals("B") && mode.equals("MATH_MODE_MAX")) {
 					for(int i =0; i< m.values.size(); i++) {
-						B += m.values.get(i).max;
+						//B += m.values.get(i).max;
+						
 					}
+					B++;
 				}if(result.equals("B") && mode.equals("MATH_MODE_MIN")) {
 					for(int i =0; i< m.values.size(); i++) {
-						B += m.values.get(i).min;
+						//B += m.values.get(i).min;
+						
 					}
+					B++;
 				}if(result.equals("C") && mode.equals("MATH_MODE_AVG")) {
 					for(int i =0; i< m.values.size(); i++) {
 						C += m.values.get(i).value;
@@ -99,8 +105,12 @@ public class Mathemagics {
 					}
 				}
 		}
+		if(player.classLevels.get(0) <5)
+		{
+			B = 1.0;
+		}
 		damage = smashingGoodFun(A,B,C);
-		
+		System.out.println("A"+A+"B"+B+"C"+C);
 		//r.map.put(/*player.level*/1,damage);
 		return damage;	//return the record
 		
@@ -110,7 +120,7 @@ public class Mathemagics {
 		if(m.tags.contains("oncePerTurn")) {
 			Albatross = "C";
 		}
-		else if(m.tags.contains("extraAttack")){
+		else if(m.tags.contains("extraAttack") || m.name.contains("Extra Attack")){
 			Albatross = "B";
 		}
 		else {
