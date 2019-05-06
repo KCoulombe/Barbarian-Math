@@ -120,8 +120,6 @@ public class DisplayCalculate extends DisplayPanel {
 		g.fill = GridBagConstraints.EAST;
 		resultPane = new JScrollPane(resultTable);
 		
-		//setResults();
-		
 		add(resultPane, g);
 		
 		/**ButtonBox****************/
@@ -180,10 +178,11 @@ public class DisplayCalculate extends DisplayPanel {
 		ArrayList<Record> results;
 		results = new ArrayList<Record>();
 		results.add(new Record(20));///dummy
-		for(CharacterBuild build : chosenBuilds)
+		/*for(CharacterBuild build : chosenBuilds)
 		{
 			results.add(Mathemagics.MathLogic(build, Constants.MATH_MODE_AVG));
-		}
+		}*/
+		results.addAll(Mathemagics.makeRecords(chosenBuilds, 5, Constants.MATH_MODE_AVG, core));
 		//add to model
 		for (Record r : results)
 		{
