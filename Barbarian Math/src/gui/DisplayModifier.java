@@ -86,7 +86,7 @@ public class DisplayModifier extends DisplayPanel {
 		type.addButton(Constants.LABEL_ADD_BUTTON, Constants.ENTER_TYPE, new ModifierButtonListener());
 		//attribute
 		filter.add(Constants.TAG_ATTRIBUTE);
-		attribute.addDropdown(Constants.LABEL_ATTRIBUTE_SELECT, c.getSublist(filter, null));
+		//attribute.addDropdown(Constants.LABEL_ATTRIBUTE_SELECT, c.getSublist(filter, null));
 		attribute.addTextBox(Constants.LABEL_STATIC_ATTRIBUTE_FIELD, Constants.TAG_STATIC_ATTRIBUTE);
 		attribute.addButton(Constants.LABEL_ADD_BUTTON, Constants.ENTER_ATTRIBUTE, new ModifierButtonListener());
 		
@@ -116,7 +116,7 @@ public class DisplayModifier extends DisplayPanel {
 		///scrollpane
 		selection = new JPanel();
 		selection.setLayout(new BoxLayout(selection, BoxLayout.Y_AXIS));
-		selection.add(new JCheckBox());
+		//selection.add(new JCheckBox());
 		//scroll = new JScrollPane(selection);
 		scroll = new JScrollPane();
 		//scroll.add(selection);
@@ -145,7 +145,7 @@ public class DisplayModifier extends DisplayPanel {
 		ArrayList<String> filter = new ArrayList<String>();
 		loadMod.updateDropdown(Constants.LABEL_MODIFIER_LOAD, core.getSublist(filter, null));
 		type.updateStringDropdown(Constants.LABEL_TYPE_DROP, core.getTags(null));
-		attribute.updateDropdown(Constants.LABEL_ATTRIBUTE_SELECT, core.getSublist(filter, null));
+		//attribute.updateDropdown(Constants.LABEL_ATTRIBUTE_SELECT, core.getSublist(filter, null));
 		limit.updateStringDropdown(Constants.LABEL_LIMIT_DROP, core.getTags(filter));
 		loadMod.setVisible(false);
 		type.setVisible(false);
@@ -163,7 +163,8 @@ public class DisplayModifier extends DisplayPanel {
 	protected void createModifier()
 	{
 		//get name
-		String n = name.parts.get(Constants.LABEL_NAME_FIELD).getToolTipText();
+		JTextField txtn = (JTextField) name.parts.get(Constants.LABEL_NAME_FIELD);
+		String n = txtn.getText();
 		//get attributes
 		
 		ArrayList<Value> v = new ArrayList<>();
@@ -205,7 +206,8 @@ public class DisplayModifier extends DisplayPanel {
 		//get costs
 		
 		Modifier m = new Modifier(n, v, tags, limits, costs);
-		core.loadedComponents.add(m);
+		//core.loadedComponents.add(m);
+		core.activeRuleset.modifiers.add(m);
 	}
 	/**
 	 * Adds selection to the right hand side
