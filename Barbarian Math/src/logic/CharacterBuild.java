@@ -21,7 +21,7 @@ public class CharacterBuild extends Component
 	
 	public List<Adventurer> classes;
 	private List<String> classNames;
-	private List<Integer> classLevels = new ArrayList<Integer>();
+	public List<Integer> classLevels = new ArrayList<Integer>();
 	private List<String> classSubclasses;
 	
 	
