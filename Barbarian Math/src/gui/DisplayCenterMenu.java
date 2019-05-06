@@ -88,12 +88,12 @@ public class DisplayCenterMenu extends DisplayPanel {
 		g.gridx = 0;
 		g.gridy = 2;
 		g.fill = GridBagConstraints.HORIZONTAL;
-		add(saveButton, g);
+		//add(saveButton, g);
 		g.ipady = 0;
 		g.gridx = 2;
 		g.gridy = 2;
 		g.fill = GridBagConstraints.HORIZONTAL;
-		add(loadButton, g);
+		//add(loadButton, g);
 		
 		
 	}
