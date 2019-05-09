@@ -21,7 +21,7 @@ public class CharacterBuild extends Component
 	
 	public List<Adventurer> classes;
 	private List<String> classNames;
-	public List<Integer> classLevels = new ArrayList<Integer>();
+	private List<Integer> classLevels = new ArrayList<Integer>();
 	private List<String> classSubclasses;
 	
 	
@@ -151,7 +151,7 @@ public class CharacterBuild extends Component
 			}
 		}
 		
-		//System.out.println("The following class modifiers for character '" + name +  "'  were not found in ruleset '" + ruleset.name + "':" + remainingModifiers + "\n");
+		System.out.println("The following class modifiers for character '" + name +  "'  were not found in ruleset '" + ruleset.name + "':" + remainingModifiers + "\n");
 	}
 	
 	public void UpdateModifiers(Ruleset ruleset)
@@ -241,7 +241,6 @@ public class CharacterBuild extends Component
 		
 	}
 }
-
 
 
 

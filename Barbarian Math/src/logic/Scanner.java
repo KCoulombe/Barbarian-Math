@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -151,6 +152,51 @@ public class Scanner
 		System.out.println("\n" + ruleset.characters.get(0).scalars + "\n" );*/
 		
 		return ruleset;
+	}
+
+    /** 
+	 * Lists all of the rulesets in the specified directory.
+	 * @param directoryPath the filepath of the directory as a string
+	 * @return A array of File objects for each ruleset in the specified directory
+	 * @throws IOException 
+	 * @throws SAXException 
+	 * @throws ParserConfigurationException 
+	 */
+	static public  List<String> ListRulesetNames(String directoryPath) throws ParserConfigurationException, SAXException, IOException
+	{
+		return ListRulesetNames(new File(directoryPath));
+	}
+	
+	/** 
+	 * Lists all of the rulesets in the specified directory.
+	 * @param directory the directory as a File object
+	 * @return A array of File objects for each ruleset in the specified directory
+	 * @throws ParserConfigurationException 
+	 * @throws IOException 
+	 * @throws SAXException 
+	 */
+	static public  List<String> ListRulesetNames(File directory) throws ParserConfigurationException, SAXException, IOException
+	{
+		List<String> rulesetNames = new ArrayList<String>();
+		
+		for(File dir : directory.listFiles(File::isDirectory))
+		{
+			for (File file : dir.listFiles()) 
+			{
+				if (file.getName().endsWith((".ruleset"))) 
+				{
+					//load the xml file into memory
+					DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+			        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+			        Document doc = dBuilder.parse(file);
+			        doc.getDocumentElement().normalize();
+					//return directory.listFiles(File::isDirectory);
+			        rulesetNames.add(doc.getElementsByTagName("name").item(0).getTextContent());
+		        }
+			}
+		}
+		
+		return rulesetNames;
 	}
 	
 	static public  Element FindComponentInXML(String name, String filePath, String nodeType) throws ParserConfigurationException, SAXException, IOException
@@ -318,51 +364,6 @@ public class Scanner
 	static public  File[] ListRulesets(File directory)
 	{
 		return directory.listFiles(File::isDirectory);
-	}
-	
-	/** 
-	 * Lists all of the rulesets in the specified directory.
-	 * @param directoryPath the filepath of the directory as a string
-	 * @return A array of File objects for each ruleset in the specified directory
-	 * @throws IOException 
-	 * @throws SAXException 
-	 * @throws ParserConfigurationException 
-	 */
-	static public  List<String> ListRulesetNames(String directoryPath) throws ParserConfigurationException, SAXException, IOException
-	{
-		return ListRulesetNames(new File(directoryPath));
-	}
-	
-	/** 
-	 * Lists all of the rulesets in the specified directory.
-	 * @param directory the directory as a File object
-	 * @return A array of File objects for each ruleset in the specified directory
-	 * @throws ParserConfigurationException 
-	 * @throws IOException 
-	 * @throws SAXException 
-	 */
-	static public  List<String> ListRulesetNames(File directory) throws ParserConfigurationException, SAXException, IOException
-	{
-		List<String> rulesetNames = new ArrayList<String>();
-		
-		for(File dir : directory.listFiles(File::isDirectory))
-		{
-			for (File file : dir.listFiles()) 
-			{
-				if (file.getName().endsWith((".ruleset"))) 
-				{
-					//load the xml file into memory
-					DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-			        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-			        Document doc = dBuilder.parse(file);
-			        doc.getDocumentElement().normalize();
-					//return directory.listFiles(File::isDirectory);
-			        rulesetNames.add(doc.getElementsByTagName("name").item(0).getTextContent());
-		        }
-			}
-		}
-		
-		return rulesetNames;
 	}
 	
 	/** 
@@ -926,7 +927,7 @@ public class Scanner
 				List<String> scalarNames = Arrays.asList(eElement.getElementsByTagName("scalars").item(0).getTextContent().trim().split(" "));
 				
 				//all of the attributes
-				Map<String, Value> attributes = new TreeMap<String, Value>();
+				Map<String, Value> attributes = new HashMap<String, Value>();
 				
 	    		//get all of the class tags, then loop through them
 	    		NodeList classList = eElement.getElementsByTagName("class");
@@ -951,10 +952,11 @@ public class Scanner
 				Node attributesNode = eElement.getElementsByTagName("attributes").item(0);
 				//get all of the item tags, and loop through them
 				NodeList itemList = ((Element) attributesNode).getElementsByTagName("item");
+				
 	    		for (int n = 0; n < itemList.getLength(); n++) 
 	            {
 	    			//get the current modifier
-        			Node itemNode = itemList.item(i);
+        			Node itemNode = itemList.item(n);
                     
                     //then parse it and add it to the list of modifiers
                 	if (itemNode.getNodeType() == Node.ELEMENT_NODE) 
