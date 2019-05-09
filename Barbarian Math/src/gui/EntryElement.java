@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.LayoutManager;
 import java.awt.event.ActionListener;
@@ -63,8 +64,9 @@ public class EntryElement extends DisplayPanel {
 	 */
 	public void addTextBox(String label, String tag)
 	{
-		JTextField t = new JTextField(label);
+		JTextField t = new JTextField();
 		t.setActionCommand(tag);
+		t.setPreferredSize(new Dimension(100,24));
 		add(t);
 		parts.put(label, t);
 	}
