@@ -163,6 +163,8 @@ public class DisplayBuild extends DisplayPanel
 		//update the list of modifiers
 		DefaultTableModel modifierModel = (DefaultTableModel) modifierTable.getModel();
 		modifierModel.setRowCount(0);
+		
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~" + dummyCharacters.get(activeCharacterIndex).classModifiers + "~~~~~~~~~~~~~~~~~~~~~~~~~");
 		for(Modifier modifier : dummyCharacters.get(activeCharacterIndex).classModifiers)
 		{
 			modifierModel.addRow(new Object[]{"*" + modifier.name, modifier.values, modifier.tags, modifier.limits, modifier.costs , modifier.active});
@@ -663,7 +665,7 @@ public class DisplayBuild extends DisplayPanel
 		{
 		    public void actionPerformed(ActionEvent e) 
 		    {  	
-		    	outerloop:
+		    	//outerloop:
 		    	for(CharacterBuild dummy : dummyCharacters)
 		    	{
 		    		Boolean found = false;
@@ -676,20 +678,23 @@ public class DisplayBuild extends DisplayPanel
 		    			
 		    			if(dummy.name.equals(c.activeRuleset.characters.get(i).name))
 		    			{
-		    				int response = JOptionPane.showConfirmDialog(null, "Are you sure you want to override build '" + 
+		    				/*int response = JOptionPane.showConfirmDialog(null, "Are you sure you want to override build '" + 
 			    					dummyCharacters.get(activeCharacterIndex).name +  "'?", "Confirm",
 			    			        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 		    				if(response == JOptionPane.YES_OPTION)
-		    				{
-			    				c.activeRuleset.characters.set(i, new CharacterBuild(dummy.name, new ArrayList<Modifier>(dummy.modifiers), new ArrayList<Modifier>(dummy.classModifiers), 
-		    							new ArrayList<Scalar>(dummy.scalars), new ArrayList<Adventurer>(dummy.classes), new HashMap<String, Value>(dummy.attributes)));
-			    				
-			    				/*build = new CharacterBuild(dummy.name, new ArrayList<Modifier>(dummy.modifiers), new ArrayList<Modifier>(dummy.classModifiers), 
-			    							new ArrayList<Scalar>(dummy.scalars), new ArrayList<Adventurer>(dummy.classes), new HashMap<String, Value>(dummy.attributes));*/
-			    				found = true;
-			    				break outerloop;
-		    				}
-		    				break outerloop;
+		    				{*/
+		    				
+		    				c.activeRuleset.characters.set(i, new CharacterBuild(dummy.name, new ArrayList<Modifier>(dummy.modifiers), new ArrayList<Modifier>(dummy.classModifiers), 
+	    							new ArrayList<Scalar>(dummy.scalars), new ArrayList<Adventurer>(dummy.classes), new HashMap<String, Value>(dummy.attributes)));
+		    				
+		    				/*build = new CharacterBuild(dummy.name, new ArrayList<Modifier>(dummy.modifiers), new ArrayList<Modifier>(dummy.classModifiers), 
+		    							new ArrayList<Scalar>(dummy.scalars), new ArrayList<Adventurer>(dummy.classes), new HashMap<String, Value>(dummy.attributes));*/
+		    				found = true;
+		    				//break outerloop;
+		    				
+		    				
+		    				//}
+		    				//break outerloop;
 		    			} 
 		    		}
 		    		
@@ -1013,7 +1018,6 @@ public class DisplayBuild extends DisplayPanel
 		add(removeClassButton, g);
 	}
 }
-
 
 
 
