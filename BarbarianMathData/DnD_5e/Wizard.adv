@@ -1,22 +1,29 @@
 <?xml version = "1.0"?>
-	<class>
-		<adventurer>
-			<bundle type = "mainclass">	
-					<name> Wizard </name>
-					<tag> class </tag>
-					<value>2:Arcane Tradition</value>
-					<value>4:asi</value>
-					<value>6:classFeature</value>
-					<value>8:asi</value>
-					<value>10:classFeature</value>
-					<value>12:asi</value>
-					<value>16:asi</value>
-					<value>19:asi</value>
-			</bundle>
-			<bundle type = "subclass">
-				<name>Evocation </name>
-				<parent> Wizard </parent>
-				<value>10: +intMod </value>
-			</bundle>
-		</adventurer>
-	</class>
+<class>
+	<adventurer>
+		<bundle type = "mainclass">	
+				<name> Wizard </name>
+				<tags> class </tags>
+				<value>2:Arcane Tradition</value>
+				<value>4:asi</value>
+				<value>6:classFeature</value>
+				<value>8:asi</value>
+				<value>10:classFeature</value>
+				<value>12:asi</value>
+				<value>16:asi</value>
+				<value>19:asi</value>
+		</bundle>
+
+		<bundle type = "subclass">
+			<name>Evocation </name>
+			<tags>WizardSub</tags>
+			<value>10: intMod</value>
+		</bundle>
+
+        <modifier>
+			<name>Spell Boost</name>
+			<tags>oncePerTurn</tags>
+			<value>1d8</value>
+		</modifier>
+	</adventurer>
+</class>

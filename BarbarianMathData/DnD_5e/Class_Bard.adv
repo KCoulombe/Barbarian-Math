@@ -15,13 +15,13 @@
 			</bundle>
 
 		<bundle type="subclass">
-			<name> Loremaster Bard </name>
+			<name>Loremaster Bard</name>
 			<tags>BardSub</tags>
 			<value>6: 2 freeSpell</value>
 		</bundle>
 
 		<bundle type="subclass">
-			<name> Valorous Bard </name>
+			<name>Valorous Bard</name>
 			<tags>BardSub</tags>
 			<value>6:extraAttack1</value>
 		</bundle>

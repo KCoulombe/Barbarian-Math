@@ -284,7 +284,7 @@
 	</modifier>
 
     <scalar>
-	    <name>shatterScaling </name>
+	    <name>shatterScaling</name>
 	    <tags>scaling </tags>
 	    <value>2:3d8 </value>
 	    <value>3:4d8 </value>
@@ -465,13 +465,7 @@
 		<value>9:10d8 </value>
 	</scalar>
 
-	<modifier>
-		<name>Chain Lighting </name>
-		<tags>lighting spell </tags>
-		<value>10d8 lighting </value>
-		<limit>action </limit>
-		<cost>spellSlot6  </cost>
-	</modifier>
+	
 
 	<modifier>
 		<name>Circle of Death </name>
@@ -507,13 +501,7 @@
 		<value>9:19d6+40 </value>
 	</scalar>
 
-	<modifier>
-		<name>Sun Beam </name>
-		<tags>radiant spell scaling </tags>
-		<value>6d8 radiant </value>
-		<limit>action </limit>
-		<cost>spellSlot6  </cost>
-	</modifier>
+	
 
 	<modifier>
 		<name>Delayed Blast Fireball </name>
@@ -531,53 +519,7 @@
 		<value>9:14d6 </value>
 	</scalar>
 
-	<modifier>
-		<name>Finger of Death </name>
-		<tags>necrotic spell </tags>
-		<value>7d8+30 </value>
-		<limit>action </limit>
-		<cost>spellSlot7  </cost>
-	</modifier>
-
-    <modifier>
-		<name>FireStorm </name>
-		<tags>fire spell </tags>
-		<value>7d10 </value>
-		<limit>action </limit>
-		<cost>spellSlot7  </cost>
-	</modifier>
-
-	<modifier>
-		<name>Incendiary Cloud </name>
-		<tags>spell fire </tags>
-		<value>10d8 </value>
-		<limit>action </limit>
-		<cost>spellSlot8  </cost>
-	</modifier>
-
-	<modifier>
-		<name>Sunburst </name>
-		<tags>radiant spell </tags>
-		<value>12d6 radiant </value>
-		<limit>action </limit>
-		<cost>spellSlot8  </cost>
-	</modifier>
-
-	<modifier>
-		<name>Meteor Swarm </name>
-		<tags>fire spell  </tags>
-		<value>20d6 fire 20d6 bludgeon </value>
-		<limit>action </limit>
-		<cost>spellSlot9  </cost>
-	</modifier>
-
-	<modifier>
-		<name>Storm of Vengeance </name>
-		<tags>thunder spell  </tags>
-		<value>2d6 </value>
-		<limit>action </limit>
-		<cost> spellSlot9 </cost>
-	</modifier>
+	
 
 	<modifier>
 		<name>Acid Arrow </name>
@@ -642,13 +584,7 @@
 		<value>9:9d6 </value>
 	</scalar>
 
-	<modifier>
-		<name>Black Tentacles </name>
-		<tags>spell  </tags>
-		<value>3d6 bludgeon </value>
-		<limit>action </limit>
-		<cost>spellSlot4  </cost>
-	</modifier>
+	
 
 	<modifier>
 		<name>Phantasmal Killer </name>
@@ -721,21 +657,7 @@
 		<value>9:16d6 </value>
 	</scalar>
 
-	<modifier>
-		<name>Arcane Sword </name>
-		<tags>spell force </tags>
-		<value>3d10 force </value>
-		<limit>action </limit>
-		<cost> spellSlot7 </cost>
-	</modifier>
-
-	<modifier>
-		<name>Incediary Cloud </name>
-		<tags>spell fire </tags>
-		<value>10d8 </value>
-		<limit>action </limit>
-		<cost>spellSlot8 </cost>
-	</modifier>
+	
 
 	<modifier>
 		<name>Vicous Mockery </name>
@@ -754,13 +676,6 @@
 		<value>17: 4d4</value>
 	</scalar>
 
-	<modifier>
-		<name>Hunters Mark </name>
-		<tags>spell  </tags>
-		<value>1d6 </value>
-		<limit>bonusAction onAttack</limit>
-		<cost>spellSlot1  </cost>
-	</modifier>
 
 	<modifier>
 		<name>Sacred Flame </name>
@@ -858,13 +773,7 @@
 		<value>9:12d6 </value>
 	</scalar>
 
-	<modifier>
-		<name>Harm </name>
-		<tag> spell necrotic</tag>
-		<value>14d6 </value>
-		<limit>action </limit>
-		<cost>spellSlot6 </cost>
-	</modifier>
+	
 
 
 

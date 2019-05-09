@@ -1,12 +1,16 @@
-<?xml version = "1.0"?>
+<?xml version="1.0" encoding="utf-8"?>  
 <class>
 <!--Holds weapon data-->
 	<modifier>
-		<name>Dagger</name><!--Name as shown in app-->
-		<tags>weapon finesse light thrown</tags><!--Tags to identify and give properties-->
-		<values>1d4 strMod dexMod</values><!--Values that influence the damage.
+		<name>Dagger</name>
+    <!--Name as shown in app-->
+		<tags>weapon finesse light thrown</tags>
+    <!--Tags to identify and give properties-->
+		<values>1d4 strMod dexMod</values>
+    <!--Values that influence the damage.
 		This may include things like: 1d8 strMod magicBonus:2 fire:1d8-->
-		<limits>attack</limits><!--Represents limitations on how it may be applied.
+		<limits>attack</limits>
+    <!--Represents limitations on how it may be applied.
 		weapon should be sufficient for weapons-->
 		<cost>Test Costs</cost>
 	</modifier>
@@ -17,6 +21,23 @@
 		<limits>attack</limits>
 		<cost></cost>
 	</modifier>
+
+    <modifier>
+		<name>divineStrikeWeapon</name>
+		<tags>divine</tags>
+		<values>1d6 divine</values>
+		<limits>attack</limits>
+		<cost></cost>
+	</modifier>
+
+    <modifier>
+		<name>recklessSwing</name>
+		<tags>Blunt</tags>
+		<values>1d6 Blunt</values>
+		<limits>attack</limits>
+		<cost></cost>
+	</modifier>
+
 	<modifier>
 		<name>Longsword</name>
 		<tags>weapon versatile</tags>
@@ -255,4 +276,5 @@
 		<limits>attack</limits>
 		<cost></cost>
 	</modifier>
+
 </class>

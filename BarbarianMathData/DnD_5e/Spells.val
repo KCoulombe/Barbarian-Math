@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class>
+    <modifier>
+		<name>Harm </name>
+		<tag> spell necrotic</tag>
+		<values>14d6 </values>
+		<limit>action </limit>
+		<cost>spellSlot6 </cost>
+	</modifier>
+
+    <modifier>
+		<name>Hunters Mark </name>
+		<tags>spell  </tags>
+		<values>1d6 </values>
+		<limit>bonusAction onAttack</limit>
+		<cost>spellSlot1  </cost>
+	</modifier>
+
+<modifier>
+		<name>Arcane Sword </name>
+		<tags>spell force </tags>
+		<values>3d10 force </values>
+		<limit>action </limit>
+		<cost> spellSlot7 </cost>
+	</modifier>
+
+	<modifier>
+		<name>Incediary Cloud </name>
+		<tags>spell fire </tags>
+		<values>10d8 </values>
+		<limit>action </limit>
+		<cost>spellSlot8 </cost>
+	</modifier>
+
+<modifier>
+		<name>Black Tentacles </name>
+		<tags>spell  </tags>
+		<values>3d6 bludgeon </values>
+		<limit>action </limit>
+		<cost>spellSlot4  </cost>
+	</modifier>
+
+<modifier>
+		<name>Finger of Death </name>
+		<tags>necrotic spell </tags>
+		<values>7d8+30 </values>
+		<limit>action </limit>
+		<cost>spellSlot7  </cost>
+	</modifier>
+
+    <modifier>
+		<name>FireStorm </name>
+		<tags>fire spell </tags>
+		<values>7d10 </values>
+		<limit>action </limit>
+		<cost>spellSlot7  </cost>
+	</modifier>
+
+	<modifier>
+		<name>Incendiary Cloud </name>
+		<tags>spell fire </tags>
+		<values>10d8 </values>
+		<limit>action </limit>
+		<cost>spellSlot8  </cost>
+	</modifier>
+
+<modifier>
+		<name>Chain Lighting </name>
+		<tags>lighting spell </tags>
+		<values>10d8 lighting </values>
+		<limit>action </limit>
+		<cost>spellSlot6  </cost>
+	</modifier>
+
+<modifier>
+		<name>Sun Beam </name>
+		<tags>radiant spell scaling </tags>
+		<values>6d8 radiant </values>
+		<limit>action </limit>
+		<cost>spellSlot6  </cost>
+	</modifier>
+
+	<modifier>
+		<name>Sunburst </name>
+		<tags>radiant spell </tags>
+		<values>12d6 radiant </values>
+		<limit>action </limit>
+		<cost>spellSlot8  </cost>
+	</modifier>
+
+	<modifier>
+		<name>Meteor Swarm </name>
+		<tags>fire spell</tags>
+		<values>fire:20d6  bludgeon:20d6</values>
+		<limit>action </limit>
+		<cost>spellSlot9  </cost>
+	</modifier>
+
+	<modifier>
+		<name>Storm of Vengeance </name>
+		<tags>thunder spell  </tags>
+		<values>2d6 </values>
+		<limit>action </limit>
+		<cost> spellSlot9 </cost>
+	</modifier>
+</class>

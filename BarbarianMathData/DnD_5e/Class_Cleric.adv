@@ -47,11 +47,11 @@
         </modifier>
 
         <scalar>
-            <name> divineStrikeStorm </name>
-            <tags> spell scaling </tags>
-            <value>8: 1d8 lightning </value>
-            <value>14: 2d8 lightning </value>
-            <limit> oncePerTurn </limit>
+            <name>divineStrikeStorm</name>
+            <tags>spell scaling</tags>
+            <value>8: 1d8 lightning</value>
+            <value>14: 2d8 lightning</value>
+            <limit>oncePerTurn</limit>
         </scalar>
 
         <scalar>
