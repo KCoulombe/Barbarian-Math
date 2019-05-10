@@ -152,8 +152,8 @@ public class EntryElement extends DisplayPanel {
 		}
 		if(purpose.equals(Constants.LABEL_ATTRIBUTE_SELECT))
 		{
-			/*JComboBox<Component> b = (JComboBox) parts.get(Constants.LABEL_ATTRIBUTE_SELECT);
-			out = out + b.getSelectedItem();*/
+			JTextField f = (JTextField) parts.get(Constants.LABEL_STATIC_ATTRIBUTE_FIELD);
+			out = out + f.getText();
 		}
 		if(purpose.equals(Constants.LABEL_COST_FIELD))
 		{
